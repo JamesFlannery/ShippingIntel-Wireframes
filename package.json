@@ -1,0 +1,23 @@
+{
+  "name": "maritime-intelligence-wireframe",
+  "version": "1.0.0",
+  "description": "Maritime Intelligence Application - Bloomberg Terminal inspired interface for ship brokers",
+  "main": "index.html",
+  "scripts": {
+    "dev": "serve .",
+    "build": "echo 'Static site - no build needed'",
+    "start": "serve ."
+  },
+  "keywords": [
+    "maritime",
+    "shipping",
+    "intelligence",
+    "analytics",
+    "bloomberg-terminal"
+  ],
+  "author": "Maritime Intelligence Team",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+} 

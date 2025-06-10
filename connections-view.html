@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connections View - Maritime Intelligence</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="connections.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <a href="index.html" class="logo">ShippingIntel</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Search stories, ships, ports, companies... (⌘K)" class="global-search">
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="user-role">Abe Vigoda</div>
+            <div class="notifications">●</div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="main-container">
+        <!-- Left Sidebar - Connection Controls -->
+        <aside class="left-sidebar">
+            <div class="connection-controls">
+                <h3>Connection Explorer</h3>
+                
+                <div class="filter-section">
+                    <h4>Connection Types</h4>
+                    <label class="filter-item">
+                        <input type="checkbox" checked> Causal
+                        <span class="connection-indicator causal">●</span>
+                    </label>
+                    <label class="filter-item">
+                        <input type="checkbox" checked> Thematic
+                        <span class="connection-indicator thematic">●</span>
+                    </label>
+                    <label class="filter-item">
+                        <input type="checkbox"> Geographic
+                        <span class="connection-indicator geographic">●</span>
+                    </label>
+                </div>
+
+                <div class="filter-section">
+                    <h4>Time Range</h4>
+                    <select class="time-filter">
+                        <option>Last 30 days</option>
+                        <option>Last 90 days</option>
+                        <option>Last 6 months</option>
+                        <option>All time</option>
+                    </select>
+                </div>
+
+                <div class="filter-section">
+                    <h4>Relevance Score</h4>
+                    <div class="score-filter">
+                        <span>75%+</span>
+                        <input type="range" min="0" max="100" value="75" class="score-slider">
+                    </div>
+                </div>
+
+                <div class="current-focus">
+                    <h4>Current Focus</h4>
+                    <div class="focus-node">
+                        <div class="focus-title">GCA Plant Startup</div>
+                        <div class="focus-meta">March 15, 2024</div>
+                        <button class="clear-focus">Reset View</button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Central Content Area - Network Visualization -->
+        <main class="content-area">
+            <!-- Function Navigation -->
+            <div class="function-nav">
+                <a href="story-view.html" class="function-btn" data-view="story">STORY</a>
+                <a href="data-view.html" class="function-btn" data-view="data">DATA</a>
+                <a href="connections-view.html" class="function-btn active" data-view="connections">CONNECTIONS</a>
+                <a href="impact-view.html" class="function-btn" data-view="impact">IMPACT</a>
+                <a href="geography-view.html" class="function-btn" data-view="geography">GEOGRAPHY</a>
+                <a href="timeline-view.html" class="function-btn" data-view="timeline">TIMELINE</a>
+                <a href="players-view.html" class="function-btn" data-view="players">PLAYERS</a>
+            </div>
+
+            <!-- Connections Network View -->
+            <div class="connections-container">
+                <div class="network-header">
+                    <h2>Story Connection Network</h2>
+                    <div class="network-controls">
+                        <button class="layout-btn active">Force Layout</button>
+                        <button class="layout-btn">Timeline Layout</button>
+                        <button class="layout-btn">Hierarchical</button>
+                        <button class="zoom-btn">🔍 Fit to Screen</button>
+                    </div>
+                </div>
+
+                <div class="network-visualization">
+                    <!-- Central Node (Current Story) -->
+                    <div class="node central-node" style="top: 50%; left: 50%;">
+                        <div class="node-content">
+                            <div class="node-title">GCA Plant Startup</div>
+                            <div class="node-type">Primary Story</div>
+                        </div>
+                        <div class="node-pulse"></div>
+                    </div>
+
+                    <!-- Connected Nodes -->
+                    <div class="node story-node high-connection" style="top: 25%; left: 35%;">
+                        <div class="node-content">
+                            <div class="node-title">Tampa Pricing Surge</div>
+                            <div class="node-type">Market Event</div>
+                        </div>
+                    </div>
+
+                    <div class="node story-node medium-connection" style="top: 75%; left: 30%;">
+                        <div class="node-content">
+                            <div class="node-title">Chemical Tanker Earnings</div>
+                            <div class="node-type">Financial Report</div>
+                        </div>
+                    </div>
+
+                    <div class="node story-node medium-connection" style="top: 30%; left: 70%;">
+                        <div class="node-content">
+                            <div class="node-title">Gulf Coast Congestion</div>
+                            <div class="node-type">Operational Update</div>
+                        </div>
+                    </div>
+
+                    <div class="node story-node low-connection" style="top: 65%; left: 75%;">
+                        <div class="node-content">
+                            <div class="node-title">Regulatory Changes</div>
+                            <div class="node-type">Policy Update</div>
+                        </div>
+                    </div>
+
+                    <div class="node story-node low-connection" style="top: 20%; left: 15%;">
+                        <div class="node-content">
+                            <div class="node-title">Competitor Analysis</div>
+                            <div class="node-type">Market Intelligence</div>
+                        </div>
+                    </div>
+
+                    <!-- Connection Lines -->
+                    <svg class="connections-svg">
+                        <!-- Causal connections (thick) -->
+                        <line class="connection causal" x1="50%" y1="50%" x2="35%" y2="25%" stroke-width="3"></line>
+                        <line class="connection causal" x1="50%" y1="50%" x2="30%" y2="75%" stroke-width="3"></line>
+                        
+                        <!-- Thematic connections (medium) -->
+                        <line class="connection thematic" x1="50%" y1="50%" x2="70%" y2="30%" stroke-width="2"></line>
+                        <line class="connection thematic" x1="35%" y1="25%" x2="15%" y2="20%" stroke-width="2"></line>
+                        
+                        <!-- Weak connections (thin) -->
+                        <line class="connection weak" x1="50%" y1="50%" x2="75%" y2="65%" stroke-width="1"></line>
+                    </svg>
+                </div>
+
+                <div class="network-legend">
+                    <div class="legend-item">
+                        <div class="legend-color causal"></div>
+                        <span>Causal Connection (Direct Impact)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color thematic"></div>
+                        <span>Thematic Connection (Related Context)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color weak"></div>
+                        <span>Weak Connection (Peripheral Relevance)</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar - Selected Node Details -->
+        <aside class="right-sidebar">
+            <div class="node-details">
+                <h4>Node Details</h4>
+                <div class="selected-node">
+                    <div class="node-title">Tampa Pricing Surge</div>
+                    <div class="node-meta">Market Event • March 16, 2024</div>
+                    <div class="relevance-score">
+                        <span class="score-label">Relevance:</span>
+                        <span class="score-value">94%</span>
+                    </div>
+                </div>
+
+                <div class="connection-details">
+                    <h5>Connection to GCA Plant</h5>
+                    <div class="connection-strength">
+                        <span class="strength-indicator causal">●</span>
+                        <span>Causal Connection</span>
+                    </div>
+                    <div class="connection-explanation">
+                        Plant startup increased demand for chemical transport to Tampa, causing immediate pricing surge.
+                    </div>
+                </div>
+
+                <div class="node-actions">
+                    <a href="story-view.html" class="action-btn primary">View Full Story</a>
+                    <button class="action-btn secondary">Add to Watchlist</button>
+                    <button class="action-btn secondary">Export Connection</button>
+                </div>
+            </div>
+
+            <div class="pathway-suggestions">
+                <h4>Suggested Exploration Paths</h4>
+                <a href="impact-view.html" class="path-item">
+                    <div class="path-icon">🎯</div>
+                    <div class="path-content">
+                        <div class="path-title">Impact Analysis Path</div>
+                        <div class="path-description">GCA Plant → Tampa Pricing → Your Fleet</div>
+                    </div>
+                </a>
+                <a href="data-view.html" class="path-item">
+                    <div class="path-icon">📊</div>
+                    <div class="path-content">
+                        <div class="path-title">Data Deep Dive</div>
+                        <div class="path-description">Compare to historical plant startups</div>
+                    </div>
+                </a>
+                <a href="geography-view.html" class="path-item">
+                    <div class="path-icon">🗺️</div>
+                    <div class="path-content">
+                        <div class="path-title">Geographic Analysis</div>
+                        <div class="path-description">Gulf Coast shipping route impacts</div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="connection-stats">
+                <h4>Network Statistics</h4>
+                <div class="stat-item">
+                    <span class="stat-label">Total Connections:</span>
+                    <span class="stat-value">12</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Causal:</span>
+                    <span class="stat-value">4</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Thematic:</span>
+                    <span class="stat-value">6</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Avg. Relevance:</span>
+                    <span class="stat-value">78%</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="status-left">
+            <span>Connected to Live Market Data</span>
+            <span class="connection-status">●</span>
+        </div>
+        <div class="status-right">
+            <span>Network Updated: 14:32 GMT</span>
+        </div>
+    </div>
+</body>
+</html> 

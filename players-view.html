@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Players View - ShippingIntel</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Vis.js Network for stakeholder visualization -->
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <a href="index.html" class="logo">ShippingIntel</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Search stories, ships, ports, companies... (⌘K)" class="global-search">
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="user-role">Abe Vigoda</div>
+            <div class="notifications">●</div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="main-container">
+        <!-- Left Sidebar - Player Filters -->
+        <aside class="left-sidebar">
+            <div class="current-story">
+                <h4>Stakeholder Analysis</h4>
+                <div class="story-card active">
+                    <div class="story-title">GCA Plant Startup Impacts Gulf Pricing</div>
+                    <div class="story-meta">March 15, 2024 • High Impact</div>
+                </div>
+            </div>
+
+            <div class="stakeholder-categories">
+                <h4>Stakeholder Categories</h4>
+                <label class="category-item">
+                    <input type="checkbox" checked onchange="filterNetwork()"> Chemical Producers
+                </label>
+                <label class="category-item">
+                    <input type="checkbox" checked onchange="filterNetwork()"> Shipping Companies
+                </label>
+                <label class="category-item">
+                    <input type="checkbox" checked onchange="filterNetwork()"> Port Authorities
+                </label>
+                <label class="category-item">
+                    <input type="checkbox" checked onchange="filterNetwork()"> Infrastructure
+                </label>
+                <label class="category-item">
+                    <input type="checkbox" checked onchange="filterNetwork()"> Regulatory Bodies
+                </label>
+            </div>
+
+            <div class="network-metrics">
+                <h4>Network Metrics</h4>
+                <div class="network-stat">
+                    <span class="stat-label">Total Stakeholders</span>
+                    <span class="stat-value">24</span>
+                </div>
+                <div class="network-stat">
+                    <span class="stat-label">High Influence</span>
+                    <span class="stat-value">6</span>
+                </div>
+                <div class="network-stat">
+                    <span class="stat-label">Direct Connections</span>
+                    <span class="stat-value">12</span>
+                </div>
+                <div class="network-stat">
+                    <span class="stat-label">Network Density</span>
+                    <span class="stat-value">68%</span>
+                </div>
+            </div>
+
+            <div class="influence-distribution">
+                <h4>Influence Distribution</h4>
+                <div class="influence-item primary">
+                    <div class="influence-type">Primary Impact</div>
+                    <div class="influence-count">3</div>
+                </div>
+                <div class="influence-item secondary">
+                    <div class="influence-type">Secondary Players</div>
+                    <div class="influence-count">8</div>
+                </div>
+                <div class="influence-item tertiary">
+                    <div class="influence-type">Regional Players</div>
+                    <div class="influence-count">13</div>
+                </div>
+            </div>
+
+            <div class="network-controls">
+                <h4>Network Controls</h4>
+                <div class="control-group">
+                    <label class="control-item">
+                        <input type="checkbox" checked> Show Labels
+                    </label>
+                    <label class="control-item">
+                        <input type="checkbox" checked> Show Weights
+                    </label>
+                    <label class="control-item">
+                        <input type="checkbox"> Physics Simulation
+                    </label>
+                    <label class="control-item">
+                        <input type="checkbox"> Cluster Analysis
+                    </label>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Central Content Area -->
+        <main class="content-area">
+            <!-- Function Navigation -->
+            <div class="function-nav">
+                <a href="story-view.html" class="function-btn" data-view="story">STORY</a>
+                <a href="data-view.html" class="function-btn" data-view="data">DATA</a>
+                <a href="connections-view.html" class="function-btn" data-view="connections">CONNECTIONS</a>
+                <a href="impact-view.html" class="function-btn" data-view="impact">IMPACT</a>
+                <a href="geography-view.html" class="function-btn" data-view="geography">GEOGRAPHY</a>
+                <a href="timeline-view.html" class="function-btn" data-view="timeline">TIMELINE</a>
+                <a href="players-view.html" class="function-btn active" data-view="players">PLAYERS</a>
+            </div>
+
+            <!-- Players Content -->
+            <div class="view-container players-view active">
+                <div class="players-header">
+                    <h2>Key Stakeholders: GCA Plant Impact Network</h2>
+                </div>
+
+                <div class="players-content">
+                    <div class="stakeholder-network-controls">
+                        <button class="network-btn active" onclick="switchNetworkView('network')">Network View</button>
+                        <button class="network-btn" onclick="switchNetworkView('list')">List View</button>
+                        <button class="network-btn" onclick="switchNetworkView('influence')">Influence Map</button>
+                    </div>
+                    
+                    <div class="stakeholder-network">
+                        <div id="stakeholder-network-vis" style="width: 100%; height: 400px; background: #1e1e1e; border-radius: 6px;"></div>
+                    </div>
+                    
+                    <div class="stakeholder-details">
+                        <h3>Key Stakeholder Profiles</h3>
+                        <div class="stakeholder-grid">
+                            <div class="stakeholder-card primary">
+                                <div class="stakeholder-header">
+                                    <h4>GCA Chemical</h4>
+                                    <span class="influence-badge primary">Primary</span>
+                                </div>
+                                <div class="stakeholder-metrics">
+                                    <div class="metric">
+                                        <span class="label">Role:</span>
+                                        <span class="value">Plant Owner/Producer</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Influence Score:</span>
+                                        <span class="value influence">95</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Market Impact:</span>
+                                        <span class="value positive">+15.2% rate driver</span>
+                                    </div>
+                                </div>
+                                <div class="stakeholder-forecast">Direct control over production volume and timing decisions</div>
+                            </div>
+                            
+                            <div class="stakeholder-card secondary">
+                                <div class="stakeholder-header">
+                                    <h4>Port of Tampa</h4>
+                                    <span class="influence-badge secondary">High Impact</span>
+                                </div>
+                                <div class="stakeholder-metrics">
+                                    <div class="metric">
+                                        <span class="label">Role:</span>
+                                        <span class="value">Primary Destination</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Influence Score:</span>
+                                        <span class="value influence">78</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Volume Change:</span>
+                                        <span class="value positive">+32% chemical calls</span>
+                                    </div>
+                                </div>
+                                <div class="stakeholder-forecast">Infrastructure beneficiary with increased utilization</div>
+                            </div>
+                            
+                            <div class="stakeholder-card tertiary">
+                                <div class="stakeholder-header">
+                                    <h4>Stolt Tankers</h4>
+                                    <span class="influence-badge tertiary">Key Shipper</span>
+                                </div>
+                                <div class="stakeholder-metrics">
+                                    <div class="metric">
+                                        <span class="label">Role:</span>
+                                        <span class="value">Transport Partner</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Influence Score:</span>
+                                        <span class="value influence">65</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Fleet Exposure:</span>
+                                        <span class="value positive">18 vessels</span>
+                                    </div>
+                                </div>
+                                <div class="stakeholder-forecast">Strategic redeployment opportunities to Gulf routes</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar - Player Intelligence -->
+        <aside class="right-sidebar">
+            <div class="stakeholder-alerts">
+                <h4>Stakeholder Alerts</h4>
+                <div class="alert-item urgent">
+                    <div class="alert-company">GCA</div>
+                    <div class="alert-text">Earnings call scheduled Mar 28</div>
+                </div>
+                <div class="alert-item important">
+                    <div class="alert-company">Stolt Tankers</div>
+                    <div class="alert-text">Fleet redeployment announced</div>
+                </div>
+            </div>
+
+            <div class="influence-ranking">
+                <h4>Influence Ranking</h4>
+                <div class="ranking-list">
+                    <div class="rank-item">
+                        <span class="rank">1</span>
+                        <span class="company">GCA</span>
+                        <span class="influence-score">95</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank">2</span>
+                        <span class="company">Port of Tampa</span>
+                        <span class="influence-score">78</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank">3</span>
+                        <span class="company">Stolt Tankers</span>
+                        <span class="influence-score">65</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="status-left">
+            <span>Connected to Live Market Data</span>
+            <span class="connection-status">●</span>
+        </div>
+        <div class="status-right">
+            <span>Stakeholder Data Updated: 14:20 GMT</span>
+        </div>
+    </div>
+
+    <script>
+        // Initialize stakeholder network visualization
+        let stakeholderNetwork;
+        let networkData;
+
+        function initializeStakeholderNetwork() {
+            // Network data structure
+            const nodes = new vis.DataSet([
+                // Primary stakeholders (center)
+                {id: 1, label: 'GCA Chemical\nPlant Owner', 
+                 group: 'primary', size: 40, 
+                 color: {background: '#00ff88', border: '#00ff88'},
+                 font: {color: '#000', size: 12, bold: true}},
+                
+                // Secondary stakeholders
+                {id: 2, label: 'Port of Tampa\nDestination Hub', 
+                 group: 'secondary', size: 30,
+                 color: {background: '#00d4ff', border: '#00d4ff'},
+                 font: {color: '#000', size: 11}},
+                
+                {id: 3, label: 'Stolt Tankers\nKey Shipper', 
+                 group: 'tertiary', size: 25,
+                 color: {background: '#ffaa44', border: '#ffaa44'},
+                 font: {color: '#000', size: 10}},
+                
+                {id: 4, label: 'Houston Port\nCompeting Hub', 
+                 group: 'secondary', size: 25,
+                 color: {background: '#00d4ff', border: '#00d4ff'},
+                 font: {color: '#000', size: 10}},
+                
+                {id: 5, label: 'Odfjell Tankers\nCompetitor', 
+                 group: 'tertiary', size: 20,
+                 color: {background: '#ffaa44', border: '#ffaa44'},
+                 font: {color: '#000', size: 10}},
+                
+                {id: 6, label: 'MISC Berhad\nRegional Player', 
+                 group: 'tertiary', size: 18,
+                 color: {background: '#ffaa44', border: '#ffaa44'},
+                 font: {color: '#000', size: 9}},
+                
+                // Additional network nodes
+                {id: 7, label: 'Louisiana Coast\nProduction Hub', 
+                 group: 'infrastructure', size: 22,
+                 color: {background: '#666', border: '#888'},
+                 font: {color: '#fff', size: 10}},
+                
+                {id: 8, label: 'Chemical Suppliers\nUpstream', 
+                 group: 'upstream', size: 15,
+                 color: {background: '#ff6666', border: '#ff6666'},
+                 font: {color: '#000', size: 9}},
+                
+                {id: 9, label: 'End Customers\nDownstream', 
+                 group: 'downstream', size: 15,
+                 color: {background: '#9966ff', border: '#9966ff'},
+                 font: {color: '#fff', size: 9}}
+            ]);
+
+            const edges = new vis.DataSet([
+                // Primary relationships (GCA as center)
+                {from: 1, to: 7, label: 'Production', 
+                 color: {color: '#00ff88'}, width: 4,
+                 dashes: false},
+                
+                {from: 1, to: 2, label: 'Primary Route\n+15.2% Impact', 
+                 color: {color: '#00ff88'}, width: 4,
+                 dashes: false},
+                
+                {from: 1, to: 3, label: 'Transport Contract', 
+                 color: {color: '#00ff88'}, width: 3,
+                 dashes: false},
+                
+                // Secondary relationships
+                {from: 2, to: 3, label: 'Port Calls', 
+                 color: {color: '#00d4ff'}, width: 2,
+                 dashes: false},
+                
+                {from: 1, to: 4, label: 'Alternative Route\n+8.1% Impact', 
+                 color: {color: '#00d4ff'}, width: 2,
+                 dashes: true},
+                
+                // Competitive relationships
+                {from: 3, to: 5, label: 'Competition', 
+                 color: {color: '#ff6666'}, width: 2,
+                 dashes: true},
+                
+                {from: 5, to: 6, label: 'Regional Alliance', 
+                 color: {color: '#ffaa44'}, width: 1,
+                 dashes: true},
+                
+                // Supply chain connections
+                {from: 8, to: 1, label: 'Raw Materials', 
+                 color: {color: '#888'}, width: 1,
+                 dashes: false},
+                
+                {from: 2, to: 9, label: 'Chemical Distribution', 
+                 color: {color: '#888'}, width: 1,
+                 dashes: false},
+                
+                {from: 4, to: 9, label: 'Alternative Distribution', 
+                 color: {color: '#888'}, width: 1,
+                 dashes: true}
+            ]);
+
+            networkData = {nodes: nodes, edges: edges};
+
+            // Network configuration
+            const options = {
+                groups: {
+                    primary: {
+                        shape: 'circle',
+                        size: 40,
+                        font: {size: 12, bold: true}
+                    },
+                    secondary: {
+                        shape: 'circle', 
+                        size: 30,
+                        font: {size: 11}
+                    },
+                    tertiary: {
+                        shape: 'circle',
+                        size: 25,
+                        font: {size: 10}
+                    },
+                    infrastructure: {
+                        shape: 'box',
+                        size: 25
+                    },
+                    upstream: {
+                        shape: 'triangle',
+                        size: 15
+                    },
+                    downstream: {
+                        shape: 'diamond',
+                        size: 15
+                    }
+                },
+                layout: {
+                    improvedLayout: true,
+                    hierarchical: {
+                        enabled: false
+                    }
+                },
+                physics: {
+                    enabled: true,
+                    stabilization: {iterations: 200},
+                    barnesHut: {
+                        gravitationalConstant: -2000,
+                        centralGravity: 0.1,
+                        springLength: 120,
+                        springConstant: 0.05,
+                        damping: 0.09
+                    }
+                },
+                interaction: {
+                    dragNodes: true,
+                    dragView: true,
+                    zoomView: true,
+                    hover: true,
+                    selectConnectedEdges: true
+                },
+                edges: {
+                    arrows: {
+                        to: {enabled: true, scaleFactor: 0.5}
+                    },
+                    smooth: {
+                        enabled: true,
+                        type: 'dynamic'
+                    },
+                    font: {
+                        size: 10,
+                        color: '#888',
+                        strokeWidth: 3,
+                        strokeColor: '#1e1e1e'
+                    }
+                },
+                nodes: {
+                    borderWidth: 2,
+                    shadow: true
+                }
+            };
+
+            // Create network
+            const container = document.getElementById('stakeholder-network-vis');
+            stakeholderNetwork = new vis.Network(container, networkData, options);
+
+            // Add interaction events
+            stakeholderNetwork.on("click", function (params) {
+                if (params.nodes.length > 0) {
+                    const nodeId = params.nodes[0];
+                    highlightNode(nodeId);
+                }
+            });
+
+            stakeholderNetwork.on("hoverNode", function (params) {
+                container.style.cursor = 'pointer';
+            });
+
+            stakeholderNetwork.on("blurNode", function (params) {
+                container.style.cursor = 'default';
+            });
+        }
+
+        function highlightNode(nodeId) {
+            // Update stakeholder profiles based on selected node
+            console.log('Selected stakeholder node:', nodeId);
+            // Could expand this to show detailed info in right sidebar
+        }
+
+        function switchNetworkView(view) {
+            // Update active button
+            document.querySelectorAll('.network-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            if (view === 'network') {
+                document.getElementById('stakeholder-network-vis').style.display = 'block';
+            } else if (view === 'list') {
+                // Could implement list view
+                console.log('List view not implemented yet');
+            } else if (view === 'influence') {
+                // Could implement influence map
+                console.log('Influence map not implemented yet');
+            }
+        }
+
+        function filterNetwork() {
+            // Update network based on category filters
+            console.log('Network filtering not fully implemented yet');
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeStakeholderNetwork();
+        });
+    </script>
+</body>
+</html> 

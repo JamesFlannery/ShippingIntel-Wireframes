@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geography View - ShippingIntel</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <a href="index.html" class="logo">ShippingIntel</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Search stories, ships, ports, companies... (⌘K)" class="global-search">
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="user-role">Abe Vigoda</div>
+            <div class="notifications">●</div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="main-container">
+        <!-- Left Sidebar - Geography Controls -->
+        <aside class="left-sidebar">
+            <div class="current-story">
+                <h3>Geographic Analysis</h3>
+                <div class="story-card active">
+                    <div class="story-title">GCA Plant Startup Impacts Gulf Pricing</div>
+                    <div class="story-meta">March 15, 2024 • High Impact</div>
+                    <div class="connection-strength">
+                        <span class="causal">●</span> Regional Analysis
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-layers">
+                <div class="section-header" onclick="toggleSection('mapLayers')">
+                    <h4>Map Layers</h4>
+                    <span class="toggle-icon" id="mapLayersToggle">▼</span>
+                </div>
+                <div class="layer-list" id="mapLayersContent">
+                    <label class="layer-item">
+                        <input type="checkbox" checked> 
+                        <span class="layer-text">Trade Routes</span>
+                    </label>
+                    <label class="layer-item">
+                        <input type="checkbox" checked> 
+                        <span class="layer-text">Rate Changes</span>
+                    </label>
+                    <label class="layer-item">
+                        <input type="checkbox"> 
+                        <span class="layer-text">Vessel Positions</span>
+                    </label>
+                    <label class="layer-item">
+                        <input type="checkbox"> 
+                        <span class="layer-text">Port Congestion</span>
+                    </label>
+                    <label class="layer-item">
+                        <input type="checkbox"> 
+                        <span class="layer-text">Weather Impacts</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="region-focus">
+                <h4>Regional Focus</h4>
+                <select class="region-selector">
+                    <option selected>Gulf Coast (Primary)</option>
+                    <option>US Atlantic Coast</option>
+                    <option>US Pacific Coast</option>
+                    <option>Global Chemical Routes</option>
+                </select>
+            </div>
+
+            <div class="geographic-metrics">
+                <h4>Regional Metrics</h4>
+                <div class="geo-metric">
+                    <span class="metric-label">Gulf Coast Activity</span>
+                    <span class="metric-value positive">+18.7%</span>
+                </div>
+                <div class="geo-metric">
+                    <span class="metric-label">Tampa Route Density</span>
+                    <span class="metric-value positive">+24.3%</span>
+                </div>
+                <div class="geo-metric">
+                    <span class="metric-label">Average Distance</span>
+                    <span class="metric-value">847 nm</span>
+                </div>
+                <div class="geo-metric">
+                    <span class="metric-label">Port Turnaround</span>
+                    <span class="metric-value neutral">2.1 days</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Central Content Area -->
+        <main class="content-area">
+            <!-- Function Navigation -->
+            <div class="function-nav">
+                <a href="story-view.html" class="function-btn" data-view="story">STORY</a>
+                <a href="data-view.html" class="function-btn" data-view="data">DATA</a>
+                <a href="connections-view.html" class="function-btn" data-view="connections">CONNECTIONS</a>
+                <a href="impact-view.html" class="function-btn" data-view="impact">IMPACT</a>
+                <a href="geography-view.html" class="function-btn active" data-view="geography">GEOGRAPHY</a>
+                <a href="timeline-view.html" class="function-btn" data-view="timeline">TIMELINE</a>
+                <a href="players-view.html" class="function-btn" data-view="players">PLAYERS</a>
+            </div>
+
+            <!-- Geography Content -->
+            <div class="view-container geography-view active">
+                <div class="geography-header">
+                    <h2>Geographic Impact Analysis: Gulf Coast Chemical Transport</h2>
+                    <div class="map-controls-top">
+                        <button class="map-btn active">Route View</button>
+                        <button class="map-btn">Heatmap</button>
+                        <button class="map-btn">3D Volumes</button>
+                        <button class="zoom-btn">🗺️ Fit Region</button>
+                    </div>
+                </div>
+
+                <div class="geography-content">
+                    <!-- Interactive Map Section -->
+                    <div class="map-section">
+                        <div class="map-container">
+                            <div id="gulf-coast-map" class="interactive-map"></div>
+                        </div>
+
+                        <div class="map-legend">
+                            <div class="legend-group">
+                                <h5>Routes</h5>
+                                <div class="legend-item">
+                                    <div class="legend-line primary"></div>
+                                    <span>Primary Impact (+15%)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-line secondary"></div>
+                                    <span>Secondary Impact (+5-8%)</span>
+                                </div>
+                            </div>
+                            <div class="legend-group">
+                                <h5>Locations</h5>
+                                <div class="legend-item">
+                                    <span class="legend-icon">🏭</span>
+                                    <span>Chemical Plant</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-icon">🏗️</span>
+                                    <span>Major Port</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Regional Analysis Grid -->
+                    <div class="regional-analysis">
+                        <h3>Regional Route Analysis</h3>
+                        <div class="analysis-grid">
+                            <div class="region-card primary">
+                                <h4>Louisiana → Tampa Corridor</h4>
+                                <div class="region-stats">
+                                    <div class="stat-row">
+                                        <span>Distance:</span>
+                                        <span>847 nautical miles</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>Transit Time:</span>
+                                        <span>3.2 days average</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>Volume Impact:</span>
+                                        <span class="positive">+36,100 MT/month</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>Rate Impact:</span>
+                                        <span class="positive">+15.2% ($21,275/day)</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>Frequency:</span>
+                                        <span class="positive">+40% voyages</span>
+                                    </div>
+                                </div>
+                                <div class="region-impact">Primary beneficiary of plant startup</div>
+                            </div>
+
+                            <div class="region-card secondary">
+                                <h4>Louisiana → Houston Routes</h4>
+                                <div class="region-stats">
+                                    <div class="stat-row">
+                                        <span>Distance:</span>
+                                        <span>356 nautical miles</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>Volume Impact:</span>
+                                        <span class="positive">+12,400 MT/month</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>Rate Impact:</span>
+                                        <span class="positive">+8.1%</span>
+                                    </div>
+                                </div>
+                                <div class="region-impact">Secondary spillover effects</div>
+                            </div>
+
+                            <div class="region-card tertiary">
+                                <h4>Intra-Gulf Movements</h4>
+                                <div class="region-stats">
+                                    <div class="stat-row">
+                                        <span>Multiple short-haul routes</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span>Rate Impact:</span>
+                                        <span class="positive">+3-5%</span>
+                                    </div>
+                                </div>
+                                <div class="region-impact">Limited but positive impact</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Port Analysis -->
+                    <div class="port-analysis">
+                        <h3>Port Impact Assessment</h3>
+                        <div class="port-grid">
+                            <div class="port-card high-impact">
+                                <div class="port-header">
+                                    <h4>Port of Tampa</h4>
+                                    <span class="impact-level high">HIGH IMPACT</span>
+                                </div>
+                                <div class="port-metrics">
+                                    <div class="metric">
+                                        <span class="label">Increased Calls:</span>
+                                        <span class="value positive">+32% chemical tankers</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Congestion:</span>
+                                        <span class="value warning">Moderate increase</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Berth Utilization:</span>
+                                        <span class="value">78% (was 62%)</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Wait Times:</span>
+                                        <span class="value positive">+0.8 days average</span>
+                                    </div>
+                                </div>
+                                <div class="port-forecast">Expected to remain primary destination for GCA production</div>
+                            </div>
+
+                            <div class="port-card medium-impact">
+                                <div class="port-header">
+                                    <h4>Houston Ship Channel</h4>
+                                    <span class="impact-level medium">MEDIUM IMPACT</span>
+                                </div>
+                                <div class="port-metrics">
+                                    <div class="metric">
+                                        <span class="label">Volume Change:</span>
+                                        <span class="value positive">+15% chemical movements</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Rate Premium:</span>
+                                        <span class="value positive">+8.1%</span>
+                                    </div>
+                                </div>
+                                <div class="port-forecast">Secondary spillover effects</div>
+                            </div>
+
+                            <div class="port-card low-impact">
+                                <div class="port-header">
+                                    <h4>Mobile Bay</h4>
+                                    <span class="impact-level low">LOW IMPACT</span>
+                                </div>
+                                <div class="port-metrics">
+                                    <div class="metric">
+                                        <span class="label">Indirect effects only</span>
+                                        <span class="value"></span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="label">Rate Impact:</span>
+                                        <span class="value positive">+4.3%</span>
+                                    </div>
+                                </div>
+                                <div class="port-forecast">Limited but positive impact</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar - Geographic Intelligence -->
+        <aside class="right-sidebar">
+            <div class="route-optimization">
+                <h4>Route Optimization</h4>
+                <div class="optimization-alert">
+                    <div class="alert-priority high">High Priority</div>
+                    <div class="alert-content">Louisiana → Tampa route showing 15% rate premium. Consider redeploying vessels from Atlantic routes.</div>
+                </div>
+                <div class="optimization-suggestion">
+                    <h5>Suggested Redeployment</h5>
+                    <div class="suggestion-item">
+                        <span class="vessel">MV Chemical Pioneer</span>
+                        <span class="action">Atlantic → Gulf</span>
+                        <span class="benefit">+$275K/quarter</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="geographic-risks">
+                <h4>Geographic Risk Factors</h4>
+                <div class="risk-item weather">
+                    <div class="risk-type">Weather</div>
+                    <div class="risk-desc">Hurricane season begins June 1st</div>
+                    <div class="risk-level">Monitor</div>
+                </div>
+                <div class="risk-item infrastructure">
+                    <div class="risk-type">Infrastructure</div>
+                    <div class="risk-desc">Tampa port expansion project ongoing</div>
+                    <div class="risk-level">Positive</div>
+                </div>
+                <div class="risk-item regulatory">
+                    <div class="risk-type">Regulatory</div>
+                    <div class="risk-desc">Jones Act compliance requirements</div>
+                    <div class="risk-level">Standard</div>
+                </div>
+            </div>
+
+            <div class="distance-calculator">
+                <h4>Distance Calculator</h4>
+                <div class="calc-inputs">
+                    <select class="port-select">
+                        <option>Louisiana (GCA Plant)</option>
+                        <option>Houston</option>
+                        <option>Beaumont</option>
+                    </select>
+                    <span class="calc-to">→</span>
+                    <select class="port-select">
+                        <option>Tampa</option>
+                        <option>Jacksonville</option>
+                        <option>Mobile</option>
+                    </select>
+                </div>
+                <div class="calc-result">
+                    <span class="distance">847 nm</span>
+                    <span class="time">3.2 days @ 11 knots</span>
+                </div>
+            </div>
+
+            <div class="regional-trends">
+                <h4>Regional Trends</h4>
+                <div class="trend-item">
+                    <span class="trend-region">Gulf Coast</span>
+                    <span class="trend-direction up">↗️ Chemical exports +18%</span>
+                </div>
+                <div class="trend-item">
+                    <span class="trend-region">SE US Ports</span>
+                    <span class="trend-direction up">↗️ Import demand +12%</span>
+                </div>
+                <div class="trend-item">
+                    <span class="trend-region">Atlantic Coast</span>
+                    <span class="trend-direction stable">→ Stable activity</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="status-left">
+            <span>Connected to Live Market Data</span>
+            <span class="connection-status">●</span>
+        </div>
+        <div class="status-right">
+            <span>AIS Data Updated: 14:28 GMT</span>
+        </div>
+    </div>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map centered on Gulf Coast
+        var map = L.map('gulf-coast-map', {
+            center: [28.5, -89.0], // Gulf Coast center
+            zoom: 6,
+            zoomControl: true
+        });
+
+        // Add OpenStreetMap tiles with dark theme
+        L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+        }).addTo(map);
+
+        // Custom icons for different location types
+        var plantIcon = L.divIcon({
+            className: 'custom-plant-icon',
+            html: '<div style="background: #ff6666; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px;">🏭</div>',
+            iconSize: [20, 20],
+            iconAnchor: [10, 10]
+        });
+
+        var portIcon = L.divIcon({
+            className: 'custom-port-icon',
+            html: '<div style="background: #00d4ff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px;">⚓</div>',
+            iconSize: [20, 20],
+            iconAnchor: [10, 10]
+        });
+
+        // GCA Plant Location (Louisiana)
+        var gcaPlant = L.marker([29.7, -90.2], {icon: plantIcon})
+            .addTo(map)
+            .bindPopup('<div style="color: #333;"><strong>GCA Chemical Plant</strong><br/>Louisiana<br/>New Production Facility</div>');
+
+        // Major Ports
+        var tampaPort = L.marker([27.9, -82.5], {icon: portIcon})
+            .addTo(map)
+            .bindPopup('<div style="color: #333;"><strong>Port of Tampa</strong><br/>Rate Impact: <span style="color: #00ff88;">+15.2%</span><br/>High Impact Zone</div>');
+
+        var houstonPort = L.marker([29.7, -95.0], {icon: portIcon})
+            .addTo(map)
+            .bindPopup('<div style="color: #333;"><strong>Port of Houston</strong><br/>Rate Impact: <span style="color: #00ff88;">+8.1%</span><br/>Secondary Route</div>');
+
+        var mobilePort = L.marker([30.7, -88.0], {icon: portIcon})
+            .addTo(map)
+            .bindPopup('<div style="color: #333;"><strong>Port of Mobile</strong><br/>Rate Impact: <span style="color: #00ff88;">+4.3%</span><br/>Regional Impact</div>');
+
+        // Trade Routes
+        // Primary route: Louisiana to Tampa
+        var primaryRoute = L.polyline([
+            [29.7, -90.2], // GCA Plant
+            [28.8, -87.5], // Mid-point
+            [27.9, -82.5]  // Tampa
+        ], {
+            color: '#00ff88',
+            weight: 4,
+            opacity: 0.8,
+            smoothFactor: 1
+        }).addTo(map);
+
+        // Secondary routes
+        var houstonRoute = L.polyline([
+            [29.7, -90.2], // GCA Plant
+            [29.7, -95.0]  // Houston
+        ], {
+            color: '#00d4ff',
+            weight: 3,
+            opacity: 0.6
+        }).addTo(map);
+
+        var mobileRoute = L.polyline([
+            [29.7, -90.2], // GCA Plant
+            [30.7, -88.0]  // Mobile
+        ], {
+            color: '#00d4ff',
+            weight: 3,
+            opacity: 0.6
+        }).addTo(map);
+
+        // Add route impact indicator
+        var impactMarker = L.marker([28.3, -85.0], {
+            icon: L.divIcon({
+                className: 'impact-indicator',
+                html: '<div style="background: #00ff88; color: #000; padding: 4px 8px; border-radius: 12px; font-size: 10px; font-weight: bold; white-space: nowrap;">+15.2% Rate Impact</div>',
+                iconSize: [80, 20],
+                iconAnchor: [40, 10]
+            })
+        }).addTo(map);
+
+        // Add popup bindings for routes
+        primaryRoute.bindPopup('<div style="color: #333;"><strong>Primary Chemical Route</strong><br/>Louisiana → Tampa<br/>Distance: 847 nautical miles<br/>Impact: <span style="color: #00ff88;">+15.2% rates</span></div>');
+        houstonRoute.bindPopup('<div style="color: #333;"><strong>Secondary Route</strong><br/>Louisiana → Houston<br/>Impact: <span style="color: #00ff88;">+8.1% rates</span></div>');
+        mobileRoute.bindPopup('<div style="color: #333;"><strong>Regional Route</strong><br/>Louisiana → Mobile<br/>Impact: <span style="color: #00ff88;">+4.3% rates</span></div>');
+    </script>
+
+    <script>
+        // Collapsible section functionality
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId + 'Content');
+            const toggle = document.getElementById(sectionId + 'Toggle');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                toggle.classList.remove('collapsed');
+                toggle.textContent = '▼';
+            } else {
+                content.classList.add('hidden');
+                toggle.classList.add('collapsed');
+                toggle.textContent = '▶';
+            }
+        }
+
+        // Initialize sections as expanded by default
+        document.addEventListener('DOMContentLoaded', function() {
+            // Map layers section starts expanded
+            const mapLayersContent = document.getElementById('mapLayersContent');
+            const mapLayersToggle = document.getElementById('mapLayersToggle');
+            
+            // Ensure it's expanded on load
+            mapLayersContent.classList.remove('hidden');
+            mapLayersToggle.classList.remove('collapsed');
+            mapLayersToggle.textContent = '▼';
+        });
+    </script>
+</body>
+</html> 

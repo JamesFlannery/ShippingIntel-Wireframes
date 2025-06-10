@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShippingIntel - Maritime Intelligence</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Authentication check
+        function checkAuth() {
+            const isAuthenticated = sessionStorage.getItem('maritime-auth');
+            const authTimestamp = sessionStorage.getItem('auth-timestamp');
+            const currentTime = Date.now();
+            const sessionDuration = 24 * 60 * 60 * 1000; // 24 hours
+            
+            if (!isAuthenticated || !authTimestamp || (currentTime - parseInt(authTimestamp)) > sessionDuration) {
+                window.location.href = 'auth.html';
+                return false;
+            }
+            return true;
+        }
+        
+        // Check authentication on page load
+        if (!checkAuth()) {
+            // Will redirect to auth.html
+        }
+    </script>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <a href="index.html" class="logo">ShippingIntel</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Search stories, ships, ports, companies... (⌘K)" class="global-search">
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="user-role">Abe Vigoda</div>
+            <div class="notifications">●</div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="main-container">
+        <!-- Left Sidebar -->
+        <aside class="left-sidebar">
+            <div class="current-story">
+                <h3>Current Analysis</h3>
+                <div class="story-card active">
+                    <div class="story-title">GCA Plant Startup Impacts Gulf Pricing</div>
+                    <div class="story-meta">March 15, 2024 • High Impact</div>
+                </div>
+            </div>
+
+            <div class="related-threads">
+                <h4>Related Stories</h4>
+                <div class="thread-item active">
+                    <div class="connection-strength causal"></div>
+                    <div class="thread-label">Motiva Refinery Expansion</div>
+                </div>
+                <div class="thread-item">
+                    <div class="connection-strength causal"></div>
+                    <div class="thread-label">Hurricane Season Impact</div>
+                </div>
+                <div class="thread-item">
+                    <div class="connection-strength causal"></div>
+                    <div class="thread-label">IMO 2020 Regulations</div>
+                </div>
+            </div>
+
+            <div class="recommendations">
+                <h4>Recommendations</h4>
+                <div class="rec-item">
+                    <div class="rec-score">95</div>
+                    <div class="rec-content">Analyze Houston alternative routes</div>
+                </div>
+                <div class="rec-item">
+                    <div class="rec-score">87</div>
+                    <div class="rec-content">Monitor Stolt fleet deployment</div>
+                </div>
+                <div class="rec-item">
+                    <div class="rec-score">78</div>
+                    <div class="rec-content">Track chemical inventory levels</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Central Content Area -->
+        <main class="content-area">
+            <!-- Function Navigation -->
+            <div class="function-nav">
+                <a href="story-view.html" class="function-btn active" data-view="story">STORY</a>
+                <a href="data-view.html" class="function-btn" data-view="data">DATA</a>
+                <a href="connections-view.html" class="function-btn" data-view="connections">CONNECTIONS</a>
+                <a href="impact-view.html" class="function-btn" data-view="impact">IMPACT</a>
+                <a href="geography-view.html" class="function-btn" data-view="geography">GEOGRAPHY</a>
+                <a href="timeline-view.html" class="function-btn" data-view="timeline">TIMELINE</a>
+                <a href="players-view.html" class="function-btn" data-view="players">PLAYERS</a>
+            </div>
+
+            <!-- Story Content -->
+            <div class="view-container story-view active">
+                <div class="story-header">
+                    <h1>GCA Plant Startup Driving 15.2% Rate Increases on Gulf Coast → Tampa Chemical Routes</h1>
+                    <div class="story-meta-bar">
+                        <span class="impact-level high">High Impact</span>
+                        <span class="relevance">97% Relevance</span>
+                        <span class="last-updated">Last Updated: 14:20 GMT</span>
+                    </div>
+                </div>
+
+                <div class="story-content">
+                    <div class="content-block">
+                        <p>Gulf Chemical Associates (GCA) has officially commenced operations at their new $2.3B petrochemical facility in Louisiana, creating immediate supply chain disruptions and pricing pressures across chemical tanker routes serving the US Gulf Coast.</p>
+                        
+                        <div class="inline-prompt">
+                            <span class="prompt-icon">⚡</span>
+                            <span class="prompt-text">This development has triggered a cascade of market effects. </span>
+                            <a href="#" class="prompt-link">Explore rate impact analysis →</a>
+                        </div>
+                    </div>
+
+                    <div class="content-block">
+                        <p>The facility's 125,000 MT monthly chemical output has created unprecedented demand for specialized chemical tankers on the Louisiana → Tampa corridor, with daily fixture rates jumping 15.2% in the past 14 days.</p>
+                        
+                        <div class="connection-callout">
+                            <div class="connection-type">CAUSAL CONNECTION</div>
+                            <div class="connection-text">Stolt Tankers has redeployed 18 vessels from North Sea routes to capitalize on Gulf Coast premiums</div>
+                            <button class="explore-connection">Explore Fleet Movement Impact</button>
+                        </div>
+                    </div>
+
+                    <div class="content-block">
+                        <p>Port of Tampa Bay has reported a 32% increase in chemical calls, straining berth availability and pushing up demurrage costs. Terminal operators are implementing premium scheduling to manage the surge.</p>
+                        
+                        <div class="inline-prompt">
+                            <span class="prompt-icon">📊</span>
+                            <span class="prompt-text">Port congestion metrics suggest </span>
+                            <a href="#" class="prompt-link">further rate escalation likely →</a>
+                        </div>
+                    </div>
+
+                    <div class="content-block">
+                        <p>Industry sources indicate that competing facilities in Houston and Mobile are experiencing secondary demand effects, with some chemical producers diverting planned shipments to take advantage of improved logistics at GCA's Louisiana terminal.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <div class="context-panel">
+                <h4>Key Context</h4>
+                <div class="context-item">
+                    <div class="context-type">Facility</div>
+                    <div class="context-detail">GCA Louisiana Plant - 125k MT/month capacity</div>
+                </div>
+                <div class="context-item">
+                    <div class="context-type">Route</div>
+                    <div class="context-detail">Louisiana Gulf → Tampa Bay</div>
+                </div>
+                <div class="context-item">
+                    <div class="context-type">Vessel Type</div>
+                    <div class="context-detail">Chemical Tankers (25k-45k DWT)</div>
+                </div>
+            </div>
+
+            <div class="active-prompts">
+                <h4>Active Alerts</h4>
+                <div class="prompt-item urgency-high">
+                    <div class="prompt-text">Rate volatility exceeding 5-day moving average</div>
+                    <div class="prompt-action">Monitor →</div>
+                </div>
+                <div class="prompt-item urgency-medium">
+                    <div class="prompt-text">Stolt earnings call scheduled March 28</div>
+                    <div class="prompt-action">Schedule →</div>
+                </div>
+            </div>
+
+            <div class="related-stories">
+                <h4>Related Intelligence</h4>
+                <div class="related-item">
+                    <div class="related-title">Houston Ship Channel Delays</div>
+                    <div class="related-connection">Competing routes analysis</div>
+                </div>
+                <div class="related-item">
+                    <div class="related-title">Chemical Inventory Buildup</div>
+                    <div class="related-connection">Demand forecasting</div>
+                </div>
+                <div class="related-item">
+                    <div class="related-title">IMO Tank Cleaning Regs</div>
+                    <div class="related-connection">Operational constraints</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="status-left">
+            <span>Connected to Live Market Data</span>
+            <span class="connection-status">●</span>
+        </div>
+        <div class="status-right">
+            <span>Market Update: 14:20 GMT • Next refresh in 2:15</span>
+        </div>
+    </div>
+</body>
+</html> 

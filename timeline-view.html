@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeline View - ShippingIntel</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Vis.js Timeline CSS -->
+    <link href="https://unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <a href="index.html" class="logo">ShippingIntel</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Search stories, ships, ports, companies... (⌘K)" class="global-search">
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="user-role">Abe Vigoda</div>
+            <div class="notifications">●</div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="main-container">
+        <!-- Left Sidebar - Timeline Controls -->
+        <aside class="left-sidebar">
+            <div class="current-story">
+                <h3>Timeline Analysis</h3>
+                <div class="story-card active">
+                    <div class="story-title">GCA Plant Startup Impacts Gulf Pricing</div>
+                    <div class="story-meta">March 15, 2024 • High Impact</div>
+                </div>
+            </div>
+
+            <div class="timeline-scope">
+                <h4>Time Horizon</h4>
+                <button class="scope-btn">30 Days</button>
+                <button class="scope-btn active">6 Months</button>
+                <button class="scope-btn">1 Year</button>
+            </div>
+
+            <div class="timeline-filters">
+                <h4>Event Types</h4>
+                <label class="filter-item">
+                    <input type="checkbox" checked> Market Events
+                </label>
+                <label class="filter-item">
+                    <input type="checkbox" checked> Rate Changes
+                </label>
+                <label class="filter-item">
+                    <input type="checkbox" checked> Plant Operations
+                </label>
+                <label class="filter-item">
+                    <input type="checkbox"> Regulatory Changes
+                </label>
+                <label class="filter-item">
+                    <input type="checkbox"> Weather Events
+                </label>
+            </div>
+
+            <div class="key-milestones">
+                <h4>Key Milestones</h4>
+                <div class="milestone-item current">
+                    <div class="milestone-date">Mar 15</div>
+                    <div class="milestone-event">Plant Startup</div>
+                </div>
+                <div class="milestone-item upcoming">
+                    <div class="milestone-date">Apr 1</div>
+                    <div class="milestone-event">Full Capacity</div>
+                </div>
+                <div class="milestone-item upcoming">
+                    <div class="milestone-date">Jun 1</div>
+                    <div class="milestone-event">Hurricane Season</div>
+                </div>
+                <div class="milestone-item future">
+                    <div class="milestone-date">Q4 24</div>
+                    <div class="milestone-event">Expansion Decision</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Central Content Area -->
+        <main class="content-area">
+            <!-- Function Navigation -->
+            <div class="function-nav">
+                <a href="story-view.html" class="function-btn" data-view="story">STORY</a>
+                <a href="data-view.html" class="function-btn" data-view="data">DATA</a>
+                <a href="connections-view.html" class="function-btn" data-view="connections">CONNECTIONS</a>
+                <a href="impact-view.html" class="function-btn" data-view="impact">IMPACT</a>
+                <a href="geography-view.html" class="function-btn" data-view="geography">GEOGRAPHY</a>
+                <a href="timeline-view.html" class="function-btn active" data-view="timeline">TIMELINE</a>
+                <a href="players-view.html" class="function-btn" data-view="players">PLAYERS</a>
+            </div>
+
+            <!-- Timeline Content -->
+            <div class="view-container timeline-view active">
+                <div class="timeline-header">
+                    <h2>GCA Plant Timeline: Market Evolution & Projections</h2>
+                </div>
+
+                <div class="timeline-content">
+                    <div class="timeline-controls">
+                        <button class="timeline-btn active">Overview</button>
+                        <button class="timeline-btn">Rate Impact</button>
+                        <button class="timeline-btn">Operations</button>
+                        <button class="timeline-btn">Market Context</button>
+                    </div>
+                    
+                    <div class="timeline-visualization">
+                        <div id="gca-timeline" class="interactive-timeline"></div>
+                    </div>
+                    
+                    <div class="timeline-details">
+                        <div class="timeline-section">
+                            <h3>Key Timeline Events</h3>
+                            <div class="timeline-event past">
+                                <div class="event-date">Jan 28, 2024</div>
+                                <div class="event-title">Construction Complete</div>
+                                <div class="event-description">GCA Chemical Plant construction phase completed. Final equipment testing and commissioning begins.</div>
+                            </div>
+                            <div class="timeline-event current">
+                                <div class="event-date">Mar 15, 2024</div>
+                                <div class="event-title">Plant Startup & Initial Production</div>
+                                <div class="event-description">Official plant startup. Initial chemical production begins. Immediate +15.2% rate impact observed on Louisiana → Tampa routes.</div>
+                            </div>
+                            <div class="timeline-event upcoming">
+                                <div class="event-date">Apr 1, 2024</div>
+                                <div class="event-title">Target Full Capacity</div>
+                                <div class="event-description">Plant expected to reach 100% capacity. Rate impact may stabilize as market adjusts to increased supply.</div>
+                            </div>
+                            <div class="timeline-event future">
+                                <div class="event-date">Jun 1, 2024</div>
+                                <div class="event-title">Hurricane Season Risk Window</div>
+                                <div class="event-description">Atlantic hurricane season begins. Potential disruption to Gulf Coast operations and shipping routes.</div>
+                            </div>
+                            <div class="timeline-event future">
+                                <div class="event-date">Q4 2024</div>
+                                <div class="event-title">Rate Normalization Expected</div>
+                                <div class="event-description">Market analysts project rate stabilization at +8-12% sustained premium based on historical patterns.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar - Timeline Intelligence -->
+        <aside class="right-sidebar">
+            <div class="timeline-insights">
+                <h4>Timeline Insights</h4>
+                <div class="insight-item">
+                    <div class="insight-type">Pattern Match</div>
+                    <div class="insight-detail">89% similarity to MOTIVA 2022 timeline</div>
+                </div>
+                <div class="insight-item">
+                    <div class="insight-type">Risk Window</div>
+                    <div class="insight-detail">Hurricane season creates uncertainty Jun-Nov</div>
+                </div>
+            </div>
+
+            <div class="upcoming-events">
+                <h4>Upcoming Events</h4>
+                <div class="upcoming-item">
+                    <div class="event-date">Mar 28</div>
+                    <div class="event-title">GCA Earnings Call</div>
+                </div>
+                <div class="upcoming-item">
+                    <div class="event-date">Apr 1</div>
+                    <div class="event-title">Q1 Chemical Tanker Report</div>
+                </div>
+            </div>
+
+            <div class="critical-dates">
+                <h4>Critical Monitoring Dates</h4>
+                <div class="critical-item">
+                    <span class="critical-date">Apr 1</span>
+                    <span class="critical-event">Full capacity target</span>
+                </div>
+                <div class="critical-item">
+                    <span class="critical-date">May 15</span>
+                    <span class="critical-event">Rate normalization window</span>
+                </div>
+                <div class="critical-item">
+                    <span class="critical-date">Jun 1</span>
+                    <span class="critical-event">Hurricane season start</span>
+                </div>
+                <div class="critical-item">
+                    <span class="critical-date">Sep 30</span>
+                    <span class="critical-event">Expansion decision deadline</span>
+                </div>
+            </div>
+
+            <div class="timeline-alerts">
+                <h4>Timeline Alerts</h4>
+                <div class="alert-item urgent">
+                    <div class="alert-type">Immediate</div>
+                    <div class="alert-text">Monitor plant utilization reports for capacity confirmation</div>
+                </div>
+                <div class="alert-item important">
+                    <div class="alert-type">30 Days</div>
+                    <div class="alert-text">Prepare for potential rate normalization in Q2</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="status-left">
+            <span>Connected to Live Market Data</span>
+            <span class="connection-status">●</span>
+        </div>
+        <div class="status-right">
+            <span>Timeline Updated: 14:35 GMT</span>
+        </div>
+    </div>
+
+    <!-- Vis.js Timeline JavaScript -->
+    <script src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
+    <script>
+        // Timeline data for GCA Plant story
+        var items = new vis.DataSet([
+            // Historical Events
+            {
+                id: 1,
+                content: 'Construction Complete',
+                start: '2024-01-28',
+                type: 'point',
+                className: 'timeline-past',
+                title: 'GCA Chemical Plant construction phase completed'
+            },
+            {
+                id: 2,
+                content: 'Plant Startup<br/><strong>+15.2% Rate Impact</strong>',
+                start: '2024-03-15',
+                type: 'point',
+                className: 'timeline-current',
+                title: 'Official plant startup with immediate market impact'
+            },
+            
+            // Rate Impact Range
+            {
+                id: 3,
+                content: 'Peak Rate Impact Period',
+                start: '2024-03-15',
+                end: '2024-05-15',
+                type: 'range',
+                className: 'timeline-impact-range',
+                title: 'Period of maximum rate impact on chemical tanker routes'
+            },
+            
+            // Future Events
+            {
+                id: 4,
+                content: 'Target Full Capacity',
+                start: '2024-04-01',
+                type: 'point',
+                className: 'timeline-upcoming',
+                title: 'Plant expected to reach 100% operational capacity'
+            },
+            {
+                id: 5,
+                content: 'Hurricane Season Risk',
+                start: '2024-06-01',
+                end: '2024-11-30',
+                type: 'range',
+                className: 'timeline-risk-range',
+                title: 'Atlantic hurricane season - potential disruption window'
+            },
+            {
+                id: 6,
+                content: 'Rate Normalization',
+                start: '2024-10-01',
+                type: 'point',
+                className: 'timeline-future',
+                title: 'Expected rate stabilization at +8-12% sustained premium'
+            },
+            
+            // Historical Context
+            {
+                id: 7,
+                content: 'MOTIVA 2022 Comparison',
+                start: '2022-06-15',
+                end: '2022-10-30',
+                type: 'background',
+                className: 'timeline-historical',
+                title: 'Similar plant startup: +18.7% initial impact, normalized in 4.2 months'
+            }
+        ]);
+
+        // Timeline options
+        var options = {
+            orientation: 'top',
+            start: '2024-01-01',
+            end: '2024-12-31',
+            zoomMin: 1000 * 60 * 60 * 24 * 7, // one week
+            zoomMax: 1000 * 60 * 60 * 24 * 365, // one year
+            height: '300px',
+            margin: {
+                item: 10,
+                axis: 5
+            },
+            format: {
+                minorLabels: {
+                    minute: 'h:mm',
+                    hour: 'h:mm',
+                    weekday: 'ddd D',
+                    day: 'D',
+                    week: 'w',
+                    month: 'MMM',
+                    year: 'YYYY'
+                },
+                majorLabels: {
+                    minute: 'ddd D MMMM',
+                    hour: 'ddd D MMMM',
+                    weekday: 'MMMM YYYY',
+                    day: 'MMMM YYYY',
+                    week: 'MMMM YYYY',
+                    month: 'YYYY',
+                    year: ''
+                }
+            },
+            showCurrentTime: true,
+            showTooltips: true,
+            tooltip: {
+                followMouse: true,
+                overflowMethod: 'cap'
+            }
+        };
+
+        // Create timeline
+        var container = document.getElementById('gca-timeline');
+        var timeline = new vis.Timeline(container, items, options);
+
+        // Timeline controls functionality
+        document.querySelectorAll('.timeline-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.timeline-btn').forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Filter timeline based on selection
+                const filter = this.textContent;
+                let filteredItems;
+                
+                switch(filter) {
+                    case 'Rate Impact':
+                        filteredItems = items.get({
+                            filter: item => item.className && (item.className.includes('impact') || item.className.includes('current'))
+                        });
+                        break;
+                    case 'Operations':
+                        filteredItems = items.get({
+                            filter: item => item.content.includes('Plant') || item.content.includes('Capacity')
+                        });
+                        break;
+                    case 'Market Context':
+                        filteredItems = items.get({
+                            filter: item => item.className && item.className.includes('historical')
+                        });
+                        break;
+                    default: // Overview
+                        filteredItems = items.get();
+                }
+                
+                timeline.setItems(filteredItems);
+            });
+        });
+
+        // Set initial focus on current event
+        timeline.focus(2, {animation: true});
+    </script>
+</body>
+</html> 

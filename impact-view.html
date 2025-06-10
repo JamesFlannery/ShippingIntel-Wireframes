@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impact View - ShippingIntel</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <a href="index.html" class="logo">ShippingIntel</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Search stories, ships, ports, companies... (⌘K)" class="global-search">
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="user-role">Abe Vigoda</div>
+            <div class="notifications">●</div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="main-container">
+        <!-- Left Sidebar - Impact Filters -->
+        <aside class="left-sidebar">
+            <div class="current-story">
+                <h3>Impact Analysis</h3>
+                <div class="story-card active">
+                    <div class="story-title">GCA Plant Startup Impacts Gulf Pricing</div>
+                    <div class="story-meta">March 15, 2024 • High Impact</div>
+                    <div class="connection-strength">
+                        <span class="causal">●</span> Fleet Impact Assessment
+                    </div>
+                </div>
+            </div>
+
+            <div class="impact-scope">
+                <h4>Analysis Scope</h4>
+                <div class="scope-selector">
+                    <label class="scope-item">
+                        <input type="radio" name="scope" checked> Your Fleet
+                    </label>
+                    <label class="scope-item">
+                        <input type="radio" name="scope"> Industry Wide
+                    </label>
+                    <label class="scope-item">
+                        <input type="radio" name="scope"> Competitive Analysis
+                    </label>
+                </div>
+            </div>
+
+            <div class="fleet-profile">
+                <h4>Your Fleet Profile</h4>
+                <div class="fleet-summary">
+                    <div class="fleet-item">
+                        <span class="fleet-type">Chemical Tankers</span>
+                        <span class="fleet-count">12 vessels</span>
+                    </div>
+                    <div class="fleet-item">
+                        <span class="fleet-type">Product Tankers</span>
+                        <span class="fleet-count">8 vessels</span>
+                    </div>
+                    <div class="fleet-item">
+                        <span class="fleet-type">Total DWT</span>
+                        <span class="fleet-count">745,000</span>
+                    </div>
+                </div>
+                <div class="exposure-level">
+                    <span class="exposure-label">Gulf Coast Exposure:</span>
+                    <span class="exposure-value high">High (67%)</span>
+                </div>
+            </div>
+
+            <div class="impact-timeline">
+                <h4>Impact Timeline</h4>
+                <div class="timeline-filter">
+                    <button class="timeline-btn active">Immediate</button>
+                    <button class="timeline-btn">30 Days</button>
+                    <button class="timeline-btn">90 Days</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Central Content Area -->
+        <main class="content-area">
+            <!-- Function Navigation -->
+            <div class="function-nav">
+                <a href="story-view.html" class="function-btn" data-view="story">STORY</a>
+                <a href="data-view.html" class="function-btn" data-view="data">DATA</a>
+                <a href="connections-view.html" class="function-btn" data-view="connections">CONNECTIONS</a>
+                <a href="impact-view.html" class="function-btn active" data-view="impact">IMPACT</a>
+                <a href="geography-view.html" class="function-btn" data-view="geography">GEOGRAPHY</a>
+                <a href="timeline-view.html" class="function-btn" data-view="timeline">TIMELINE</a>
+                <a href="players-view.html" class="function-btn" data-view="players">PLAYERS</a>
+            </div>
+
+            <!-- Impact Content -->
+            <div class="view-container impact-view active">
+                <div class="impact-header">
+                    <h2>Fleet Impact Analysis: GCA Plant Startup</h2>
+                    <div class="impact-summary">
+                        <div class="summary-metric positive">
+                            <span class="metric-label">Overall Impact</span>
+                            <span class="metric-value">Positive</span>
+                        </div>
+                        <div class="summary-metric">
+                            <span class="metric-label">Revenue Impact</span>
+                            <span class="metric-value">+$2.1M annually</span>
+                        </div>
+                        <div class="summary-metric">
+                            <span class="metric-label">Affected Vessels</span>
+                            <span class="metric-value">8 of 12</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="impact-content">
+                    <!-- Fleet Impact Breakdown -->
+                    <div class="impact-section">
+                        <h3>Your Fleet Impact Breakdown</h3>
+                        <div class="fleet-impact-grid">
+                            <div class="vessel-impact-card high-impact">
+                                <div class="vessel-header">
+                                    <h4>Chemical Tankers (37,000-40,000 DWT)</h4>
+                                    <span class="impact-badge positive">High Positive</span>
+                                </div>
+                                <div class="vessel-details">
+                                    <div class="detail-row">
+                                        <span>Affected Vessels:</span>
+                                        <span>5 of 12 (42%)</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span>Route Relevance:</span>
+                                        <span>Gulf → Tampa (Primary)</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span>Rate Impact:</span>
+                                        <span class="positive">+15.2% (+$2,825/day)</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span>Utilization Impact:</span>
+                                        <span class="positive">+8.3%</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span>Annual Revenue Impact:</span>
+                                        <span class="positive">+$1.8M</span>
+                                    </div>
+                                </div>
+                                <div class="vessel-actions">
+                                    <button class="action-btn">Optimize Deployment</button>
+                                    <button class="action-btn secondary">View Vessel Details</button>
+                                </div>
+                            </div>
+
+                            <div class="vessel-impact-card medium-impact">
+                                <div class="vessel-header">
+                                    <h4>Chemical Tankers (25,000-35,000 DWT)</h4>
+                                    <span class="impact-badge neutral">Medium Positive</span>
+                                </div>
+                                <div class="vessel-details">
+                                    <div class="detail-row">
+                                        <span>Affected Vessels:</span>
+                                        <span>3 of 12 (25%)</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span>Route Relevance:</span>
+                                        <span>Gulf → Regional (Secondary)</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span>Rate Impact:</span>
+                                        <span class="positive">+6.8% (+$1,190/day)</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span>Annual Revenue Impact:</span>
+                                        <span class="positive">+$280K</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="vessel-impact-card low-impact">
+                                <div class="vessel-header">
+                                    <h4>Product Tankers</h4>
+                                    <span class="impact-badge low">Low Impact</span>
+                                </div>
+                                <div class="vessel-details">
+                                    <div class="detail-row">
+                                        <span>Affected Vessels:</span>
+                                        <span>Limited exposure</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span>Impact Type:</span>
+                                        <span>Indirect benefit from market dynamics</span>
+                                    </div>
+                                    <div class="detail-row">
+                                        <span>Rate Impact:</span>
+                                        <span class="neutral">+1.2%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scenario Analysis -->
+                    <div class="impact-section">
+                        <h3>Scenario Planning</h3>
+                        <div class="scenario-grid">
+                            <div class="scenario-card current">
+                                <h4>Current Scenario (Base Case)</h4>
+                                <div class="scenario-assumptions">
+                                    <ul>
+                                        <li>Plant operates at 85% capacity</li>
+                                        <li>Current rate premiums maintain</li>
+                                        <li>No competing capacity additions</li>
+                                    </ul>
+                                </div>
+                                <div class="scenario-impact">
+                                    <span class="impact-value">+$2.1M annual revenue</span>
+                                    <span class="probability">Probability: 75%</span>
+                                </div>
+                            </div>
+
+                            <div class="scenario-card optimistic">
+                                <h4>Optimistic Scenario</h4>
+                                <div class="scenario-assumptions">
+                                    <ul>
+                                        <li>Plant expansion announced</li>
+                                        <li>Additional chemical facilities planned</li>
+                                        <li>Sustained high utilization</li>
+                                    </ul>
+                                </div>
+                                <div class="scenario-impact">
+                                    <span class="impact-value positive">+$3.7M annual revenue</span>
+                                    <span class="probability">Probability: 25%</span>
+                                </div>
+                            </div>
+
+                            <div class="scenario-card pessimistic">
+                                <h4>Risk Scenario</h4>
+                                <div class="scenario-assumptions">
+                                    <ul>
+                                        <li>Plant operational issues</li>
+                                        <li>Economic downturn reduces demand</li>
+                                        <li>New tonnage enters market</li>
+                                    </ul>
+                                </div>
+                                <div class="scenario-impact">
+                                    <span class="impact-value negative">-$0.5M vs baseline</span>
+                                    <span class="probability">Probability: 15%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Strategic Recommendations -->
+                    <div class="impact-section">
+                        <h3>Strategic Recommendations</h3>
+                        <div class="recommendations-grid">
+                            <div class="recommendation-card priority-high">
+                                <div class="rec-header">
+                                    <span class="rec-priority">High Priority</span>
+                                    <span class="rec-timeline">Immediate</span>
+                                </div>
+                                <h4>Optimize Chemical Tanker Deployment</h4>
+                                <p>Redeploy 2-3 chemical tankers to Gulf-Tampa routes to capture elevated rates. Estimated additional revenue: $1.2M over 6 months.</p>
+                                <div class="rec-actions">
+                                    <button class="action-btn primary">Implement</button>
+                                    <button class="action-btn secondary">Analyze</button>
+                                </div>
+                            </div>
+
+                            <div class="recommendation-card priority-medium">
+                                <div class="rec-header">
+                                    <span class="rec-priority">Medium Priority</span>
+                                    <span class="rec-timeline">30 Days</span>
+                                </div>
+                                <h4>Secure Forward Contracts</h4>
+                                <p>Lock in Q2 contracts at current elevated rates before market normalization. Target 60-70% coverage for affected vessels.</p>
+                                <div class="rec-actions">
+                                    <button class="action-btn primary">Execute</button>
+                                </div>
+                            </div>
+
+                            <div class="recommendation-card priority-low">
+                                <div class="rec-header">
+                                    <span class="rec-priority">Strategic</span>
+                                    <span class="rec-timeline">90 Days</span>
+                                </div>
+                                <h4>Evaluate Fleet Expansion</h4>
+                                <p>Consider acquisition of additional chemical tanker capacity if elevated demand patterns persist through Q2.</p>
+                                <div class="rec-actions">
+                                    <button class="action-btn secondary">Research</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar - Impact Intelligence -->
+        <aside class="right-sidebar">
+            <div class="competitive-intel">
+                <h4>Competitive Impact</h4>
+                <div class="competitor-item">
+                    <div class="competitor-name">Stolt Tankers</div>
+                    <div class="competitor-impact positive">High exposure (+)</div>
+                </div>
+                <div class="competitor-item">
+                    <div class="competitor-name">Odfjell</div>
+                    <div class="competitor-impact positive">Medium exposure (+)</div>
+                </div>
+                <div class="competitor-item">
+                    <div class="competitor-name">MISC Berhad</div>
+                    <div class="competitor-impact neutral">Limited exposure</div>
+                </div>
+            </div>
+
+            <div class="risk-factors">
+                <h4>Risk Factors</h4>
+                <div class="risk-item high">
+                    <div class="risk-level">High</div>
+                    <div class="risk-desc">Plant operational disruption</div>
+                    <div class="risk-probability">15% probability</div>
+                </div>
+                <div class="risk-item medium">
+                    <div class="risk-level">Medium</div>
+                    <div class="risk-desc">Competing capacity additions</div>
+                    <div class="risk-probability">35% probability</div>
+                </div>
+                <div class="risk-item low">
+                    <div class="risk-level">Low</div>
+                    <div class="risk-desc">Demand substitution</div>
+                    <div class="risk-probability">10% probability</div>
+                </div>
+            </div>
+
+            <div class="fleet-optimization">
+                <h4>Fleet Optimization Alerts</h4>
+                <div class="alert-item urgent">
+                    <div class="alert-type">Immediate</div>
+                    <div class="alert-text">3 vessels currently ballasting that could capture Tampa premium</div>
+                </div>
+                <div class="alert-item important">
+                    <div class="alert-type">Contract</div>
+                    <div class="alert-text">Q2 contract negotiations should reflect new market dynamics</div>
+                </div>
+            </div>
+
+            <div class="impact-monitoring">
+                <h4>Impact Monitoring</h4>
+                <div class="monitor-item">
+                    <span class="monitor-metric">Revenue vs Forecast</span>
+                    <span class="monitor-value positive">+12.3%</span>
+                </div>
+                <div class="monitor-item">
+                    <span class="monitor-metric">Utilization Impact</span>
+                    <span class="monitor-value positive">+5.8%</span>
+                </div>
+                <div class="monitor-item">
+                    <span class="monitor-metric">Route Performance</span>
+                    <span class="monitor-value positive">+18.7%</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="status-left">
+            <span>Connected to Live Market Data</span>
+            <span class="connection-status">●</span>
+        </div>
+        <div class="status-right">
+            <span>Fleet Data Synced: 14:15 GMT</span>
+        </div>
+    </div>
+</body>
+</html> 

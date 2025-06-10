@@ -2,7 +2,8 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "/auth-map.html"
+      "destination": "/landing.html",
+      "permanent": false
     }
   ],
   "headers": [

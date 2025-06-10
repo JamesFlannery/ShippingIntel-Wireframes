@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "dev": "serve .",
-    "build": "echo 'Static site - no build needed' && exit 0",
+    "build": "echo 'Static site - no build needed'",
     "start": "serve ."
   },
   "keywords": [

@@ -15,80 +15,220 @@
             font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
             color: #e5e5e5;
-            height: 100vh;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .marketing-content {
+            padding: 40px 0;
+        }
+
+        .hero-section {
+            margin-bottom: 40px;
+        }
+
+        .logo-container {
             display: flex;
             align-items: center;
-            justify-content: center;
+            margin-bottom: 20px;
         }
 
-        .auth-container {
-            background: #1e1e1e;
-            border: 1px solid #333;
-            border-radius: 12px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            max-width: 400px;
-            width: 100%;
-            margin: 20px;
+        .logo-icon {
+            font-size: 32px;
+            margin-right: 12px;
+            filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: #00d4ff;
-            margin-bottom: 8px;
+        .logo-text {
+            display: flex;
+            align-items: baseline;
             letter-spacing: -0.5px;
         }
 
-        .subtitle {
-            font-size: 14px;
+        .logo-main {
+            font-size: 28px;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-right: 8px;
+        }
+
+        .logo-accent {
+            font-size: 28px;
+            font-weight: 700;
+            color: #00ff88;
+        }
+
+        .hero-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
             color: #888;
             margin-bottom: 32px;
+            line-height: 1.5;
         }
 
-        .demo-info {
-            background: #2a2a2a;
+        .value-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .value-card {
+            background: #1e1e1e;
             border: 1px solid #333;
             border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 24px;
-            text-align: left;
+            padding: 24px;
+            border-left: 4px solid #00d4ff;
+            transition: transform 0.2s ease, border-left-color 0.2s ease;
         }
 
-        .demo-info h3 {
-            color: #00ff88;
-            font-size: 16px;
+        .value-card:hover {
+            transform: translateY(-4px);
+            border-left-color: #00ff88;
+        }
+
+        .value-card.primary {
+            border-left-color: #00ff88;
+        }
+
+        .value-card.secondary {
+            border-left-color: #ffaa44;
+        }
+
+        .card-icon {
+            font-size: 20px;
             margin-bottom: 12px;
         }
 
-        .demo-info ul {
-            list-style: none;
-            font-size: 12px;
-            line-height: 1.6;
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
         }
 
-        .demo-info li {
-            margin-bottom: 6px;
-            padding-left: 16px;
-            position: relative;
+        .card-description {
+            font-size: 13px;
+            color: #888;
+            line-height: 1.4;
         }
 
-        .demo-info li::before {
-            content: "▶";
+        .card-metric {
+            font-size: 18px;
+            font-weight: 700;
+            color: #00ff88;
+            margin-top: 12px;
+        }
+
+        .demo-stats {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .stats-title {
+            font-size: 16px;
+            font-weight: 600;
             color: #00d4ff;
-            position: absolute;
-            left: 0;
-            top: 0;
+            margin-bottom: 16px;
+            text-align: center;
         }
 
-        .auth-form {
-            margin-bottom: 20px;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #00ff88;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        .auth-panel {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 20px;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .auth-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .auth-subtitle {
+            font-size: 13px;
+            color: #888;
+        }
+
+        .demo-access-info {
+            background: #2a2a2a;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .access-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #00ff88;
+            margin-bottom: 8px;
+        }
+
+        .access-description {
+            font-size: 12px;
+            color: #888;
+            line-height: 1.4;
         }
 
         .password-input {
             width: 100%;
-            padding: 12px 16px;
+            padding: 14px 16px;
             background: #2a2a2a;
             border: 1px solid #333;
             border-radius: 6px;
@@ -101,6 +241,7 @@
         .password-input:focus {
             outline: none;
             border-color: #00d4ff;
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
         }
 
         .password-input::placeholder {
@@ -109,38 +250,62 @@
 
         .auth-button {
             width: 100%;
-            background: #00d4ff;
+            background: linear-gradient(135deg, #00d4ff 0%, #00ff88 100%);
             color: #000;
             border: none;
-            padding: 12px 16px;
+            padding: 14px 16px;
             font-size: 14px;
             font-weight: 600;
             border-radius: 6px;
             cursor: pointer;
-            transition: background 0.2s ease;
+            transition: transform 0.2s ease;
         }
 
         .auth-button:hover {
-            background: #0099cc;
+            transform: translateY(-1px);
         }
 
         .auth-button:disabled {
             background: #333;
             color: #666;
             cursor: not-allowed;
+            transform: none;
         }
 
         .error-message {
             color: #ff6666;
             font-size: 12px;
-            margin-top: 8px;
+            margin-top: 12px;
             display: none;
+            text-align: center;
         }
 
         .footer {
+            text-align: center;
+            margin-top: 32px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        .footer-text {
             font-size: 11px;
             color: #666;
-            margin-top: 20px;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .demo-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .value-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @keyframes glow {
@@ -148,45 +313,133 @@
             50% { box-shadow: 0 0 30px rgba(0, 212, 255, 0.4); }
         }
 
-        .auth-container:hover {
+        .auth-panel:hover {
             animation: glow 2s ease-in-out infinite;
         }
     </style>
 </head>
 <body>
-    <div class="auth-container">
-        <div class="logo">ShippingIntel</div>
-        <div class="subtitle">Maritime Intelligence Platform</div>
-        
-        <div class="demo-info">
-            <h3>Demo Features</h3>
-            <ul>
-                <li>Interactive Stakeholder Network (Vis.js)</li>
-                <li>Live Maritime Map (Leaflet.js)</li>
-                <li>Timeline Visualization</li>
-                <li>Bloomberg Terminal-inspired UI</li>
-                <li>Multi-lens Analytical Framework</li>
-                <li>GCA Plant Impact Analysis</li>
-            </ul>
-        </div>
+    <div class="demo-container">
+        <!-- Marketing Content -->
+        <div class="marketing-content">
+            <div class="hero-section">
+                <div class="logo-container">
+                    <div class="logo-icon">🚢</div>
+                    <div class="logo-text">
+                        <span class="logo-main">SHIPPING</span>
+                        <span class="logo-accent">INTEL</span>
+                    </div>
+                </div>
+                <h1 class="hero-title">Maritime Intelligence Platform</h1>
+                <p class="hero-subtitle">Not another Power BI shipping analysis. Analyze the GCA Chemical Plant startup's $2.3B impact on Gulf Coast maritime markets.</p>
+            </div>
 
-        <div class="auth-form">
-            <input 
-                type="password" 
-                id="passwordInput" 
-                class="password-input" 
-                placeholder="Enter demo password"
-                autocomplete="off"
-            >
-            <button id="authButton" class="auth-button">Access Demo</button>
-            <div id="errorMessage" class="error-message">
-                Incorrect password. Please try again.
+            <div class="demo-stats">
+                <h3 class="stats-title">GCA Plant Impact - Live Demo Data</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-value">+15.2%</span>
+                        <span class="stat-label">Rate Increase</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">125K</span>
+                        <span class="stat-label">MT/Month</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">24</span>
+                        <span class="stat-label">Stakeholders</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">18</span>
+                        <span class="stat-label">Vessels Redeployed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">+32%</span>
+                        <span class="stat-label">Tampa Calls</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">7</span>
+                        <span class="stat-label">Analysis Views</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="value-cards">
+                <div class="value-card primary">
+                    <div class="card-icon">📊</div>
+                    <h3 class="card-title">Real-Time Market Intelligence</h3>
+                    <p class="card-description">Track chemical tanker rates, port congestion, and fleet movements across Gulf Coast routes with live data feeds.</p>
+                    <div class="card-metric">97% Accuracy</div>
+                </div>
+
+                <div class="value-card">
+                    <div class="card-icon">🔗</div>
+                    <h3 class="card-title">Stakeholder Network Analysis</h3>
+                    <p class="card-description">Visualize relationships between chemical producers, shipping companies, and port authorities in interactive network maps.</p>
+                    <div class="card-metric">24 Key Players</div>
+                </div>
+
+                <div class="value-card secondary">
+                    <div class="card-icon">🗺️</div>
+                    <h3 class="card-title">Geographic Impact Mapping</h3>
+                    <p class="card-description">Understand regional trade flow disruptions and identify alternative routing opportunities across the Gulf Coast.</p>
+                    <div class="card-metric">5 Major Routes</div>
+                </div>
+
+                <div class="value-card">
+                    <div class="card-icon">⏱️</div>
+                    <h3 class="card-title">Timeline & Scenario Planning</h3>
+                    <p class="card-description">Compare current market conditions to historical plant startups and model future impact scenarios.</p>
+                    <div class="card-metric">15 Years Data</div>
+                </div>
+
+                <div class="value-card">
+                    <div class="card-icon">⚡</div>
+                    <h3 class="card-title">Instant Decision Support</h3>
+                    <p class="card-description">Bloomberg Terminal-style interface delivers actionable insights for fleet deployment and route optimization.</p>
+                    <div class="card-metric">< 2sec Response</div>
+                </div>
+
+                <div class="value-card primary">
+                    <div class="card-icon">💰</div>
+                    <h3 class="card-title">Revenue Impact Analysis</h3>
+                    <p class="card-description">Quantify earnings potential from rate increases and identify high-value opportunities in chemical transport.</p>
+                    <div class="card-metric">$2.3B Impact</div>
+                </div>
             </div>
         </div>
 
-        <div class="footer">
-            Bloomberg Terminal-inspired Maritime Intelligence<br>
-            Built for Ship Brokers & Maritime Professionals
+        <!-- Authentication Panel -->
+        <div class="auth-panel">
+            <div class="auth-header">
+                <h2 class="auth-title">Access Demo</h2>
+                <p class="auth-subtitle">GCA Plant Analysis Demo</p>
+            </div>
+
+            <div class="demo-access-info">
+                <div class="access-title">Maritime Intelligence Preview</div>
+                <p class="access-description">Explore our platform's analytical capabilities through the lens of the GCA Chemical Plant startup and its market impact.</p>
+            </div>
+
+            <div class="auth-form">
+                <input 
+                    type="password" 
+                    id="passwordInput" 
+                    class="password-input" 
+                    placeholder="Enter demo access code"
+                    autocomplete="off"
+                >
+                <button id="authButton" class="auth-button">Launch Demo</button>
+                <div id="errorMessage" class="error-message">
+                    Invalid access code. Please try again.
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="footer-text">
+                    Built for Ship Brokers & Maritime Professionals
+                </div>
+            </div>
         </div>
     </div>
 

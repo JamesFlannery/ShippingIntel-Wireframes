@@ -7,6 +7,177 @@
     <link rel="stylesheet" href="styles.css">
     <!-- Vis.js Timeline CSS -->
     <link href="https://unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
+    <style>
+        /* Custom timeline range styling */
+        .vis-item.timeline-impact-range {
+            background-color: rgba(0, 255, 136, 0.3) !important;
+            border-color: #00ff88 !important;
+            border-width: 2px !important;
+            color: #fff !important;
+        }
+        
+        .vis-item.timeline-competition-range {
+            background-color: rgba(255, 107, 107, 0.3) !important;
+            border-color: #ff6b6b !important;
+            border-width: 2px !important;
+            color: #fff !important;
+        }
+        
+        .vis-item.timeline-integration-range {
+            background-color: rgba(0, 212, 255, 0.3) !important;
+            border-color: #00d4ff !important;
+            border-width: 2px !important;
+            color: #fff !important;
+        }
+        
+        /* Hide timeline group labels */
+        .vis-labelset {
+            display: none !important;
+        }
+        
+
+        
+        /* Timeline details full width container */
+        .timeline-details.full-width {
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Timeline details two-column layout */
+        .timeline-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 16px;
+            width: 100%;
+            max-width: none;
+        }
+        
+        .events-column {
+            grid-column: 1 / 2;
+            position: relative;
+            width: 100%;
+            min-width: 0;
+            background: rgba(0, 100, 0, 0.1); /* Debug: light green background */
+        }
+        
+        .impacts-column {
+            grid-column: 2 / 3;
+            position: relative;
+            width: 100%;
+            min-width: 0;
+            background: rgba(0, 0, 100, 0.1); /* Debug: light blue background */
+        }
+        
+        /* Arrow styling */
+        .impact-arrow {
+            position: absolute;
+            right: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: #00d4ff;
+            font-weight: bold;
+            z-index: 10;
+        }
+        
+        .timeline-event {
+            position: relative;
+        }
+        
+        /* Market impact cards */
+        .market-impact {
+            background: rgba(42, 42, 42, 0.8);
+            border: 1px solid #444;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        
+        .impact-severity {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        
+        .impact-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        
+        .impact-description {
+            font-size: 12px;
+            color: #ccc;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+        
+        .impact-metrics {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .metric {
+            font-size: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 4px 8px;
+            border-radius: 3px;
+            color: #888;
+        }
+        
+        /* Impact severity colors */
+        .low-impact {
+            border-left: 4px solid #888;
+        }
+        
+        .low-impact .impact-severity {
+            color: #888;
+        }
+        
+        .medium-impact {
+            border-left: 4px solid #ffa500;
+        }
+        
+        .medium-impact .impact-severity {
+            color: #ffa500;
+        }
+        
+        .high-impact {
+            border-left: 4px solid #ff6b6b;
+        }
+        
+        .high-impact .impact-severity {
+            color: #ff6b6b;
+        }
+        
+        .stabilizing-impact {
+            border-left: 4px solid #00ff88;
+        }
+        
+        .stabilizing-impact .impact-severity {
+            color: #00ff88;
+        }
+        
+        /* Responsive layout */
+        @media (max-width: 1024px) {
+            .timeline-columns {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .impact-arrow {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Top Navigation Bar -->
@@ -30,16 +201,16 @@
             <div class="current-story">
                 <h3>Timeline Analysis</h3>
                 <div class="story-card active">
-                    <div class="story-title">GCA Plant Startup Impacts Gulf Pricing</div>
-                    <div class="story-meta">March 15, 2024 • High Impact</div>
+                    <div class="story-title">Gulf Coast Ammonia Plant Reshapes Global Trade</div>
+                    <div class="story-meta">March 28, 2025 • High Impact</div>
                 </div>
             </div>
 
             <div class="timeline-scope">
                 <h4>Time Horizon</h4>
                 <button class="scope-btn">30 Days</button>
-                <button class="scope-btn active">6 Months</button>
-                <button class="scope-btn">1 Year</button>
+                <button class="scope-btn">6 Months</button>
+                <button class="scope-btn active">1 Year</button>
             </div>
 
             <div class="timeline-filters">
@@ -64,20 +235,20 @@
             <div class="key-milestones">
                 <h4>Key Milestones</h4>
                 <div class="milestone-item current">
-                    <div class="milestone-date">Mar 15</div>
-                    <div class="milestone-event">Plant Startup</div>
+                    <div class="milestone-date">Mar 28</div>
+                    <div class="milestone-event">First Cargo Export</div>
                 </div>
                 <div class="milestone-item upcoming">
-                    <div class="milestone-date">Apr 1</div>
+                    <div class="milestone-date">May 1</div>
+                    <div class="milestone-event">Ramp-Up Phase</div>
+                </div>
+                <div class="milestone-item upcoming">
+                    <div class="milestone-date">Jul 1</div>
                     <div class="milestone-event">Full Capacity</div>
                 </div>
-                <div class="milestone-item upcoming">
-                    <div class="milestone-date">Jun 1</div>
-                    <div class="milestone-event">Hurricane Season</div>
-                </div>
                 <div class="milestone-item future">
-                    <div class="milestone-date">Q4 24</div>
-                    <div class="milestone-event">Expansion Decision</div>
+                    <div class="milestone-date">Q4 25</div>
+                    <div class="milestone-event">Market Integration</div>
                 </div>
             </div>
         </aside>
@@ -86,6 +257,7 @@
         <main class="content-area">
             <!-- Function Navigation -->
             <div class="function-nav">
+                <a href="index.html" class="function-btn" data-view="overview">OVERVIEW</a>
                 <a href="story-view.html" class="function-btn" data-view="story">STORY</a>
                 <a href="data-view.html" class="function-btn" data-view="data">DATA</a>
                 <a href="connections-view.html" class="function-btn" data-view="connections">CONNECTIONS</a>
@@ -98,7 +270,7 @@
             <!-- Timeline Content -->
             <div class="view-container timeline-view active">
                 <div class="timeline-header">
-                    <h2>GCA Plant Timeline: Market Evolution & Projections</h2>
+                    <h2>Gulf Coast Ammonia Plant Timeline: Global Market Integration</h2>
                 </div>
 
                 <div class="timeline-content">
@@ -113,36 +285,90 @@
                         <div id="gca-timeline" class="interactive-timeline"></div>
                     </div>
                     
-                    <div class="timeline-details">
-                        <div class="timeline-section">
-                            <h3>Key Timeline Events</h3>
-                            <div class="timeline-event past">
-                                <div class="event-date">Jan 28, 2024</div>
-                                <div class="event-title">Construction Complete</div>
-                                <div class="event-description">GCA Chemical Plant construction phase completed. Final equipment testing and commissioning begins.</div>
+                    <div class="timeline-columns">
+                        <div class="timeline-section events-column">
+                                <h3>Key Timeline Events</h3>
+                                <div class="timeline-event past" data-impact="1">
+                                    <div class="event-date">Jan 15, 2025</div>
+                                    <div class="event-title">Commercial Operation Announced</div>
+                                    <div class="event-description">Gulf Coast Ammonia Plant (1.3M t/y capacity) at Texas City announces imminent commercial operation. Market anticipates supply impact.</div>
+                                    <div class="impact-arrow">→</div>
+                                </div>
+                                <div class="timeline-event current" data-impact="2">
+                                    <div class="event-date">Mar 28, 2025</div>
+                                    <div class="event-title">First Cargo Export - Dancing Brave</div>
+                                    <div class="event-description">Inaugural ammonia cargo loaded on Dancing Brave for Norway (Glomfjord). Tampa prices drop $25/mt CFR to $435/mt - fourth consecutive monthly decline.</div>
+                                    <div class="impact-arrow">→</div>
+                                </div>
+                                <div class="timeline-event upcoming" data-impact="3">
+                                    <div class="event-date">May 1, 2025</div>
+                                    <div class="event-title">Production Ramp-Up Phase</div>
+                                    <div class="event-description">Plant targeting 80% capacity utilization. Additional USG export cargoes begin competing directly with Trinidad Point Lisas exports.</div>
+                                    <div class="impact-arrow">→</div>
+                                </div>
+                                <div class="timeline-event future" data-impact="4">
+                                    <div class="event-date">Jul 1, 2025</div>
+                                    <div class="event-title">Full Capacity Achievement</div>
+                                    <div class="event-description">Plant reaches full 1.3M t/y production capacity. Global ammonia trade patterns permanently altered with additional USG supply.</div>
+                                    <div class="impact-arrow">→</div>
+                                </div>
+                                <div class="timeline-event future" data-impact="5">
+                                    <div class="event-date">Q4 2025</div>
+                                    <div class="event-title">Market Integration Complete</div>
+                                    <div class="event-description">Ammonia pricing stabilizes at new equilibrium. USG-Europe trade lane established, Trinidad market share redistributed.</div>
+                                    <div class="impact-arrow">→</div>
+                                </div>
                             </div>
-                            <div class="timeline-event current">
-                                <div class="event-date">Mar 15, 2024</div>
-                                <div class="event-title">Plant Startup & Initial Production</div>
-                                <div class="event-description">Official plant startup. Initial chemical production begins. Immediate +15.2% rate impact observed on Louisiana → Tampa routes.</div>
-                            </div>
-                            <div class="timeline-event upcoming">
-                                <div class="event-date">Apr 1, 2024</div>
-                                <div class="event-title">Target Full Capacity</div>
-                                <div class="event-description">Plant expected to reach 100% capacity. Rate impact may stabilize as market adjusts to increased supply.</div>
-                            </div>
-                            <div class="timeline-event future">
-                                <div class="event-date">Jun 1, 2024</div>
-                                <div class="event-title">Hurricane Season Risk Window</div>
-                                <div class="event-description">Atlantic hurricane season begins. Potential disruption to Gulf Coast operations and shipping routes.</div>
-                            </div>
-                            <div class="timeline-event future">
-                                <div class="event-date">Q4 2024</div>
-                                <div class="event-title">Rate Normalization Expected</div>
-                                <div class="event-description">Market analysts project rate stabilization at +8-12% sustained premium based on historical patterns.</div>
+                            
+                            <div class="timeline-section impacts-column">
+                                <h3>Market Impacts</h3>
+                                <div class="market-impact low-impact" data-from="1">
+                                    <div class="impact-severity">Low Impact</div>
+                                    <div class="impact-title">Market Speculation Begins</div>
+                                    <div class="impact-description">Initial price weakness in Tampa contract pricing. Traders begin positioning for supply increase.</div>
+                                    <div class="impact-metrics">
+                                        <span class="metric">Tampa: -$5/mt CFR</span>
+                                        <span class="metric">Volume: Minimal</span>
+                                    </div>
+                                </div>
+                                <div class="market-impact high-impact" data-from="2">
+                                    <div class="impact-severity">High Impact</div>
+                                    <div class="impact-title">Price Decline Acceleration</div>
+                                    <div class="impact-description">Immediate market reaction to first cargo. Fourth consecutive monthly decline confirms supply pressure.</div>
+                                    <div class="impact-metrics">
+                                        <span class="metric">Tampa: -$25/mt CFR</span>
+                                        <span class="metric">Volume: 20,000 MT</span>
+                                    </div>
+                                </div>
+                                <div class="market-impact medium-impact" data-from="3">
+                                    <div class="impact-severity">Medium Impact</div>
+                                    <div class="impact-title">Trinidad Competition</div>
+                                    <div class="impact-description">Direct competition with Point Lisas exports. USG freight advantage to Europe becomes apparent.</div>
+                                    <div class="impact-metrics">
+                                        <span class="metric">Market Share: -15%</span>
+                                        <span class="metric">Route Premium: +$10/mt</span>
+                                    </div>
+                                </div>
+                                <div class="market-impact high-impact" data-from="4">
+                                    <div class="impact-severity">High Impact</div>
+                                    <div class="impact-title">Global Trade Shift</div>
+                                    <div class="impact-description">Permanent alteration of global ammonia flows. USG becomes major supplier to Europe.</div>
+                                    <div class="impact-metrics">
+                                        <span class="metric">Annual Volume: 1.3M MT</span>
+                                        <span class="metric">Trade Route: USG-EUR</span>
+                                    </div>
+                                </div>
+                                <div class="market-impact stabilizing-impact" data-from="5">
+                                    <div class="impact-severity">Stabilizing</div>
+                                    <div class="impact-title">New Market Equilibrium</div>
+                                    <div class="impact-description">Pricing stabilizes at new sustainable levels. Market adaptation complete.</div>
+                                    <div class="impact-metrics">
+                                        <span class="metric">Tampa: $435/mt CFR</span>
+                                        <span class="metric">Volatility: Reduced</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </main>
@@ -164,32 +390,32 @@
             <div class="upcoming-events">
                 <h4>Upcoming Events</h4>
                 <div class="upcoming-item">
-                    <div class="event-date">Mar 28</div>
-                    <div class="event-title">GCA Earnings Call</div>
+                    <div class="event-date">Apr 15</div>
+                    <div class="event-title">GCA Q1 Production Report</div>
                 </div>
                 <div class="upcoming-item">
-                    <div class="event-date">Apr 1</div>
-                    <div class="event-title">Q1 Chemical Tanker Report</div>
+                    <div class="event-date">May 1</div>
+                    <div class="event-title">Global Ammonia Market Update</div>
                 </div>
             </div>
 
             <div class="critical-dates">
                 <h4>Critical Monitoring Dates</h4>
                 <div class="critical-item">
-                    <span class="critical-date">Apr 1</span>
-                    <span class="critical-event">Full capacity target</span>
+                    <span class="critical-date">May 1</span>
+                    <span class="critical-event">80% capacity target</span>
                 </div>
                 <div class="critical-item">
-                    <span class="critical-date">May 15</span>
-                    <span class="critical-event">Rate normalization window</span>
+                    <span class="critical-date">Jul 1</span>
+                    <span class="critical-event">Full capacity achievement</span>
                 </div>
                 <div class="critical-item">
-                    <span class="critical-date">Jun 1</span>
-                    <span class="critical-event">Hurricane season start</span>
+                    <span class="critical-date">Aug 15</span>
+                    <span class="critical-event">Tampa price stabilization</span>
                 </div>
                 <div class="critical-item">
-                    <span class="critical-date">Sep 30</span>
-                    <span class="critical-event">Expansion decision deadline</span>
+                    <span class="critical-date">Dec 31</span>
+                    <span class="critical-event">Annual trade pattern review</span>
                 </div>
             </div>
 
@@ -197,11 +423,11 @@
                 <h4>Timeline Alerts</h4>
                 <div class="alert-item urgent">
                     <div class="alert-type">Immediate</div>
-                    <div class="alert-text">Monitor plant utilization reports for capacity confirmation</div>
+                    <div class="alert-text">Track Dancing Brave voyage and discharge timing at Glomfjord</div>
                 </div>
                 <div class="alert-item important">
                     <div class="alert-type">30 Days</div>
-                    <div class="alert-text">Prepare for potential rate normalization in Q2</div>
+                    <div class="alert-text">Monitor Tampa pricing for further decline vs. Trinidad competition</div>
                 </div>
             </div>
         </aside>
@@ -221,81 +447,92 @@
     <!-- Vis.js Timeline JavaScript -->
     <script src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
     <script>
-        // Timeline data for GCA Plant story
+        // Timeline groups for organization (hidden labels)
+        var groups = new vis.DataSet([
+            {id: 1, content: ''},
+            {id: 2, content: ''}
+        ]);
+
+        // Timeline data for Gulf Coast Ammonia Plant story
         var items = new vis.DataSet([
             // Historical Events
             {
                 id: 1,
-                content: 'Construction Complete',
-                start: '2024-01-28',
+                content: 'Commercial Operation Announced',
+                start: '2025-01-15',
                 type: 'point',
                 className: 'timeline-past',
-                title: 'GCA Chemical Plant construction phase completed'
+                group: 1,
+                title: 'Gulf Coast Ammonia Plant (1.3M t/y) at Texas City announces imminent operation'
             },
             {
                 id: 2,
-                content: 'Plant Startup<br/><strong>+15.2% Rate Impact</strong>',
-                start: '2024-03-15',
+                content: 'First Cargo Export<br/><strong>Dancing Brave → Norway</strong>',
+                start: '2025-03-28',
                 type: 'point',
                 className: 'timeline-current',
-                title: 'Official plant startup with immediate market impact'
-            },
-            
-            // Rate Impact Range
-            {
-                id: 3,
-                content: 'Peak Rate Impact Period',
-                start: '2024-03-15',
-                end: '2024-05-15',
-                type: 'range',
-                className: 'timeline-impact-range',
-                title: 'Period of maximum rate impact on chemical tanker routes'
+                group: 1,
+                title: 'Inaugural ammonia cargo to Glomfjord, Tampa prices drop $25/mt CFR'
             },
             
             // Future Events
             {
                 id: 4,
-                content: 'Target Full Capacity',
-                start: '2024-04-01',
+                content: 'Production Ramp-Up (80%)',
+                start: '2025-05-01',
                 type: 'point',
                 className: 'timeline-upcoming',
-                title: 'Plant expected to reach 100% operational capacity'
+                group: 1,
+                title: 'Plant targeting 80% capacity, competing with Trinidad Point Lisas'
             },
             {
                 id: 5,
-                content: 'Hurricane Season Risk',
-                start: '2024-06-01',
-                end: '2024-11-30',
+                content: 'Full Capacity Achievement',
+                start: '2025-07-01',
+                type: 'point',
+                className: 'timeline-upcoming',
+                group: 1,
+                title: 'Plant reaches full 1.3M t/y production capacity'
+            },
+            
+            // Market Impact Ranges
+            {
+                id: 3,
+                content: 'Tampa Price Decline Period',
+                start: '2025-03-28',
+                end: '2025-08-15',
                 type: 'range',
-                className: 'timeline-risk-range',
-                title: 'Atlantic hurricane season - potential disruption window'
+                className: 'timeline-impact-range',
+                group: 2,
+                title: 'Fourth consecutive monthly decline as USG supply enters market'
+            },
+            {
+                id: 7,
+                content: 'Trinidad Market Share Impact',
+                start: '2025-04-01',
+                end: '2025-12-31',
+                type: 'range',
+                className: 'timeline-competition-range',
+                group: 2,
+                title: 'GCA directly competes with Trinidad Point Lisas exports to Europe'
             },
             {
                 id: 6,
-                content: 'Rate Normalization',
-                start: '2024-10-01',
-                type: 'point',
-                className: 'timeline-future',
-                title: 'Expected rate stabilization at +8-12% sustained premium'
-            },
-            
-            // Historical Context
-            {
-                id: 7,
-                content: 'MOTIVA 2022 Comparison',
-                start: '2022-06-15',
-                end: '2022-10-30',
-                type: 'background',
-                className: 'timeline-historical',
-                title: 'Similar plant startup: +18.7% initial impact, normalized in 4.2 months'
+                content: 'Market Integration Complete',
+                start: '2025-09-01',
+                end: '2025-12-31',
+                type: 'range',
+                className: 'timeline-integration-range',
+                group: 2,
+                title: 'Ammonia pricing stabilizes, USG-Europe trade lane established'
             }
         ]);
 
         // Timeline options
         var options = {
             orientation: 'top',
-            start: '2024-01-01',
-            end: '2024-12-31',
+            start: '2025-01-01',
+            end: '2025-12-31', // Default to 1 year view
             zoomMin: 1000 * 60 * 60 * 24 * 7, // one week
             zoomMax: 1000 * 60 * 60 * 24 * 365, // one year
             height: '300px',
@@ -333,7 +570,7 @@
 
         // Create timeline
         var container = document.getElementById('gca-timeline');
-        var timeline = new vis.Timeline(container, items, options);
+        var timeline = new vis.Timeline(container, items, groups, options);
 
         // Timeline controls functionality
         document.querySelectorAll('.timeline-btn').forEach(btn => {
@@ -371,8 +608,39 @@
             });
         });
 
-        // Set initial focus on current event
-        timeline.focus(2, {animation: true});
+        // Set initial window to full year view
+        timeline.setWindow('2025-01-01', '2025-12-31');
+
+        // Time horizon controls functionality
+        document.querySelectorAll('.scope-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.scope-btn').forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Set timeline range based on selection
+                const scope = this.textContent;
+                let startDate, endDate;
+                
+                switch(scope) {
+                    case '30 Days':
+                        startDate = '2025-02-28'; // 30 days before current event
+                        endDate = '2025-04-28';   // 30 days after current event
+                        break;
+                    case '6 Months':
+                        startDate = '2025-01-01';
+                        endDate = '2025-07-01';
+                        break;
+                    case '1 Year':
+                        startDate = '2025-01-01';
+                        endDate = '2025-12-31';
+                        break;
+                }
+                
+                timeline.setWindow(startDate, endDate, {animation: true});
+            });
+        });
     </script>
 </body>
 </html> 

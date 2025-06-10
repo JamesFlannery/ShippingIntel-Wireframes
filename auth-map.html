@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maritime Intelligence - Geographic Analysis Demo</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #e5e5e5;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+
+        #demoMap {
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                135deg, 
+                rgba(10, 10, 10, 0.8) 0%, 
+                rgba(26, 26, 46, 0.6) 50%, 
+                rgba(22, 33, 62, 0.4) 100%
+            );
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .header-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(30, 30, 30, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #333;
+            padding: 16px 24px;
+            z-index: 1001;
+            pointer-events: auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            font-size: 24px;
+            margin-right: 12px;
+            filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
+        }
+
+        .logo-text {
+            display: flex;
+            align-items: baseline;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-main {
+            font-size: 20px;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-right: 6px;
+        }
+
+        .logo-accent {
+            font-size: 20px;
+            font-weight: 700;
+            color: #00ff88;
+        }
+
+        .header-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .overlay-cards {
+            position: absolute;
+            top: 80px;
+            left: 24px;
+            right: 24px;
+            bottom: 24px;
+            display: grid;
+            grid-template-columns: 350px 1fr 320px;
+            grid-template-rows: auto 1fr auto;
+            gap: 20px;
+            z-index: 1001;
+            pointer-events: auto;
+        }
+
+        .impact-summary {
+            grid-column: 1;
+            grid-row: 1;
+            background: rgba(30, 30, 30, 0.95);
+            backdrop-filter: blur(15px);
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid #00ff88;
+        }
+
+        .summary-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #00ff88;
+            margin-bottom: 12px;
+        }
+
+        .key-metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .metric-label {
+            color: #888;
+        }
+
+        .metric-value {
+            color: #00ff88;
+            font-weight: 600;
+        }
+
+        .metric-value.secondary {
+            color: #00d4ff;
+        }
+
+        .route-legend {
+            grid-column: 1;
+            grid-row: 2;
+            background: rgba(30, 30, 30, 0.95);
+            backdrop-filter: blur(15px);
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            align-self: start;
+        }
+
+        .legend-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 12px;
+        }
+
+        .legend-line {
+            width: 24px;
+            height: 3px;
+            margin-right: 12px;
+            border-radius: 2px;
+        }
+
+        .legend-line.primary {
+            background: #00ff88;
+        }
+
+        .legend-line.secondary {
+            background: #00d4ff;
+        }
+
+        .legend-text {
+            color: #e5e5e5;
+        }
+
+        .auth-panel {
+            grid-column: 3;
+            grid-row: 1 / -1;
+            background: rgba(30, 30, 30, 0.95);
+            backdrop-filter: blur(15px);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 24px;
+            align-self: start;
+            position: sticky;
+            top: 0;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .auth-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .auth-subtitle {
+            font-size: 13px;
+            color: #888;
+        }
+
+        .demo-info {
+            background: rgba(42, 42, 42, 0.8);
+            border: 1px solid #444;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .info-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #00ff88;
+            margin-bottom: 8px;
+        }
+
+        .info-description {
+            font-size: 12px;
+            color: #ccc;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .demo-features {
+            list-style: none;
+            font-size: 11px;
+        }
+
+        .demo-features li {
+            color: #888;
+            margin-bottom: 4px;
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .demo-features li::before {
+            content: "▶";
+            color: #00d4ff;
+            position: absolute;
+            left: 0;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(42, 42, 42, 0.8);
+            border: 1px solid #444;
+            border-radius: 6px;
+            color: #e5e5e5;
+            font-size: 14px;
+            margin-bottom: 16px;
+            transition: border-color 0.2s ease;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+
+        .password-input::placeholder {
+            color: #666;
+        }
+
+        .auth-button {
+            width: 100%;
+            background: linear-gradient(135deg, #00d4ff 0%, #00ff88 100%);
+            color: #000;
+            border: none;
+            padding: 12px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .auth-button:hover {
+            transform: translateY(-1px);
+        }
+
+        .error-message {
+            color: #ff6666;
+            font-size: 12px;
+            margin-top: 12px;
+            display: none;
+            text-align: center;
+        }
+
+        .map-stats {
+            grid-column: 1 / -1;
+            grid-row: 3;
+            display: flex;
+            gap: 16px;
+        }
+
+        .stat-card {
+            background: rgba(30, 30, 30, 0.95);
+            backdrop-filter: blur(15px);
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 16px;
+            flex: 1;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #00ff88;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 1024px) {
+            .overlay-cards {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto 1fr;
+                top: 60px;
+            }
+            
+            .auth-panel {
+                grid-column: 1;
+                grid-row: 1;
+            }
+            
+            .impact-summary {
+                grid-column: 1;
+                grid-row: 2;
+            }
+            
+            .route-legend {
+                grid-column: 1;
+                grid-row: 3;
+            }
+            
+            .map-stats {
+                grid-row: 4;
+                grid-column: 1;
+                align-self: end;
+            }
+        }
+
+        /* Leaflet overrides for dark theme */
+        .leaflet-control-attribution {
+            background: rgba(30, 30, 30, 0.8) !important;
+            color: #888 !important;
+        }
+
+        .leaflet-control-zoom {
+            border: 1px solid #333 !important;
+        }
+
+        .leaflet-control-zoom a {
+            background: rgba(30, 30, 30, 0.9) !important;
+            color: #e5e5e5 !important;
+            border-bottom: 1px solid #333 !important;
+        }
+
+        .leaflet-control-zoom a:hover {
+            background: rgba(50, 50, 50, 0.9) !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="map-container">
+        <div id="demoMap"></div>
+        <div class="map-overlay"></div>
+
+        <div class="header-bar">
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="logo-icon">🚢</div>
+                    <div class="logo-text">
+                        <span class="logo-main">SHIPPING</span>
+                        <span class="logo-accent">INTEL</span>
+                    </div>
+                </div>
+                <div class="header-title">Geographic Impact Analysis: Gulf Coast Chemical Transport</div>
+            </div>
+        </div>
+
+        <div class="overlay-cards">
+            <div class="impact-summary">
+                <h3 class="summary-title">GCA Plant Impact</h3>
+                <div class="key-metric">
+                    <span class="metric-label">Rate Increase</span>
+                    <span class="metric-value">+15.2%</span>
+                </div>
+                <div class="key-metric">
+                    <span class="metric-label">Production</span>
+                    <span class="metric-value">125,000 MT/month</span>
+                </div>
+                <div class="key-metric">
+                    <span class="metric-label">Tampa Calls</span>
+                    <span class="metric-value">+32%</span>
+                </div>
+                <div class="key-metric">
+                    <span class="metric-label">Vessels Redeployed</span>
+                    <span class="metric-value secondary">18</span>
+                </div>
+                <div class="key-metric">
+                    <span class="metric-label">Active Routes</span>
+                    <span class="metric-value secondary">5</span>
+                </div>
+            </div>
+
+            <div class="route-legend">
+                <h4 class="legend-title">Route Impact</h4>
+                <div class="legend-item">
+                    <div class="legend-line primary"></div>
+                    <span class="legend-text">Primary Impact (+15.2%)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-line secondary"></div>
+                    <span class="legend-text">Secondary Impact (+5-8%)</span>
+                </div>
+                <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #333;">
+                    <div style="font-size: 11px; color: #888; line-height: 1.4;">
+                        Interactive analysis showing chemical tanker route disruptions and fleet redeployment opportunities across the Gulf Coast.
+                    </div>
+                </div>
+            </div>
+
+            <div class="auth-panel">
+                <div class="auth-header">
+                    <h2 class="auth-title">Access Demo</h2>
+                    <p class="auth-subtitle">Maritime Intelligence Platform</p>
+                </div>
+
+                <div class="demo-info">
+                    <div class="info-title">Geographic Analysis Preview</div>
+                    <p class="info-description">Experience maritime intelligence through interactive mapping and route analysis.</p>
+                    <ul class="demo-features">
+                        <li>Live route impact visualization</li>
+                        <li>Fleet redeployment tracking</li>
+                        <li>Port congestion analysis</li>
+                        <li>Multi-dimensional trade flows</li>
+                    </ul>
+                </div>
+
+                <div class="auth-form">
+                    <input 
+                        type="password" 
+                        id="passwordInput" 
+                        class="password-input" 
+                        placeholder="Enter demo access code"
+                        autocomplete="off"
+                    >
+                    <button id="authButton" class="auth-button">Launch Geographic Demo</button>
+                    <div id="errorMessage" class="error-message">
+                        Invalid access code. Please try again.
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-stats">
+                <div class="stat-card">
+                    <span class="stat-value">$2.3B</span>
+                    <span class="stat-label">Plant Investment</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">650nm</span>
+                    <span class="stat-label">Primary Route</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">24</span>
+                    <span class="stat-label">Key Stakeholders</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">3</span>
+                    <span class="stat-label">Major Ports</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize map
+        const map = L.map('demoMap', {
+            center: [28.5, -89.0],
+            zoom: 6,
+            zoomControl: true,
+            scrollWheelZoom: false,
+            doubleClickZoom: false,
+            dragging: false
+        });
+
+        // Dark tile layer
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap © CartoDB',
+            subdomains: 'abcd',
+            maxZoom: 19
+        }).addTo(map);
+
+        // GCA Plant (Louisiana)
+        const gcaPlant = L.marker([29.8, -90.1], {
+            icon: L.divIcon({
+                className: 'custom-marker',
+                html: '<div style="background: #ff6b6b; border: 2px solid #fff; border-radius: 50%; width: 12px; height: 12px;"></div>',
+                iconSize: [12, 12],
+                iconAnchor: [6, 6]
+            })
+        }).addTo(map);
+
+        // Houston Port
+        const houstonPort = L.marker([29.7, -95.0], {
+            icon: L.divIcon({
+                className: 'custom-marker',
+                html: '<div style="background: #00d4ff; border: 2px solid #fff; border-radius: 50%; width: 10px; height: 10px;"></div>',
+                iconSize: [10, 10],
+                iconAnchor: [5, 5]
+            })
+        }).addTo(map);
+
+        // Tampa Port
+        const tampaPort = L.marker([27.9, -82.5], {
+            icon: L.divIcon({
+                className: 'custom-marker',
+                html: '<div style="background: #00d4ff; border: 2px solid #fff; border-radius: 50%; width: 10px; height: 10px;"></div>',
+                iconSize: [10, 10],
+                iconAnchor: [5, 5]
+            })
+        }).addTo(map);
+
+        // Primary route (GCA to Tampa)
+        const primaryRoute = L.polyline([
+            [29.8, -90.1],
+            [28.5, -85.5],
+            [27.9, -82.5]
+        ], {
+            color: '#00ff88',
+            weight: 4,
+            opacity: 0.8
+        }).addTo(map);
+
+        // Secondary route (GCA to Houston)
+        const secondaryRoute = L.polyline([
+            [29.8, -90.1],
+            [29.7, -95.0]
+        ], {
+            color: '#00d4ff',
+            weight: 3,
+            opacity: 0.8,
+            dashArray: '10, 5'
+        }).addTo(map);
+
+        // Authentication functionality
+        const DEMO_PASSWORD = 'maritime2024';
+        
+        const passwordInput = document.getElementById('passwordInput');
+        const authButton = document.getElementById('authButton');
+        const errorMessage = document.getElementById('errorMessage');
+
+        function authenticate() {
+            const password = passwordInput.value.trim();
+            
+            if (password === DEMO_PASSWORD) {
+                sessionStorage.setItem('maritime-auth', 'true');
+                sessionStorage.setItem('auth-timestamp', Date.now().toString());
+                sessionStorage.setItem('auth-variant', 'map'); // Track A/B test variant
+                
+                window.location.href = 'geography-view.html'; // Direct to geography view
+            } else {
+                errorMessage.style.display = 'block';
+                passwordInput.value = '';
+                passwordInput.focus();
+                
+                passwordInput.style.animation = 'shake 0.5s ease-in-out';
+                setTimeout(() => {
+                    passwordInput.style.animation = '';
+                }, 500);
+            }
+        }
+
+        authButton.addEventListener('click', authenticate);
+        passwordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                authenticate();
+            }
+        });
+
+        passwordInput.addEventListener('input', () => {
+            errorMessage.style.display = 'none';
+        });
+
+        passwordInput.focus();
+
+        // Check if already authenticated
+        const isAuthenticated = sessionStorage.getItem('maritime-auth');
+        const authTimestamp = sessionStorage.getItem('auth-timestamp');
+        const currentTime = Date.now();
+        const sessionDuration = 24 * 60 * 60 * 1000;
+
+        if (isAuthenticated && authTimestamp && (currentTime - parseInt(authTimestamp)) < sessionDuration) {
+            window.location.href = 'geography-view.html';
+        }
+    </script>
+
+    <style>
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+    </style>
+</body>
+</html> 

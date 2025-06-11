@@ -1,84 +1,164 @@
-# ShippingIntel Platform - Wireframe
+# Maritime Intelligence - YAML-Driven Content System
 
-This wireframe demonstrates a Bloomberg Terminal-inspired user flow for a maritime intelligence platform that helps users understand trends in the maritime industry through interactive, personalized storytelling.
+## Project Overview
 
-## Core Concept
+This project is building a sophisticated maritime intelligence platform with a **data-driven content architecture** that separates content from presentation. The goal is to enable:
 
-The platform uses three interconnected schemas to create intelligent, contextual guidance:
+1. **Story Ontology**: Content structured as semantic maritime knowledge
+2. **Dual Analytics**: Track both click behavior AND concept engagement  
+3. **UX Flexibility**: Easy visual pattern changes without touching content
 
-1. **story-connection-mapping.yaml** - Maps relationships between maritime events, companies, and market trends
-2. **recommendation-engine-logic.yaml** - Scores and suggests relevant content based on user role and behavior
-3. **pathway-prompting-system.yaml** - Generates contextual prompts and navigation guidance
+## Current Architecture
 
-## Bloomberg Terminal-Inspired Flow
+### Three-Zone Layout
+- **Left Zone**: Context & Control (metrics, related stories, recommendations)
+- **Center Zone**: Primary Analysis (story content, prompts, connections) 
+- **Right Zone**: Decision Support (context panel, alerts, intelligence)
 
-### 1. Central Entity → Radiating Analysis
-- Start with a maritime story/trend (e.g., "GCA Plant Startup")
-- Everything branches from this central focus
-- Users stay "in context" while exploring different perspectives
+### Key Files Structure
+```
+maritime-intelligence-wireframe/
+├── pages/stories/
+│   └── ammonia.html                    # Target implementation file
+├── data/stories/
+│   └── ammonia-plant.yaml             # Structured story data
+├── scripts/
+│   └── story-renderer.js              # YAML → HTML renderer
+└── styles/
+    ├── main.css
+    └── story.css
+```
 
-### 2. Function-Based Drill-Down
-Similar to Bloomberg's function keys, users can switch between views:
-- **STORY** - Main narrative content
-- **DATA** - Supporting metrics, charts, pricing data  
-- **CONNECTIONS** - Visual network of related stories and events
-- **IMPACT** - Effects on specific ship types, routes, companies
-- **GEOGRAPHY** - Regional implications and trade routes
-- **TIMELINE** - Story evolution and future projections
-- **PLAYERS** - Companies, ports, stakeholders involved
+## What We're Building
 
-### 3. Discovery Through Cross-Reference
-- Reading about one event reveals connections to others
-- Each data point becomes a potential jumping-off point
-- Intelligent recommendations based on user role (Ship Owner, Trader, etc.)
+### 1. Content Extraction & Structure
+- **From**: Hardcoded HTML content in story pages
+- **To**: Structured YAML data with semantic tags
+- **Result**: `ammonia-plant.yaml` (227 lines) with full story content
 
-## Key Features Demonstrated
+### 2. Template Rendering System  
+- **Component**: `StoryRenderer` class in `story-renderer.js`
+- **Function**: Converts YAML data → HTML with semantic CSS classes
+- **Features**: 
+  - Semantic CSS classes for visual patterns
+  - Analytics tracking for content engagement
+  - Component-based rendering (left/center/right zones)
 
-### Main Dashboard (`index.html`)
-- **Three-panel layout**: Story context (left), main content (center), contextual intelligence (right)
-- **Function navigation**: Bloomberg-style view switching
-- **Inline prompts**: Smart suggestions embedded in content
-- **Connection callouts**: Highlight relationships between stories
-- **Role-based relevance**: Content scored for user type
+### 3. Analytics Foundation
+- **Click Analytics**: Traditional user interaction tracking
+- **Concept Analytics**: Semantic content comprehension tracking
+- **Implementation**: `data-concept` attributes + semantic CSS classes
 
-### Connections View (`connections-view.html`)
-- **Neural network visualization**: Interactive graph of story relationships
-- **Connection types**: Causal (strong), Thematic (medium), Weak (peripheral)
-- **Filtering controls**: Time range, connection types, relevance threshold
-- **Node details**: Deep dive on selected stories/events
-- **Exploration paths**: Suggested routes through the data
+## Current Implementation Status
 
-## Design Philosophy
+### ✅ Completed
+- [x] Content extracted from HTML into `ammonia-plant.yaml`
+- [x] YAML structure designed with semantic tags
+- [x] `StoryRenderer` class created with zone-based rendering
+- [x] `ammonia.html` set up as template loader
+- [x] Analytics tracking framework designed
 
-### Visual Hierarchy
-- **Dark theme** with high contrast for extended reading
-- **Color coding** for different connection strengths and content types
-- **Typography** focused on data density and readability
-- **Minimal chrome** to maximize content focus
+### 🚧 Current Issue
+The `ammonia.html` page loads but doesn't render content from YAML. The integration between:
+1. `ammonia.html` (loads YAML + calls renderer)
+2. `story-renderer.js` (StoryRenderer class)  
+3. `ammonia-plant.yaml` (structured content)
 
-### Information Architecture
-- **Context preservation** - always know where you are in the story network
-- **Progressive disclosure** - start broad, drill down to specifics
-- **Cross-referencing** - seamless jumping between related content
-- **Personalization** - content relevance based on user role and preferences
+**Problem**: Content not appearing on page load.
 
-## User Flow Examples
+## File Details
 
-1. **Market Analysis Flow**:
-   GCA Plant (STORY) → Pricing Impact (DATA) → Fleet Impact (IMPACT) → Route Changes (GEOGRAPHY)
+### ammonia.html
+```html
+<!-- Loads js-yaml + story-renderer.js -->
+<!-- Fetches ammonia-plant.yaml -->
+<!-- Calls StoryRenderer.render() -->
+<!-- Injects result into <div id="app"> -->
+```
 
-2. **Discovery Flow**:
-   Reading about Tampa pricing → Connection callout → Chemical tanker earnings → Your fleet analysis
+### ammonia-plant.yaml Structure
+```yaml
+story_meta:
+  story_id: "ammonia-plant-export-2025"
+  commodity: "ammonia"
+  
+semantic_tags:
+  commodity: "ammonia"
+  content_concepts: [...]
+  user_journey_markers: [...]
 
-3. **Comparative Flow**:
-   Current plant startup → Historical plant startups (TIMELINE) → Pattern analysis (DATA)
+left_zone:
+  current_story: {...}
+  key_metrics: {...}
+  related_stories: {...}
+  recommendations: {...}
 
-## Technical Implementation Notes
+center_zone:
+  story_header: {...}
+  content_blocks: {...}
 
-- Responsive grid layout using CSS Grid
-- SVG-based connection visualization
-- Smooth transitions and hover states
-- Keyboard shortcut support (⌘K global search)
-- Modular CSS architecture for different view types
+right_zone:
+  context_panel: {...}
+  active_alerts: {...}
+  related_intelligence: {...}
 
-The wireframe demonstrates how maritime professionals can efficiently navigate complex market intelligence through Bloomberg Terminal-style function navigation while maintaining story context and discovering relevant connections. 
+navigation: {...}
+status_bar: {...}
+```
+
+### StoryRenderer Class
+```javascript
+class StoryRenderer {
+  constructor(storyData) { /* YAML data */ }
+  
+  render() { 
+    // Returns complete HTML for injection
+    // Combines: nav + main-container + status-bar
+  }
+  
+  renderLeftZone() { /* Sidebar components */ }
+  renderCenterZone() { /* Story content */ }
+  renderRightZone() { /* Context panels */ }
+}
+```
+
+## Questions Answered
+
+### "Will the content be in a story ontology?"
+**Yes** - Every piece of content knows where it fits in maritime domain knowledge through:
+- Semantic tags for commodity, market dynamics, operational concepts
+- Content concept tracking for comprehension analytics
+- Structured relationships between story elements
+
+### "Can we track user analytics both clicks and concepts?"
+**Yes** - Dual analytics system:
+- **Click Analytics**: `addEventListener('click')` on interactive elements
+- **Concept Analytics**: `data-concept` attributes track semantic engagement
+- **Visual Analytics**: Semantic CSS classes enable pattern-based tracking
+
+### "Can we tweak the UX easily?"
+**Yes** - Complete separation of concerns:
+- **Content**: Managed in YAML files
+- **Logic**: JavaScript rendering templates  
+- **Visuals**: CSS semantic classes for consistent patterns
+- **UX Changes**: Modify CSS classes without touching content
+
+## Next Steps
+
+1. **Debug Current Integration**: Fix why content isn't rendering
+2. **Test Full Pipeline**: YAML → Renderer → Display
+3. **Validate Analytics**: Ensure tracking works for both clicks and concepts
+4. **Scale Pattern**: Apply to other maritime stories
+
+## Benefits Achieved
+
+When working, this system provides:
+- **Content Scalability**: Add stories without HTML coding
+- **Analytics Depth**: Measure comprehension, not just interaction  
+- **UX Agility**: Visual changes without content modification
+- **Knowledge Structure**: Maritime domain ontology in data
+- **AI-Ready Foundation**: Structured content for AI assistance
+
+---
+
+*This README captures our progress toward a sophisticated, data-driven maritime intelligence platform where content, analytics, and UX are independently manageable.* 

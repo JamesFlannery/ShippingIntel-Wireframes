@@ -601,7 +601,7 @@
                 sessionStorage.setItem('auth-timestamp', Date.now().toString());
                 sessionStorage.setItem('auth-variant', 'map'); // Track A/B test variant
                 
-                window.location.href = 'geography-view.html'; // Direct to geography view
+                window.location.href = '../../index.html'; // Go back to main page
             } else {
                 errorMessage.style.display = 'block';
                 passwordInput.value = '';
@@ -634,7 +634,7 @@
         const sessionDuration = 24 * 60 * 60 * 1000;
 
         if (isAuthenticated && authTimestamp && (currentTime - parseInt(authTimestamp)) < sessionDuration) {
-            window.location.href = 'geography-view.html';
+            window.location.href = '../../index.html';
         }
     </script>
 

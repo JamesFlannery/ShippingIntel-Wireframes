@@ -1,3 +1,6 @@
+# Maritime Story Data Structure with Semantic Foundation
+# Enables: Content analytics, UX pattern configuration, Visual consistency
+
 # Semantic Tags - Foundation for Visual Patterns & Content Analytics
 semantic_tags:
   # Domain Concepts
@@ -19,147 +22,206 @@ semantic_tags:
   content_concepts: ["ammonia_pricing", "plant_capacity", "vessel_tracking", "route_economics", "market_competition"]
   user_journey_markers: ["price_impact_understanding", "operational_implications", "competitive_dynamics", "action_planning"]
 
-story_id: "ammonia"
-story_title: "Gulf Coast Ammonia Plant Reshapes Global Trade"
-story_headline: "Gulf Coast Ammonia Plant Export Triggers $25/mt Price Decline in Global Ammonia Markets"
-story_date: "March 28, 2025"
-impact_level: "High"
-impact_class: "high"
-relevance: 97
-last_updated: "14:35 GMT"
-connection_type: "causal"
-connection_label: "Data-Driven Analysis"
+# Story Metadata
+story_meta:
+  story_id: "ammonia"
+  story_title: "Gulf Coast Ammonia Plant Reshapes Global Trade"
+  story_headline: "Gulf Coast Ammonia Plant Export Triggers $25/mt Price Decline in Global Ammonia Markets"
+  story_date: "March 28, 2025"
+  impact_level: "High"
+  impact_class: "high"
+  relevance: 97
+  last_updated: "14:35 GMT"
+  connection_type: "causal"
+  connection_label: "Data-Driven Analysis"
 
-# Navigation active states
-overview_active: ""
-story_active: "active"
-data_active: ""
-connections_active: ""
-impact_active: ""
-geography_active: ""
-timeline_active: ""
-players_active: ""
+# Left Zone: Context & Control
+left_zone:
+  # Current Story Card
+  current_story:
+    title: "Gulf Coast Ammonia Plant Reshapes Global Trade"
+    meta: "March 28, 2025 • High Impact"
+    connection_label: "Data-Driven Analysis"
+    semantic_tags: ["story_context", "event_summary"]
+    
+  # Key Metrics
+  key_metrics:
+    section_title: "Key Metrics"
+    metrics:
+      price_change:
+        label: "Price Change"
+        value: "-$25/mt CFR"
+        class: "negative"
+        semantic_tags: ["ammonia_pricing", "market_decline", "financial_impact"]
+      market_impact:
+        label: "Market Impact"
+        value: "4th consecutive decline"
+        class: "negative" 
+        semantic_tags: ["market_trend", "pricing_pattern", "supply_pressure"]
+      capacity:
+        label: "GCA Capacity"
+        value: "1.3M t/y"
+        class: "neutral"
+        semantic_tags: ["plant_capacity", "supply_addition", "production_scale"]
+      production_target:
+        label: "Production Target"
+        value: "80% by May 1"
+        class: "positive"
+        semantic_tags: ["ramp_up_timeline", "operational_planning", "capacity_utilization"]
+        
+  # Related Stories
+  related_stories:
+    section_title: "Related Stories"
+    stories:
+      motiva:
+        title: "Motiva Refinery Expansion"
+        connection_type: "causal"
+        active: true
+        semantic_tags: ["related_infrastructure", "USG_development", "supply_chain"]
+      hurricane:
+        title: "Hurricane Season Impact"
+        connection_type: "causal"
+        active: false
+        semantic_tags: ["operational_risk", "supply_disruption", "seasonal_factors"]
+      imo:
+        title: "IMO 2020 Regulations"
+        connection_type: "causal"
+        active: false
+        semantic_tags: ["regulatory_impact", "compliance_cost", "industry_change"]
+        
+  # Recommendations
+  recommendations:
+    section_title: "Recommendations"
+    items:
+      route_analysis:
+        score: 95
+        text: "Analyze Houston alternative routes"
+        semantic_tags: ["route_optimization", "operational_planning", "commercial_strategy"]
+      fleet_monitoring:
+        score: 87
+        text: "Monitor Stolt fleet deployment"
+        semantic_tags: ["competitive_intelligence", "fleet_positioning", "market_monitoring"]
+      inventory_tracking:
+        score: 78
+        text: "Track chemical inventory levels"
+        semantic_tags: ["supply_monitoring", "demand_forecasting", "operational_intelligence"]
 
-# Key metrics
-metrics:
-  metric_1:
-    label: "Price Change"
-    value: "-$25/mt CFR"
-    class: "negative"
-  metric_2:
-    label: "Market Impact"
-    value: "4th consecutive decline"
-    class: "negative"
-  metric_3:
-    label: "GCA Capacity"
-    value: "1.3M t/y"
-    class: "neutral"
-  metric_4:
-    label: "Production Target"
-    value: "80% by May 1"
-    class: "positive"
+# Center Zone: Primary Analysis
+center_zone:
+  # Story Header
+  story_header:
+    headline: "Gulf Coast Ammonia Plant Export Triggers $25/mt Price Decline in Global Ammonia Markets"
+    meta_bar:
+      impact_level: "High Impact"
+      relevance: "97% Relevance"
+      last_updated: "Last Updated: 14:35 GMT"
+    semantic_tags: ["story_headline", "impact_assessment", "relevance_scoring"]
+    
+  # Content Blocks
+  content_blocks:
+    block_1:
+      type: "paragraph"
+      content: "Gulf Coast Ammonia Plant (GCA) has executed its inaugural export cargo on Yara's Dancing Brave, loading 1.3M t/y capacity ammonia at Texas City for delivery to Norway (Glomfjord), triggering immediate supply pressure and the fourth consecutive monthly price decline in global ammonia markets."
+      semantic_tags: ["event_summary", "vessel_operation", "market_impact", "price_causation"]
+      inline_prompt:
+        icon: "⚡"
+        text: "This development has triggered a cascade of market effects."
+        link: "../views/data.html"
+        link_text: "Explore ammonia trade impact analysis"
+        semantic_tags: ["market_analysis_prompt", "data_exploration", "impact_investigation"]
+        
+    block_2:
+      type: "paragraph"
+      content: "The plant's 1.3M t/y ammonia capacity has created supply concerns in global markets, with Tampa contract prices dropping $25/mt CFR to $435/mt - marking the fourth consecutive monthly decline as markets adapt to additional USG export volumes."
+      semantic_tags: ["capacity_impact", "pricing_mechanism", "market_adaptation", "supply_dynamics"]
+      connection_callout:
+        type: "CAUSAL CONNECTION"
+        description: "Trinidad Point Lisas exports facing direct competition from USG with freight advantage to European markets"
+        button_text: "Explore Global Trade Shift Impact"
+        semantic_tags: ["causal_relationship", "competitive_dynamics", "trade_route_impact"]
+        
+    block_3:
+      type: "paragraph"
+      content: "Markets are now watching for OCP vessel arrivals and monitoring when the plant reaches full production capacity, with an additional 1.3M tons expected to permanently alter global ammonia trade patterns and establish the USG-Europe trade lane."
+      semantic_tags: ["market_monitoring", "capacity_scaling", "trade_pattern_evolution", "route_establishment"]
+      inline_prompt:
+        icon: "📊"
+        text: "Production ramp-up trajectory suggests"
+        link: "../views/timeline.html"
+        link_text: "Further supply pressure likely"
+        semantic_tags: ["timeline_analysis", "supply_pressure_forecast", "production_planning"]
+        
+    block_4:
+      type: "paragraph"
+      content: "Industry sources indicate that traditional ammonia suppliers, particularly Trinidad Point Lisas, are reassessing their market positioning as USG exports demonstrate freight advantages to European destinations, with the market settling into a new pricing equilibrium."
+      semantic_tags: ["competitive_response", "market_repositioning", "freight_economics", "pricing_equilibrium"]
 
-# Content blocks
-content:
-  paragraph_1: "Gulf Coast Ammonia Plant (GCA) has executed its inaugural export cargo on Yara's Dancing Brave, loading 1.3M t/y capacity ammonia at Texas City for delivery to Norway (Glomfjord), triggering immediate supply pressure and the fourth consecutive monthly price decline in global ammonia markets."
-  
-  paragraph_2: "The plant's 1.3M t/y ammonia capacity has created supply concerns in global markets, with Tampa contract prices dropping $25/mt CFR to $435/mt - marking the fourth consecutive monthly decline as markets adapt to additional USG export volumes."
-  
-  paragraph_3: "Markets are now watching for OCP vessel arrivals and monitoring when the plant reaches full production capacity, with an additional 1.3M tons expected to permanently alter global ammonia trade patterns and establish the USG-Europe trade lane."
-  
-  paragraph_4: "Industry sources indicate that traditional ammonia suppliers, particularly Trinidad Point Lisas, are reassessing their market positioning as USG exports demonstrate freight advantages to European destinations, with the market settling into a new pricing equilibrium."
+# Right Zone: Decision Support
+right_zone:
+  # Context Panel
+  context_panel:
+    section_title: "Key Context"
+    items:
+      facility:
+        type: "Facility"
+        detail: "GCA Texas City Plant - 1.3M t/y capacity"
+        semantic_tags: ["facility_specification", "capacity_data", "operational_context"]
+      route:
+        type: "Route"
+        detail: "USG → Norway (Glomfjord)"
+        semantic_tags: ["trade_route", "geographic_scope", "route_economics"]
+      vessel:
+        type: "Vessel"
+        detail: "Dancing Brave (Ammonia Carrier)"
+        semantic_tags: ["vessel_identification", "asset_tracking", "operational_asset"]
+        
+  # Active Alerts
+  active_alerts:
+    section_title: "Active Alerts"
+    items:
+      vessel_tracking:
+        urgency: "high"
+        text: "Track Dancing Brave voyage to Glomfjord discharge"
+        action: "Monitor"
+        semantic_tags: ["vessel_monitoring", "voyage_tracking", "operational_alert"]
+      capacity_monitoring:
+        urgency: "medium"
+        text: "GCA plant ramp-up to 80% capacity targeting May 1"
+        action: "Schedule"
+        semantic_tags: ["capacity_planning", "production_timeline", "operational_planning"]
+        
+  # Related Intelligence
+  related_intelligence:
+    section_title: "Related Intelligence"
+    items:
+      trinidad_analysis:
+        title: "Trinidad Point Lisas Market Share"
+        connection: "Competitive displacement analysis"
+        semantic_tags: ["competitive_analysis", "market_share", "displacement_risk"]
+      oversupply_analysis:
+        title: "Global Ammonia Oversupply"
+        connection: "Supply-demand forecasting"
+        semantic_tags: ["supply_analysis", "demand_forecasting", "market_balance"]
+      trade_lane_development:
+        title: "USG-Europe Trade Lane Development"
+        connection: "Trade pattern evolution"
+        semantic_tags: ["trade_development", "route_analysis", "pattern_evolution"]
 
-# Inline prompts
-prompts:
-  prompt_1:
-    icon: "⚡"
-    text: "This development has triggered a cascade of market effects."
-    link: "data-ammonia.html"
-    link_text: "Explore ammonia trade impact analysis"
-  
-  prompt_2:
-    icon: "📊"
-    text: "Production ramp-up trajectory suggests"
-    link: "timeline-ammonia.html"
-    link_text: "Further supply pressure likely"
+# Status Bar
+status_bar:
+  left_status: "Connected to Live Market Data"
+  right_status: "Market Update: 14:35 GMT • Next refresh in 2:15"
+  semantic_tags: ["system_status", "data_freshness", "update_frequency"]
 
-# Connection callout
-connection:
-  type_label: "CAUSAL CONNECTION"
-  description: "Trinidad Point Lisas exports facing direct competition from USG with freight advantage to European markets"
-  button_text: "Explore Global Trade Shift Impact"
-
-# Context items
-context:
-  context_1:
-    type: "Facility"
-    detail: "GCA Texas City Plant - 1.3M t/y capacity"
-  context_2:
-    type: "Route"
-    detail: "USG → Norway (Glomfjord)"
-  context_3:
-    type: "Vessel"
-    detail: "Dancing Brave (Ammonia Carrier)"
-
-# Active prompts
-active_prompts:
-  prompt_1:
-    text: "Track Dancing Brave voyage to Glomfjord discharge"
-    action: "Monitor"
-    urgency: "high"
-  prompt_2:
-    text: "GCA plant ramp-up to 80% capacity targeting May 1"
-    action: "Schedule"
-    urgency: "medium"
-
-# Related stories
-related_stories:
-  - "Motiva Refinery Expansion"
-  - "Hurricane Season Impact"
-  - "IMO 2020 Regulations"
-
-# Recommendations
-recommendations:
-  rec_1:
-    score: 95
-    text: "Analyze Houston alternative routes"
-  rec_2:
-    score: 87
-    text: "Monitor Stolt fleet deployment"
-  rec_3:
-    score: 78
-    text: "Track chemical inventory levels"
-
-# Related intelligence
-related_intelligence:
-  intel_1:
-    title: "Trinidad Point Lisas Market Share"
-    connection: "Competitive displacement analysis"
-  intel_2:
-    title: "Global Ammonia Oversupply"
-    connection: "Supply-demand forecasting"
-  intel_3:
-    title: "USG-Europe Trade Lane Development"
-    connection: "Trade pattern evolution"
-
-# Status
-status_message: "Market Update: 14:35 GMT • Next refresh in 2:15"
-
-# Timeline data
-timeline:
-  - date: "December 2024"
-    event: "Market weakness begins"
-    price: "$485"
-    impact: "First decline"
-  - date: "January 15, 2025"
-    event: "GCA Plant Announced"
-    price: "$470"
-    impact: "Second decline"
-  - date: "February 2025"
-    event: "Supply concerns build"
-    price: "$455"
-    impact: "Third decline"
-  - date: "March 28, 2025"
-    event: "Dancing Brave Export"
-    price: "$435"
-    impact: "Fourth decline" 
+# Navigation Configuration
+navigation:
+  active_view: "overview"
+  views:
+    overview: "/index.html"
+    story: "/pages/stories/ammonia.html"
+    data: "/pages/views/data.html"
+    connections: "/pages/views/connections.html"
+    impact: "/pages/views/impact.html"
+    geography: "/pages/views/geography.html"
+    timeline: "/pages/views/timeline.html"
+    players: "/pages/views/players.html" 

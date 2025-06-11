@@ -1,0 +1,510 @@
+/* =================================================================
+   MARITIME INTELLIGENCE PLATFORM - REUSABLE COMPONENTS
+   ================================================================= */
+
+/* Story Card Component */
+.story-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    transition: all 0.2s ease;
+}
+
+.story-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: #444;
+}
+
+.story-card.active {
+    border-color: #00d4ff;
+    background: rgba(0, 212, 255, 0.05);
+}
+
+.story-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.story-meta {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 8px;
+}
+
+/* Metric Item Component */
+.metric-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.metric-item:last-child {
+    border-bottom: none;
+}
+
+.metric-label {
+    font-size: 13px;
+    color: #ccc;
+    font-weight: 500;
+}
+
+.metric-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.metric-value.positive {
+    color: #4CAF50;
+}
+
+.metric-value.negative {
+    color: #ff6b6b;
+}
+
+.metric-value.neutral {
+    color: #ffa500;
+}
+
+/* Content Block Component */
+.content-block {
+    margin-bottom: 32px;
+    line-height: 1.6;
+}
+
+.content-block p {
+    color: #ccc;
+    font-size: 15px;
+    margin-bottom: 16px;
+}
+
+/* Inline Prompt Component */
+.inline-prompt {
+    background: rgba(0, 212, 255, 0.05);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.prompt-icon {
+    font-size: 18px;
+    color: #00d4ff;
+}
+
+.prompt-text {
+    color: #ccc;
+    font-size: 14px;
+    flex: 1;
+}
+
+.prompt-link {
+    color: #00d4ff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.prompt-link:hover {
+    color: #ffffff;
+}
+
+/* Connection Callout Component */
+.connection-callout {
+    background: rgba(255, 165, 0, 0.05);
+    border: 1px solid rgba(255, 165, 0, 0.2);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 24px 0;
+}
+
+.connection-type {
+    font-size: 11px;
+    font-weight: 700;
+    color: #ffa500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.connection-text {
+    color: #ccc;
+    font-size: 14px;
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+.explore-connection {
+    background: #ffa500;
+    color: #000;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.explore-connection:hover {
+    background: #ffb733;
+    transform: translateY(-1px);
+}
+
+/* Context Item Component */
+.context-item {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.context-item:last-child {
+    border-bottom: none;
+}
+
+.context-type {
+    font-size: 11px;
+    font-weight: 600;
+    color: #00d4ff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.context-detail {
+    font-size: 13px;
+    color: #ccc;
+    line-height: 1.4;
+}
+
+/* Prompt Item Component */
+.prompt-item {
+    background: rgba(255, 255, 255, 0.02);
+    border-left: 3px solid #333;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border-radius: 0 4px 4px 0;
+    transition: all 0.2s ease;
+}
+
+.prompt-item:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.prompt-item.urgency-high {
+    border-left-color: #ff6b6b;
+}
+
+.prompt-item.urgency-medium {
+    border-left-color: #ffa500;
+}
+
+.prompt-item.urgency-low {
+    border-left-color: #4CAF50;
+}
+
+.prompt-text {
+    font-size: 13px;
+    color: #ccc;
+    margin-bottom: 4px;
+}
+
+.prompt-action {
+    font-size: 12px;
+    color: #888;
+    font-weight: 500;
+}
+
+/* Related Item Component */
+.related-item {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.related-item:hover {
+    background: rgba(255, 255, 255, 0.02);
+    margin: 0 -12px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 4px;
+}
+
+.related-item:last-child {
+    border-bottom: none;
+}
+
+.related-title {
+    font-size: 13px;
+    color: #ffffff;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.related-connection {
+    font-size: 12px;
+    color: #888;
+    font-style: italic;
+}
+
+/* Thread Item Component */
+.thread-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.thread-item:hover {
+    background: rgba(255, 255, 255, 0.02);
+    margin: 0 -12px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 4px;
+}
+
+.thread-item.active {
+    background: rgba(0, 212, 255, 0.1);
+}
+
+.thread-label {
+    font-size: 13px;
+    color: #ccc;
+}
+
+.thread-item.active .thread-label {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+/* Recommendation Item Component */
+.rec-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rec-item:last-child {
+    border-bottom: none;
+}
+
+.rec-score {
+    background: linear-gradient(135deg, #00d4ff, #0099cc);
+    color: #000;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    min-width: 32px;
+    text-align: center;
+}
+
+.rec-content {
+    font-size: 13px;
+    color: #ccc;
+    flex: 1;
+    line-height: 1.3;
+}
+
+/* Chart Container Component */
+.chart-container {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 24px;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.chart-header h3 {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.chart-period {
+    color: #888;
+    font-size: 12px;
+}
+
+/* Impact Level Indicators */
+.impact-level {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.impact-level.high {
+    background: rgba(255, 107, 107, 0.2);
+    color: #ff6b6b;
+    border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+.impact-level.medium {
+    background: rgba(255, 165, 0, 0.2);
+    color: #ffa500;
+    border: 1px solid rgba(255, 165, 0, 0.3);
+}
+
+.impact-level.low {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4CAF50;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+/* Connection Strength Indicators */
+.connection-strength {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.connection-strength.causal {
+    background: #ff6b6b;
+}
+
+.connection-strength.correlative {
+    background: #ffa500;
+}
+
+.connection-strength.contextual {
+    background: #4CAF50;
+}
+
+/* Story-Specific Variations */
+.story-ammonia .story-card {
+    border-color: #00d4ff;
+}
+
+.story-ammonia .metric-value.primary {
+    color: #00d4ff;
+}
+
+.story-chemical .story-card {
+    border-color: #ffa500;
+}
+
+.story-chemical .metric-value.primary {
+    color: #ffa500;
+}
+
+/* Button Components */
+.btn-primary {
+    background: #00d4ff;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: #33ddff;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 1px solid #333;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #555;
+}
+
+/* Data Quality Indicators */
+.quality-meter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.quality-label {
+    font-size: 12px;
+    color: #888;
+    min-width: 80px;
+}
+
+.quality-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.quality-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff6b6b, #ffa500, #4CAF50);
+    transition: width 0.3s ease;
+}
+
+.quality-value {
+    font-size: 12px;
+    color: #ccc;
+    font-weight: 600;
+    min-width: 32px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .story-card, .content-block, .connection-callout, .inline-prompt {
+        margin-left: -16px;
+        margin-right: -16px;
+        border-radius: 0;
+    }
+    
+    .metric-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .rec-item {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .chart-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+} 

@@ -1,0 +1,165 @@
+# Semantic Tags - Foundation for Visual Patterns & Content Analytics
+semantic_tags:
+  # Domain Concepts
+  commodity: "ammonia"
+  facility_type: "terminal"
+  vessel_type: "chemical_tanker" 
+  route: "USG_Europe"
+  
+  # Business Impact Types
+  market_impact: ["pricing_decline", "supply_pressure", "trade_pattern_shift"]
+  operational_impact: ["vessel_positioning", "route_establishment", "capacity_utilization"]
+  competitive_impact: ["market_displacement", "competitive_response", "strategic_positioning"]
+  
+  # Content Relationship Types
+  connection_types: ["causal", "competitive", "geographic", "temporal"]
+  decision_support: ["monitoring", "analysis", "planning", "execution"]
+  
+  # Analytics Tracking Concepts
+  content_concepts: ["ammonia_pricing", "plant_capacity", "vessel_tracking", "route_economics", "market_competition"]
+  user_journey_markers: ["price_impact_understanding", "operational_implications", "competitive_dynamics", "action_planning"]
+
+story_id: "ammonia"
+story_title: "Gulf Coast Ammonia Plant Reshapes Global Trade"
+story_headline: "Gulf Coast Ammonia Plant Export Triggers $25/mt Price Decline in Global Ammonia Markets"
+story_date: "March 28, 2025"
+impact_level: "High"
+impact_class: "high"
+relevance: 97
+last_updated: "14:35 GMT"
+connection_type: "causal"
+connection_label: "Data-Driven Analysis"
+
+# Navigation active states
+overview_active: ""
+story_active: "active"
+data_active: ""
+connections_active: ""
+impact_active: ""
+geography_active: ""
+timeline_active: ""
+players_active: ""
+
+# Key metrics
+metrics:
+  metric_1:
+    label: "Price Change"
+    value: "-$25/mt CFR"
+    class: "negative"
+  metric_2:
+    label: "Market Impact"
+    value: "4th consecutive decline"
+    class: "negative"
+  metric_3:
+    label: "GCA Capacity"
+    value: "1.3M t/y"
+    class: "neutral"
+  metric_4:
+    label: "Production Target"
+    value: "80% by May 1"
+    class: "positive"
+
+# Content blocks
+content:
+  paragraph_1: "Gulf Coast Ammonia Plant (GCA) has executed its inaugural export cargo on Yara's Dancing Brave, loading 1.3M t/y capacity ammonia at Texas City for delivery to Norway (Glomfjord), triggering immediate supply pressure and the fourth consecutive monthly price decline in global ammonia markets."
+  
+  paragraph_2: "The plant's 1.3M t/y ammonia capacity has created supply concerns in global markets, with Tampa contract prices dropping $25/mt CFR to $435/mt - marking the fourth consecutive monthly decline as markets adapt to additional USG export volumes."
+  
+  paragraph_3: "Markets are now watching for OCP vessel arrivals and monitoring when the plant reaches full production capacity, with an additional 1.3M tons expected to permanently alter global ammonia trade patterns and establish the USG-Europe trade lane."
+  
+  paragraph_4: "Industry sources indicate that traditional ammonia suppliers, particularly Trinidad Point Lisas, are reassessing their market positioning as USG exports demonstrate freight advantages to European destinations, with the market settling into a new pricing equilibrium."
+
+# Inline prompts
+prompts:
+  prompt_1:
+    icon: "⚡"
+    text: "This development has triggered a cascade of market effects."
+    link: "data-ammonia.html"
+    link_text: "Explore ammonia trade impact analysis"
+  
+  prompt_2:
+    icon: "📊"
+    text: "Production ramp-up trajectory suggests"
+    link: "timeline-ammonia.html"
+    link_text: "Further supply pressure likely"
+
+# Connection callout
+connection:
+  type_label: "CAUSAL CONNECTION"
+  description: "Trinidad Point Lisas exports facing direct competition from USG with freight advantage to European markets"
+  button_text: "Explore Global Trade Shift Impact"
+
+# Context items
+context:
+  context_1:
+    type: "Facility"
+    detail: "GCA Texas City Plant - 1.3M t/y capacity"
+  context_2:
+    type: "Route"
+    detail: "USG → Norway (Glomfjord)"
+  context_3:
+    type: "Vessel"
+    detail: "Dancing Brave (Ammonia Carrier)"
+
+# Active prompts
+active_prompts:
+  prompt_1:
+    text: "Track Dancing Brave voyage to Glomfjord discharge"
+    action: "Monitor"
+    urgency: "high"
+  prompt_2:
+    text: "GCA plant ramp-up to 80% capacity targeting May 1"
+    action: "Schedule"
+    urgency: "medium"
+
+# Related stories
+related_stories:
+  - "Motiva Refinery Expansion"
+  - "Hurricane Season Impact"
+  - "IMO 2020 Regulations"
+
+# Recommendations
+recommendations:
+  rec_1:
+    score: 95
+    text: "Analyze Houston alternative routes"
+  rec_2:
+    score: 87
+    text: "Monitor Stolt fleet deployment"
+  rec_3:
+    score: 78
+    text: "Track chemical inventory levels"
+
+# Related intelligence
+related_intelligence:
+  intel_1:
+    title: "Trinidad Point Lisas Market Share"
+    connection: "Competitive displacement analysis"
+  intel_2:
+    title: "Global Ammonia Oversupply"
+    connection: "Supply-demand forecasting"
+  intel_3:
+    title: "USG-Europe Trade Lane Development"
+    connection: "Trade pattern evolution"
+
+# Status
+status_message: "Market Update: 14:35 GMT • Next refresh in 2:15"
+
+# Timeline data
+timeline:
+  - date: "December 2024"
+    event: "Market weakness begins"
+    price: "$485"
+    impact: "First decline"
+  - date: "January 15, 2025"
+    event: "GCA Plant Announced"
+    price: "$470"
+    impact: "Second decline"
+  - date: "February 2025"
+    event: "Supply concerns build"
+    price: "$455"
+    impact: "Third decline"
+  - date: "March 28, 2025"
+    event: "Dancing Brave Export"
+    price: "$435"
+    impact: "Fourth decline" 

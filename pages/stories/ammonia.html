@@ -3,34 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShippingIntel - Maritime Intelligence</title>
-    <link rel="stylesheet" href="styles.css">
-    <script>
-        // Authentication check
-        function checkAuth() {
-            const isAuthenticated = sessionStorage.getItem('maritime-auth');
-            const authTimestamp = sessionStorage.getItem('auth-timestamp');
-            const currentTime = Date.now();
-            const sessionDuration = 24 * 60 * 60 * 1000; // 24 hours
-            
-            if (!isAuthenticated || !authTimestamp || (currentTime - parseInt(authTimestamp)) > sessionDuration) {
-                window.location.href = 'auth-map.html';
-                return false;
-            }
-            return true;
-        }
-        
-        // Check authentication on page load
-        if (!checkAuth()) {
-            // Will redirect to auth.html
-        }
-    </script>
+    <title>Gulf Coast Ammonia Plant Reshapes Global Trade - ShippingIntel</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/components.css">
 </head>
-<body>
+<body class="story-ammonia">
     <!-- Top Navigation Bar -->
     <nav class="top-nav">
         <div class="nav-left">
-            <a href="index.html" class="logo">ShippingIntel</a>
+            <a href="../../index.html" class="logo">ShippingIntel</a>
             <div class="search-bar">
                 <input type="text" placeholder="Search stories, ships, ports, companies... (⌘K)" class="global-search">
             </div>
@@ -45,14 +26,40 @@
     <div class="main-container">
         <!-- Left Sidebar -->
         <aside class="left-sidebar">
+            <!-- Current Story Component -->
             <div class="current-story">
                 <h3>Current Analysis</h3>
-                <div class="story-card active">
+                <div class="story-card active" data-story="ammonia">
                     <div class="story-title">Gulf Coast Ammonia Plant Reshapes Global Trade</div>
                     <div class="story-meta">March 28, 2025 • High Impact</div>
+                    <div class="connection-strength">
+                        <span class="causal">●</span> Data-Driven Analysis
+                    </div>
                 </div>
             </div>
 
+            <!-- Key Metrics Component -->
+            <div class="key-metrics">
+                <h4>Key Metrics</h4>
+                <div class="metric-item">
+                    <div class="metric-label">Price Change</div>
+                    <div class="metric-value negative">-$25/mt CFR</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-label">Market Impact</div>
+                    <div class="metric-value negative">4th consecutive decline</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-label">GCA Capacity</div>
+                    <div class="metric-value neutral">1.3M t/y</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-label">Production Target</div>
+                    <div class="metric-value positive">80% by May 1</div>
+                </div>
+            </div>
+
+            <!-- Related Stories Component -->
             <div class="related-threads">
                 <h4>Related Stories</h4>
                 <div class="thread-item active">
@@ -69,6 +76,7 @@
                 </div>
             </div>
 
+            <!-- Recommendations Component -->
             <div class="recommendations">
                 <h4>Recommendations</h4>
                 <div class="rec-item">
@@ -90,18 +98,19 @@
         <main class="content-area">
             <!-- Function Navigation -->
             <div class="function-nav">
-                <a href="index.html" class="function-btn active" data-view="overview">OVERVIEW</a>
-                <a href="pages/stories/ammonia.html" class="function-btn" data-view="story">STORY</a>
-                <a href="pages/views/data.html" class="function-btn" data-view="data">DATA</a>
-                <a href="pages/views/connections.html" class="function-btn" data-view="connections">CONNECTIONS</a>
-                <a href="pages/views/impact.html" class="function-btn" data-view="impact">IMPACT</a>
-                <a href="pages/views/geography.html" class="function-btn" data-view="geography">GEOGRAPHY</a>
-                <a href="pages/views/timeline.html" class="function-btn" data-view="timeline">TIMELINE</a>
-                <a href="pages/views/players.html" class="function-btn" data-view="players">PLAYERS</a>
+                <a href="../../index.html" class="function-btn" data-view="overview">OVERVIEW</a>
+                <a href="ammonia.html" class="function-btn active" data-view="story">STORY</a>
+                <a href="../views/data.html" class="function-btn" data-view="data">DATA</a>
+                <a href="../views/connections.html" class="function-btn" data-view="connections">CONNECTIONS</a>
+                <a href="../views/impact.html" class="function-btn" data-view="impact">IMPACT</a>
+                <a href="../views/geography.html" class="function-btn" data-view="geography">GEOGRAPHY</a>
+                <a href="../views/timeline.html" class="function-btn" data-view="timeline">TIMELINE</a>
+                <a href="../views/players.html" class="function-btn" data-view="players">PLAYERS</a>
             </div>
 
-            <!-- Story Content -->
+            <!-- Story Content Container -->
             <div class="view-container story-view active">
+                <!-- Story Header Component -->
                 <div class="story-header">
                     <h1>Gulf Coast Ammonia Plant Export Triggers $25/mt Price Decline in Global Ammonia Markets</h1>
                     <div class="story-meta-bar">
@@ -111,17 +120,21 @@
                     </div>
                 </div>
 
+                <!-- Main Content Area -->
                 <div class="story-content">
+                    <!-- Standard Content Block Component -->
                     <div class="content-block">
                         <p>Gulf Coast Ammonia Plant (GCA) has executed its inaugural export cargo on Yara's Dancing Brave, loading 1.3M t/y capacity ammonia at Texas City for delivery to Norway (Glomfjord), triggering immediate supply pressure and the fourth consecutive monthly price decline in global ammonia markets.</p>
                         
+                        <!-- Inline Prompt Component -->
                         <div class="inline-prompt">
                             <span class="prompt-icon">⚡</span>
-                            <span class="prompt-text">This development has triggered a cascade of market effects. </span>
-                            <a href="pages/views/data.html" class="prompt-link">Explore ammonia trade impact analysis →</a>
+                            <span class="prompt-text">This development has triggered a cascade of market effects.</span>
+                            <a href="../views/data.html" class="prompt-link">Explore ammonia trade impact analysis →</a>
                         </div>
                     </div>
 
+                    <!-- Connection Callout Component -->
                     <div class="content-block">
                         <p>The plant's 1.3M t/y ammonia capacity has created supply concerns in global markets, with Tampa contract prices dropping $25/mt CFR to $435/mt - marking the fourth consecutive monthly decline as markets adapt to additional USG export volumes.</p>
                         
@@ -132,13 +145,14 @@
                         </div>
                     </div>
 
+                    <!-- Additional Content Blocks -->
                     <div class="content-block">
                         <p>Markets are now watching for OCP vessel arrivals and monitoring when the plant reaches full production capacity, with an additional 1.3M tons expected to permanently alter global ammonia trade patterns and establish the USG-Europe trade lane.</p>
                         
                         <div class="inline-prompt">
                             <span class="prompt-icon">📊</span>
-                            <span class="prompt-text">Production ramp-up trajectory suggests </span>
-                            <a href="pages/views/timeline.html" class="prompt-link">Further supply pressure likely →</a>
+                            <span class="prompt-text">Production ramp-up trajectory suggests</span>
+                            <a href="../views/timeline.html" class="prompt-link">Further supply pressure likely →</a>
                         </div>
                     </div>
 
@@ -151,6 +165,7 @@
 
         <!-- Right Sidebar -->
         <aside class="right-sidebar">
+            <!-- Context Panel Component -->
             <div class="context-panel">
                 <h4>Key Context</h4>
                 <div class="context-item">
@@ -167,6 +182,7 @@
                 </div>
             </div>
 
+            <!-- Active Prompts Component -->
             <div class="active-prompts">
                 <h4>Active Alerts</h4>
                 <div class="prompt-item urgency-high">
@@ -179,6 +195,7 @@
                 </div>
             </div>
 
+            <!-- Related Intelligence Component -->
             <div class="related-stories">
                 <h4>Related Intelligence</h4>
                 <div class="related-item">
@@ -207,5 +224,9 @@
             <span>Market Update: 14:35 GMT • Next refresh in 2:15</span>
         </div>
     </div>
+
+    <!-- Include shared scripts -->
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/navigation.js"></script>
 </body>
 </html> 

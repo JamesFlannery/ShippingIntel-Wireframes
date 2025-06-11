@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{STORY_TITLE}} - ShippingIntel</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <script>
+        // Authentication check
+        function checkAuth() {
+            const isAuthenticated = sessionStorage.getItem('maritime-auth');
+            const authTimestamp = sessionStorage.getItem('auth-timestamp');
+            const currentTime = Date.now();
+            const sessionDuration = 24 * 60 * 60 * 1000; // 24 hours
+            
+            if (!isAuthenticated || !authTimestamp || (currentTime - parseInt(authTimestamp)) > sessionDuration) {
+                window.location.href = 'auth-map.html';
+                return false;
+            }
+            return true;
+        }
+        
+        // Check authentication on page load
+        if (!checkAuth()) {
+            // Will redirect to auth-map.html
+        }
+    </script>
+</head>
+<body class="story-{{STORY_ID}}">
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <a href="index.html" class="logo">ShippingIntel</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Search stories, ships, ports, companies... (⌘K)" class="global-search">
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="user-role">Abe Vigoda</div>
+            <div class="notifications">●</div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="main-container">
+        <!-- Left Sidebar -->
+        <aside class="left-sidebar">
+            <!-- Current Story Component -->
+            <div class="current-story">
+                <h3>Current Analysis</h3>
+                <div class="story-card active" data-story="{{STORY_ID}}">
+                    <div class="story-title">{{STORY_TITLE}}</div>
+                    <div class="story-meta">{{STORY_DATE}} • {{IMPACT_LEVEL}} Impact</div>
+                    <div class="connection-strength">
+                        <span class="{{CONNECTION_TYPE}}">●</span> {{CONNECTION_LABEL}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Metrics Component -->
+            <div class="key-metrics">
+                <h4>Key Metrics</h4>
+                <!-- {{METRIC_ITEMS}} - Replace with actual metrics -->
+                <div class="metric-item">
+                    <div class="metric-label">{{METRIC_1_LABEL}}</div>
+                    <div class="metric-value {{METRIC_1_CLASS}}">{{METRIC_1_VALUE}}</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-label">{{METRIC_2_LABEL}}</div>
+                    <div class="metric-value {{METRIC_2_CLASS}}">{{METRIC_2_VALUE}}</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-label">{{METRIC_3_LABEL}}</div>
+                    <div class="metric-value {{METRIC_3_CLASS}}">{{METRIC_3_VALUE}}</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-label">{{METRIC_4_LABEL}}</div>
+                    <div class="metric-value {{METRIC_4_CLASS}}">{{METRIC_4_VALUE}}</div>
+                </div>
+            </div>
+
+            <!-- Related Stories Component -->
+            <div class="related-threads">
+                <h4>Related Stories</h4>
+                <!-- {{RELATED_STORIES}} - Replace with actual related stories -->
+                <div class="thread-item active">
+                    <div class="connection-strength causal"></div>
+                    <div class="thread-label">{{RELATED_1}}</div>
+                </div>
+                <div class="thread-item">
+                    <div class="connection-strength causal"></div>
+                    <div class="thread-label">{{RELATED_2}}</div>
+                </div>
+                <div class="thread-item">
+                    <div class="connection-strength causal"></div>
+                    <div class="thread-label">{{RELATED_3}}</div>
+                </div>
+            </div>
+
+            <!-- Recommendations Component -->
+            <div class="recommendations">
+                <h4>Recommendations</h4>
+                <!-- {{RECOMMENDATIONS}} - Replace with actual recommendations -->
+                <div class="rec-item">
+                    <div class="rec-score">{{REC_1_SCORE}}</div>
+                    <div class="rec-content">{{REC_1_TEXT}}</div>
+                </div>
+                <div class="rec-item">
+                    <div class="rec-score">{{REC_2_SCORE}}</div>
+                    <div class="rec-content">{{REC_2_TEXT}}</div>
+                </div>
+                <div class="rec-item">
+                    <div class="rec-score">{{REC_3_SCORE}}</div>
+                    <div class="rec-content">{{REC_3_TEXT}}</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Central Content Area -->
+        <main class="content-area">
+            <!-- Function Navigation -->
+            <div class="function-nav">
+                <a href="index.html" class="function-btn {{OVERVIEW_ACTIVE}}" data-view="overview">OVERVIEW</a>
+                <a href="story-{{STORY_ID}}.html" class="function-btn {{STORY_ACTIVE}}" data-view="story">STORY</a>
+                <a href="data-{{STORY_ID}}.html" class="function-btn {{DATA_ACTIVE}}" data-view="data">DATA</a>
+                <a href="connections-{{STORY_ID}}.html" class="function-btn {{CONNECTIONS_ACTIVE}}" data-view="connections">CONNECTIONS</a>
+                <a href="impact-{{STORY_ID}}.html" class="function-btn {{IMPACT_ACTIVE}}" data-view="impact">IMPACT</a>
+                <a href="geography-{{STORY_ID}}.html" class="function-btn {{GEOGRAPHY_ACTIVE}}" data-view="geography">GEOGRAPHY</a>
+                <a href="timeline-{{STORY_ID}}.html" class="function-btn {{TIMELINE_ACTIVE}}" data-view="timeline">TIMELINE</a>
+                <a href="players-{{STORY_ID}}.html" class="function-btn {{PLAYERS_ACTIVE}}" data-view="players">PLAYERS</a>
+            </div>
+
+            <!-- Story Content Container -->
+            <div class="view-container {{VIEW_TYPE}}-view active">
+                <!-- Story Header Component -->
+                <div class="story-header">
+                    <h1>{{STORY_HEADLINE}}</h1>
+                    <div class="story-meta-bar">
+                        <span class="impact-level {{IMPACT_CLASS}}">{{IMPACT_LEVEL}} Impact</span>
+                        <span class="relevance">{{RELEVANCE}}% Relevance</span>
+                        <span class="last-updated">Last Updated: {{LAST_UPDATED}}</span>
+                    </div>
+                </div>
+
+                <!-- Main Content Area -->
+                <div class="story-content">
+                    <!-- {{CONTENT_BLOCKS}} - Replace with actual content -->
+                    
+                    <!-- Standard Content Block Component -->
+                    <div class="content-block">
+                        <p>{{CONTENT_PARAGRAPH_1}}</p>
+                        
+                        <!-- Inline Prompt Component -->
+                        <div class="inline-prompt">
+                            <span class="prompt-icon">{{PROMPT_ICON_1}}</span>
+                            <span class="prompt-text">{{PROMPT_TEXT_1}}</span>
+                            <a href="{{PROMPT_LINK_1}}" class="prompt-link">{{PROMPT_LINK_TEXT_1}} →</a>
+                        </div>
+                    </div>
+
+                    <!-- Connection Callout Component -->
+                    <div class="content-block">
+                        <p>{{CONTENT_PARAGRAPH_2}}</p>
+                        
+                        <div class="connection-callout">
+                            <div class="connection-type">{{CONNECTION_TYPE_LABEL}}</div>
+                            <div class="connection-text">{{CONNECTION_DESCRIPTION}}</div>
+                            <button class="explore-connection">{{CONNECTION_BUTTON_TEXT}}</button>
+                        </div>
+                    </div>
+
+                    <!-- Additional Content Blocks -->
+                    <div class="content-block">
+                        <p>{{CONTENT_PARAGRAPH_3}}</p>
+                        
+                        <div class="inline-prompt">
+                            <span class="prompt-icon">{{PROMPT_ICON_2}}</span>
+                            <span class="prompt-text">{{PROMPT_TEXT_2}}</span>
+                            <a href="{{PROMPT_LINK_2}}" class="prompt-link">{{PROMPT_LINK_TEXT_2}} →</a>
+                        </div>
+                    </div>
+
+                    <div class="content-block">
+                        <p>{{CONTENT_PARAGRAPH_4}}</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <!-- Context Panel Component -->
+            <div class="context-panel">
+                <h4>Key Context</h4>
+                <!-- {{CONTEXT_ITEMS}} - Replace with actual context -->
+                <div class="context-item">
+                    <div class="context-type">{{CONTEXT_1_TYPE}}</div>
+                    <div class="context-detail">{{CONTEXT_1_DETAIL}}</div>
+                </div>
+                <div class="context-item">
+                    <div class="context-type">{{CONTEXT_2_TYPE}}</div>
+                    <div class="context-detail">{{CONTEXT_2_DETAIL}}</div>
+                </div>
+                <div class="context-item">
+                    <div class="context-type">{{CONTEXT_3_TYPE}}</div>
+                    <div class="context-detail">{{CONTEXT_3_DETAIL}}</div>
+                </div>
+            </div>
+
+            <!-- Active Prompts Component -->
+            <div class="active-prompts">
+                <h4>Active Alerts</h4>
+                <!-- {{ACTIVE_PROMPTS}} - Replace with actual prompts -->
+                <div class="prompt-item urgency-{{PROMPT_1_URGENCY}}">
+                    <div class="prompt-text">{{PROMPT_1_TEXT}}</div>
+                    <div class="prompt-action">{{PROMPT_1_ACTION}} →</div>
+                </div>
+                <div class="prompt-item urgency-{{PROMPT_2_URGENCY}}">
+                    <div class="prompt-text">{{PROMPT_2_TEXT}}</div>
+                    <div class="prompt-action">{{PROMPT_2_ACTION}} →</div>
+                </div>
+            </div>
+
+            <!-- Related Intelligence Component -->
+            <div class="related-stories">
+                <h4>Related Intelligence</h4>
+                <!-- {{RELATED_INTELLIGENCE}} - Replace with actual related items -->
+                <div class="related-item">
+                    <div class="related-title">{{RELATED_INTEL_1_TITLE}}</div>
+                    <div class="related-connection">{{RELATED_INTEL_1_CONNECTION}}</div>
+                </div>
+                <div class="related-item">
+                    <div class="related-title">{{RELATED_INTEL_2_TITLE}}</div>
+                    <div class="related-connection">{{RELATED_INTEL_2_CONNECTION}}</div>
+                </div>
+                <div class="related-item">
+                    <div class="related-title">{{RELATED_INTEL_3_TITLE}}</div>
+                    <div class="related-connection">{{RELATED_INTEL_3_CONNECTION}}</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="status-left">
+            <span>Connected to Live Market Data</span>
+            <span class="connection-status">●</span>
+        </div>
+        <div class="status-right">
+            <span>{{STATUS_MESSAGE}}</span>
+        </div>
+    </div>
+
+    <!-- Include shared scripts -->
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/navigation.js"></script>
+    
+    <!-- Story-specific scripts will go here -->
+    <!-- {{STORY_SCRIPTS}} -->
+</body>
+</html> 

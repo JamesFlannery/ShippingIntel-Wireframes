@@ -1,0 +1,173 @@
+---
+# Maritime Report Template
+# References: schema/maritime-industry-ontology.yaml
+# Version: 1.0.0
+
+template_metadata:
+  version: "1.0.0"
+  ontology_reference: "maritime-industry-ontology.yaml v1.0.0"
+  description: "Standardized template for maritime market reports"
+  
+template_structure:
+  
+  # REQUIRED FIELDS (Always present)
+  required_sections:
+    
+    report:
+      id: "${report_type}-${date}-${vessel_primary}"
+      title: "TEMPLATE_TITLE"
+      publication: "PUBLISHER_NAME"
+      report_date: "YYYY-MM-DD"
+      report_period: "PERIOD_DESCRIPTION"
+      pages_covered: []
+      
+    vessel_types:
+      primary:
+        code: "ONTOLOGY_REF:vessel_types.gas_carriers.{VLGC|LGC|MGC|HANDY}"
+        # Automatically populates from ontology
+        
+      secondary: []
+      # Optional: Additional vessel types covered
+      
+    commodities:
+      primary: "ONTOLOGY_REF:commodities.{LPG|CHEMICAL_GASES|ANHYDROUS_AMMONIA}"
+      secondary: []
+      # Optional: Additional commodities
+      
+  # OPTIONAL SECTIONS (Conditional based on content)
+  conditional_sections:
+    
+    regions:
+      # Template for vessel-focused regional analysis
+      vessel_regions:
+        - id: "${vessel_type}-${region}"
+          name: "ONTOLOGY_REF:geographic_regions.trading_regions.{USG|AG|EUROPE|ASIA}.name + {West|East}"
+          vessel_type: "ONTOLOGY_REF:vessel_types.gas_carriers.{VLGC|LGC|MGC|HANDY}.code"
+          geographical_bounds: "DESCRIPTIVE_TEXT"
+          market_overview: "NARRATIVE_TEXT"
+          
+          market_conditions:
+            - aspect: "ONTOLOGY_REF:operational_concepts.market_conditions.{supply|demand}_indicators"
+              status: "ONTOLOGY_REF:schema.market_condition.status.enum"
+              description: "DESCRIPTIVE_TEXT"
+              impact: "ONTOLOGY_REF:schema.market_condition.impact.enum"
+              
+          key_insights: []
+          
+      # Template for commodity-focused regional analysis  
+      commodity_regions:
+        - id: "${commodity}-${region}"
+          commodity: "ONTOLOGY_REF:commodities.{LPG|CHEMICAL_GASES|ANHYDROUS_AMMONIA}.code"
+          region: "ONTOLOGY_REF:geographic_regions.{trading_regions|supply_regions}.{REGION_CODE}"
+          market_status: "STRING"
+          
+    commodity_markets:
+      # Template for chemical gases
+      - id: "chemical-gases"
+        commodity: "CHEMICAL_GASES"
+        title: "Chemical Gases"
+        market_overview: "NARRATIVE_TEXT"
+        
+        market_segments:
+          - segment: "ONTOLOGY_REF:commodities.CHEMICAL_GASES.subcategories.code"
+            name: "ONTOLOGY_REF:commodities.CHEMICAL_GASES.subcategories.name"
+            status: "STRING"
+            description: "NARRATIVE_TEXT"
+            
+      # Template for ammonia
+      - id: "anhydrous-ammonia"
+        commodity: "ANHYDROUS_AMMONIA"
+        title: "Anhydrous Ammonia"
+        
+        regional_markets:
+          - region: "ONTOLOGY_REF:geographic_regions.{trading_regions|supply_regions}.{REGION_CODE}"
+            market_status: "STRING"
+            
+    charts:
+      # Standard chart types with ontology references
+      - id: "CHART_ID"
+        title: "CHART_TITLE"
+        type: "ONTOLOGY_REF:schema.charts.type.enum"
+        vessel_segment: "ONTOLOGY_REF:vessel_types.gas_carriers.{VLGC|LGC|MGC|HANDY}.code"
+        
+        series:
+          - name: "SERIES_NAME"
+            code: "SERIES_CODE"
+            color: "HEX_COLOR"
+            
+    key_metrics:
+      # Standard metric types
+      - name: "METRIC_NAME"
+        value: "NUMBER|STRING"
+        unit: "ONTOLOGY_REF:pricing_structures.rate_types.{H/C|RT/C|TCE|CFR|FOB}.unit"
+        context: "DESCRIPTIVE_TEXT"
+
+# VALIDATION TEMPLATES
+validation_templates:
+  
+  vessel_commodity_compatibility:
+    # Ensures vessel types can carry specified commodities
+    rule: "ONTOLOGY_REF:vessel_types.gas_carriers.{TYPE}.cargo_types CONTAINS commodity"
+    
+  regional_trade_patterns:
+    # Validates realistic trade routes
+    rule: "ONTOLOGY_REF:geographic_regions.{REGION}.primary_{exports|imports} CONTAINS commodity"
+    
+  pricing_mechanism_validation:
+    # Ensures proper pricing types for context
+    rule: "rate_type MATCHES ONTOLOGY_REF:pricing_structures.rate_types.{TYPE}"
+    
+  seasonal_alignment:
+    # Validates seasonal factors make sense for geography/commodity
+    rule: "ONTOLOGY_REF:seasonal_factors.{agricultural|industrial} APPLICABLE TO {region|commodity}"
+
+# AUTO-COMPLETION SUGGESTIONS
+auto_completion:
+  
+  vessel_names:
+    source: "Extract from previous reports"
+    pattern: "Company + Vessel Name format"
+    
+  market_participants:
+    traders: "ONTOLOGY_REF:market_participants.major_traders"
+    producers: "ONTOLOGY_REF:market_participants.major_producers"
+    shipping: "ONTOLOGY_REF:market_participants.shipping_companies"
+    
+  ports_terminals:
+    source: "ONTOLOGY_REF:geographic_regions.*.key_ports"
+    
+  rate_ranges:
+    source: "Historical data + current market context"
+    validation: "ONTOLOGY_REF:pricing_structures.rate_types.{TYPE}.unit"
+
+# NARRATIVE TEMPLATES
+narrative_templates:
+  
+  market_overview:
+    pattern: "The {commodity} market {showed|demonstrated|experienced} {positive|negative|mixed} {momentum|trends|conditions} in {period}, with {key_factor} driving {impact_description}."
+    
+  regional_analysis:
+    pattern: "The {region} market was {characterized_by} {market_conditions}, with {specific_activity} {resulting_in} {outcome}."
+    
+  pricing_discussion:
+    pattern: "Rates {movement_verb} from {previous_level} to {current_level}, {driven_by|supported_by|pressured_by} {market_factors}."
+    
+  outlook_statement:
+    pattern: "Looking ahead, {sentiment_adjective} sentiment {continues|emerges} as {supporting_factors} {offset|support|challenge} {constraining_factors}."
+
+# USAGE INSTRUCTIONS
+usage_instructions:
+  
+  step_1: "Copy template structure"
+  step_2: "Replace ONTOLOGY_REF placeholders with actual ontology values"
+  step_3: "Fill TEMPLATE_ placeholders with report-specific content"
+  step_4: "Validate against ontology compatibility rules"
+  step_5: "Auto-complete suggestions where applicable"
+  step_6: "Validate narrative coherence"
+  
+  automation_potential:
+    - "Vessel type auto-population from ontology"
+    - "Commodity compatibility checking"
+    - "Regional trade pattern validation"
+    - "Pricing mechanism standardization"
+    - "Market participant auto-suggestion" 

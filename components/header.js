@@ -12,6 +12,11 @@ window.GlobalHeader = {
             <nav class="top-nav">
                 <div class="nav-left">
                     <a href="/" class="logo">SHIPPINGINTEL</a>
+                    <div class="nav-links">
+                        <a href="/" class="nav-link ${currentPage === 'dashboard' ? 'active' : ''}">Dashboard</a>
+                        <a href="/pages/canvas.html" class="nav-link ${currentPage === 'canvas' ? 'active' : ''}">AI Canvas</a>
+                        <a href="/reports/index.html" class="nav-link ${currentPage === 'reports' ? 'active' : ''}">Reports</a>
+                    </div>
                     <div class="search-bar">
                         <input type="search" class="global-search" placeholder="${searchPlaceholder}">
                     </div>

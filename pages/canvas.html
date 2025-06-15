@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maritime Intelligence Canvas - ShippingIntel</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚢</text></svg>">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/canvas.css">
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+    <script src="../components/header.js"></script>
+    <script src="../scripts/canvas-engine.js"></script>
+</head>
+<body>
+    <!-- Global Header -->
+    <div id="global-header"></div>
+
+    <!-- Canvas Workspace -->
+    <div class="canvas-workspace">
+        <!-- Canvas Toolbar -->
+        <div class="canvas-toolbar">
+            <div class="toolbar-section">
+                <div class="workspace-title">
+                    <h1>Maritime Intelligence Canvas</h1>
+                    <span class="workspace-subtitle">AI-Powered Collaborative Analytics</span>
+                </div>
+            </div>
+
+            <div class="toolbar-section">
+                <div class="ai-status">
+                    <div class="ai-indicator active">
+                        <div class="pulse-dot"></div>
+                        <span>AI Assistant Active</span>
+                    </div>
+                    <div class="collaboration-status">
+                        <div class="user-avatars">
+                            <div class="user-avatar" title="James F.">JF</div>
+                            <div class="user-avatar" title="Sarah K.">SK</div>
+                            <div class="user-avatar ai" title="AI Agent">AI</div>
+                        </div>
+                        <span class="active-users">3 active</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="toolbar-section">
+                <div class="canvas-controls">
+                    <button class="canvas-btn" id="generate-layout">
+                        <span class="btn-icon">✨</span>
+                        Generate Layout
+                    </button>
+                    <button class="canvas-btn" id="add-data-source">
+                        <span class="btn-icon">📊</span>
+                        Add Data
+                    </button>
+                    <button class="canvas-btn" id="collaborate">
+                        <span class="btn-icon">👥</span>
+                        Collaborate
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Command Bar -->
+        <div class="ai-command-bar">
+            <div class="command-input-wrapper">
+                <input type="text" 
+                       class="ai-command-input" 
+                       placeholder="Ask AI to analyze maritime data, generate insights, or create visualizations..."
+                       id="ai-command">
+                <button class="command-submit" id="submit-command">
+                    <span class="btn-icon">⚡</span>
+                </button>
+            </div>
+            <div class="quick-commands">
+                <button class="quick-cmd" data-command="Show me trade flow patterns for Q4 2024">
+                    Trade Flow Analysis
+                </button>
+                <button class="quick-cmd" data-command="Generate risk assessment for Suez Canal disruptions">
+                    Risk Assessment
+                </button>
+                <button class="quick-cmd" data-command="Create comparative analysis of ammonia vs LNG shipping">
+                    Comparative Analysis
+                </button>
+            </div>
+        </div>
+
+        <!-- Canvas Grid -->
+        <div class="canvas-grid" id="canvas-grid">
+            <!-- AI-Generated Content Sections -->
+            <div class="canvas-section" id="insights-section">
+                <div class="section-header">
+                    <h3>AI-Generated Insights</h3>
+                    <div class="section-controls">
+                        <button class="section-btn refresh">↻</button>
+                        <button class="section-btn expand">⤢</button>
+                    </div>
+                </div>
+                <div class="insight-cards">
+                    <div class="insight-card">
+                        <div class="insight-header">
+                            <span class="insight-type">Market Pattern</span>
+                            <span class="confidence-score">94% confidence</span>
+                        </div>
+                        <h4>Emerging Trade Route Optimization</h4>
+                        <p>AI analysis indicates 23% efficiency gain potential in Pacific-Atlantic routing through Panama Canal optimization.</p>
+                        <div class="insight-actions">
+                            <button class="insight-btn">Explore Pattern</button>
+                            <button class="insight-btn secondary">Add to Report</button>
+                        </div>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-header">
+                            <span class="insight-type">Risk Alert</span>
+                            <span class="confidence-score">87% confidence</span>
+                        </div>
+                        <h4>Supply Chain Vulnerability Detected</h4>
+                        <p>Cross-domain analysis reveals potential bottlenecks in ammonia supply chain affecting 3 major trade lanes.</p>
+                        <div class="insight-actions">
+                            <button class="insight-btn">View Details</button>
+                            <button class="insight-btn secondary">Alert Team</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-time Data Visualization -->
+            <div class="canvas-section" id="visualization-section">
+                <div class="section-header">
+                    <h3>Live Data Visualization</h3>
+                    <div class="section-controls">
+                        <select class="data-source-selector">
+                            <option>Trade Flows</option>
+                            <option>Price Indices</option>
+                            <option>Vessel Tracking</option>
+                            <option>Port Congestion</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="visualization-container">
+                    <div class="viz-placeholder">
+                        <div class="viz-loading">
+                            <div class="loading-spinner"></div>
+                            <span>Generating real-time visualization...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collaborative Notes -->
+            <div class="canvas-section" id="collaboration-section">
+                <div class="section-header">
+                    <h3>Team Collaboration</h3>
+                    <div class="section-controls">
+                        <button class="section-btn" id="add-annotation">+ Note</button>
+                    </div>
+                </div>
+                <div class="collaboration-feed">
+                    <div class="collab-item">
+                        <div class="collab-avatar">JF</div>
+                        <div class="collab-content">
+                            <div class="collab-header">
+                                <span class="collab-user">James F.</span>
+                                <span class="collab-time">2 min ago</span>
+                            </div>
+                            <p>The ammonia plant data looks concerning - should we deep dive into the supply chain implications?</p>
+                        </div>
+                    </div>
+                    <div class="collab-item ai">
+                        <div class="collab-avatar ai">AI</div>
+                        <div class="collab-content">
+                            <div class="collab-header">
+                                <span class="collab-user">AI Assistant</span>
+                                <span class="collab-time">1 min ago</span>
+                            </div>
+                            <p>I've generated a comprehensive supply chain analysis. The data suggests 3 critical dependency points that require immediate attention.</p>
+                            <div class="ai-suggestions">
+                                <button class="suggestion-btn">View Analysis</button>
+                                <button class="suggestion-btn">Schedule Review</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Cards Area -->
+            <div class="canvas-section expandable" id="dynamic-cards-section">
+                <div class="section-header">
+                    <h3>Dynamic Intelligence Cards</h3>
+                    <div class="section-controls">
+                        <button class="section-btn" id="ai-generate-cards">AI Generate</button>
+                    </div>
+                </div>
+                <div class="dynamic-cards-grid">
+                    <!-- Cards will be dynamically generated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Chat Panel (Expandable) -->
+        <div class="ai-chat-panel" id="ai-chat-panel">
+            <div class="chat-header">
+                <h3>AI Assistant</h3>
+                <button class="chat-toggle" id="chat-toggle">—</button>
+            </div>
+            <div class="chat-content">
+                <div class="chat-messages" id="chat-messages">
+                    <div class="chat-message ai">
+                        <div class="message-avatar ai">AI</div>
+                        <div class="message-content">
+                            <p>Welcome to Maritime Intelligence Canvas! I can help you analyze data, generate insights, and collaborate with your team. What would you like to explore?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" class="chat-input" placeholder="Ask me anything about maritime intelligence...">
+                    <button class="chat-send">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Canvas Overlay Elements -->
+    <div class="canvas-overlays">
+        <!-- AI Processing Indicator -->
+        <div class="ai-processing-overlay" id="ai-processing">
+            <div class="processing-content">
+                <div class="processing-spinner"></div>
+                <h3>AI Processing</h3>
+                <p id="processing-status">Analyzing maritime data patterns...</p>
+            </div>
+        </div>
+
+        <!-- Collaboration Cursor -->
+        <div class="collaboration-cursors" id="collab-cursors">
+            <!-- Dynamic cursors for other users -->
+        </div>
+    </div>
+
+    <script>
+        // Initialize Canvas Engine
+        document.addEventListener('DOMContentLoaded', function() {
+            window.canvasEngine = new CanvasEngine();
+        });
+    </script>
+</body>
+</html> 

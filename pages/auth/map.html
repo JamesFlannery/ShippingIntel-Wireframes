@@ -465,11 +465,11 @@
 
             <div class="auth-panel">
                 <div class="auth-header">
-                    <h2 class="auth-title">Access Demo</h2>
+                    <h2 class="auth-title" id="authTitle">Access Demo</h2>
                     <p class="auth-subtitle">Maritime Intelligence Platform</p>
                 </div>
 
-                <div class="demo-info">
+                <div class="demo-info" id="demoInfo">
                     <div class="info-title">Geographic Analysis Preview</div>
                     <p class="info-description">Experience maritime intelligence through interactive mapping and route analysis.</p>
                     <ul class="demo-features">
@@ -593,6 +593,26 @@
         const authButton = document.getElementById('authButton');
         const errorMessage = document.getElementById('errorMessage');
 
+        // Get report parameter from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const reportParam = urlParams.get('report');
+
+        // Customize auth page based on report
+        if (reportParam === 'ammonia-plant-export-2025') {
+            document.getElementById('authTitle').textContent = 'Access Gulf Coast Ammonia Report';
+            document.getElementById('demoInfo').innerHTML = `
+                <div class="info-title">Gulf Coast Ammonia Plant Analysis</div>
+                <p class="info-description">Access comprehensive intelligence on the GCA plant export impact and global market implications.</p>
+                <ul class="demo-features">
+                    <li>$2.3B plant investment analysis</li>
+                    <li>Global trade flow disruption</li>
+                    <li>Tampa market price impact</li>
+                    <li>USG-Europe trade lane emergence</li>
+                </ul>
+            `;
+            document.getElementById('authButton').textContent = 'Access Ammonia Report';
+        }
+
         function authenticate() {
             const password = passwordInput.value.trim();
             
@@ -601,7 +621,12 @@
                 sessionStorage.setItem('auth-timestamp', Date.now().toString());
                 sessionStorage.setItem('auth-variant', 'map'); // Track A/B test variant
                 
-                window.location.href = '../../index.html'; // Go back to main page
+                // Redirect to specific report if parameter exists, otherwise go to main platform
+                if (reportParam) {
+                    window.location.href = `../../reports/${reportParam}/`;
+                } else {
+                    window.location.href = '../../index.html';
+                }
             } else {
                 errorMessage.style.display = 'block';
                 passwordInput.value = '';
@@ -634,7 +659,12 @@
         const sessionDuration = 24 * 60 * 60 * 1000;
 
         if (isAuthenticated && authTimestamp && (currentTime - parseInt(authTimestamp)) < sessionDuration) {
-            window.location.href = '../../index.html';
+            // Redirect to specific report if parameter exists, otherwise go to main platform
+            if (reportParam) {
+                window.location.href = `../../reports/${reportParam}/`;
+            } else {
+                window.location.href = '../../index.html';
+            }
         }
     </script>
 

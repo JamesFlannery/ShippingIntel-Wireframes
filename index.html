@@ -3,116 +3,446 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShippingIntel - Maritime Intelligence</title>
+    <title>ShippingIntel Platform</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚢</text></svg>">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/platform-hub.css">
     <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+    <script src="components/header.js"></script>
+    <script src="components/footer.js"></script>
     <script src="scripts/story-renderer.js"></script>
     <script>
-        // Authentication check
-        function checkAuth() {
-            const isAuthenticated = sessionStorage.getItem('maritime-auth');
-            const authTimestamp = sessionStorage.getItem('auth-timestamp');
-            const currentTime = Date.now();
-            const sessionDuration = 24 * 60 * 60 * 1000; // 24 hours
-            
-            if (!isAuthenticated || !authTimestamp || (currentTime - parseInt(authTimestamp)) > sessionDuration) {
-                window.location.href = 'pages/auth/map.html';
-                return false;
-            }
-            return true;
-        }
-        
-        // Check authentication on page load
-        if (!checkAuth()) {
-            // Will redirect to auth.html
-        }
+        // Main platform hub is publicly accessible
+        // Authentication only required for specific reports
     </script>
 </head>
 <body>
-    <div id="app">
-        <!-- Content will be rendered here by JavaScript -->
-        <div class="loading-state">
-            <div class="loading-spinner">●</div>
-            <div class="loading-text">Loading maritime intelligence...</div>
+    <!-- Global Header -->
+    <div id="global-header"></div>
+
+    <!-- Main Dashboard Grid -->
+    <div class="dashboard-grid">
+        <div class="dashboard-cards">
+            <!-- Featured Card - Market Events -->
+            <div id="featured-ammonia" class="intel-card featured" data-category="market-events">
+                <div class="card-header">
+                    <div class="card-tags">
+                        <span class="card-tag market-event">Market Event</span>
+                        <span class="card-tag high-impact">High Impact</span>
+                    </div>
+                    <span class="card-timestamp">Updated 14:35 GMT</span>
+                </div>
+                <h3 class="card-title">Gulf Coast Ammonia Plant Reshapes Global Trade</h3>
+                <div class="card-metrics">
+                    <div class="metric">
+                        <span class="metric-label">Price Impact</span>
+                        <span class="metric-value negative">-$25/mt CFR</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Market Impact</span>
+                        <span class="metric-value">4th consecutive decline</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Capacity</span>
+                        <span class="metric-value">1.3M t/y</span>
+                    </div>
+                </div>
+                <p class="card-summary">GCA's inaugural export cargo triggers $25/mt price decline in global ammonia markets, establishing new USG-Europe trade lane with immediate supply chain implications.</p>
+                <div class="card-actions">
+                    <button class="card-action-btn primary" onclick="window.location.href='reports/ammonia-plant-export-2025/index.html'">Access Full Report</button>
+                    <button class="card-action-btn secondary" onclick="window.location.href='reports/index.html'">View All Reports</button>
+                </div>
+            </div>
+
+            <!-- Breaking News Card -->
+            <div id="breaking-news" class="intel-card live-update urgent" data-category="market-events">
+                <div class="card-header">
+                    <span class="card-timestamp">2min ago</span>
+                    <span class="impact-badge high">High Impact</span>
+                </div>
+                <h3 class="card-title">BREAKING: Suez Canal vessel collision - 6hr delays</h3>
+                <div class="feed-status">
+                    <span class="pulse-dot"></span>
+                    <span>Live Update</span>
+                </div>
+            </div>
+
+            <!-- Market Pulse Card -->
+            <div id="market-pulse" class="intel-card market-pulse" data-category="market-events">
+                <div class="card-header">
+                    <h3 class="card-title">Market Pulse</h3>
+                </div>
+                <div class="market-indicators">
+                    <div class="market-indicator">
+                        <span class="indicator-label">Freight</span>
+                        <span class="indicator-value up">+2.3%</span>
+                    </div>
+                    <div class="market-indicator">
+                        <span class="indicator-label">Energy</span>
+                        <span class="indicator-value down">-1.8%</span>
+                    </div>
+                    <div class="market-indicator">
+                        <span class="indicator-label">Commodities</span>
+                        <span class="indicator-value up">+0.7%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trade Volume Widget -->
+            <div id="trade-volume" class="intel-card analytics-widget" data-category="market-events">
+                <div class="widget-title">Trade Volume</div>
+                <div class="widget-value">847K TEU</div>
+                <div class="widget-change positive">+5.2% vs Last Week</div>
+            </div>
+
+                    <!-- Port Congestion Widget -->
+        <div id="port-congestion" class="intel-card analytics-widget" data-category="market-events">
+            <div class="widget-title">Port Congestion</div>
+            <div class="widget-value">23 Ports</div>
+            <div class="widget-change negative">+3 new alerts</div>
+        </div>
+
+        <!-- Additional Market Events Cards -->
+        <div id="panama-canal-rates" class="intel-card" data-category="market-events">
+            <div class="card-header">
+                <div class="card-tags">
+                    <span class="card-tag market-event">Market Event</span>
+                </div>
+                <span class="card-timestamp">30min ago</span>
+            </div>
+            <h3 class="card-title">Panama Canal Transit Rates Increase 15%</h3>
+            <div class="card-metrics">
+                <div class="metric">
+                    <span class="metric-label">Rate Change</span>
+                    <span class="metric-value negative">+15%</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Effective Date</span>
+                    <span class="metric-value">Feb 1, 2025</span>
+                </div>
+            </div>
+            <p class="card-summary">Panama Canal Authority announces 15% rate increase citing infrastructure maintenance and capacity optimization.</p>
+        </div>
+
+        <div id="lng-carrier-shortage" class="intel-card live-update urgent" data-category="market-events">
+            <div class="card-header">
+                <span class="card-timestamp">45min ago</span>
+                <span class="impact-badge high">High Impact</span>
+            </div>
+            <h3 class="card-title">LNG Carrier Shortage Drives Charter Rates Up 40%</h3>
+            <div class="feed-status">
+                <span class="pulse-dot"></span>
+                <span>Live Update</span>
+            </div>
+        </div>
+
+        <div id="red-sea-disruption" class="intel-card" data-category="market-events">
+            <div class="card-header">
+                <div class="card-tags">
+                    <span class="card-tag market-event">Market Event</span>
+                    <span class="card-tag high-impact">High Impact</span>
+                </div>
+                <span class="card-timestamp">1h ago</span>
+            </div>
+            <h3 class="card-title">Red Sea Route Diversions Impact Global Schedules</h3>
+            <div class="card-metrics">
+                <div class="metric">
+                    <span class="metric-label">Affected Vessels</span>
+                    <span class="metric-value">847</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Delay Average</span>
+                    <span class="metric-value negative">+12 days</span>
+                </div>
+            </div>
+            <p class="card-summary">Continued Red Sea tensions force 847 vessels to reroute via Cape of Good Hope, adding 12 days average transit time.</p>
+        </div>
+
+        <div id="container-shortage" class="intel-card analytics-widget" data-category="market-events">
+            <div class="widget-title">Container Availability</div>
+            <div class="widget-value">67%</div>
+            <div class="widget-change negative">-8% vs normal</div>
+        </div>
+
+        <div id="bunker-fuel-spike" class="intel-card" data-category="market-events">
+            <div class="card-header">
+                <div class="card-tags">
+                    <span class="card-tag market-event">Market Event</span>
+                </div>
+                <span class="card-timestamp">3h ago</span>
+            </div>
+            <h3 class="card-title">Singapore Bunker Fuel Prices Surge</h3>
+            <p class="card-summary">VLSFO prices hit $680/mt in Singapore, highest level since Q3 2023, driven by refinery maintenance and demand spike.</p>
+            </div>
+
+                    <!-- Technology Cards -->
+        <div id="autonomous-vessel" class="intel-card featured" data-category="technology">
+            <div class="card-header">
+                <div class="card-tags">
+                    <span class="card-tag technology">Technology</span>
+                </div>
+                <span class="card-timestamp">4h ago</span>
+            </div>
+            <h3 class="card-title">Autonomous Vessel Navigation Breakthrough</h3>
+            <div class="card-metrics">
+                <div class="metric">
+                    <span class="metric-label">Investment</span>
+                    <span class="metric-value">$1.2B</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Efficiency</span>
+                    <span class="metric-value positive">+84%</span>
+                </div>
+            </div>
+            <p class="card-summary">New AI-powered navigation system demonstrates 84% improvement in route optimization during sea trials.</p>
+            <div class="card-actions">
+                <button class="card-action-btn primary">View Technical Details</button>
+                <button class="card-action-btn secondary">Compare Solutions</button>
+            </div>
+        </div>
+
+        <div id="blockchain-cargo" class="intel-card" data-category="technology">
+            <div class="card-header">
+                <div class="card-tags">
+                    <span class="card-tag technology">Technology</span>
+                </div>
+                <span class="card-timestamp">6h ago</span>
+            </div>
+            <h3 class="card-title">Blockchain Cargo Tracking Adoption Surges</h3>
+            <div class="card-metrics">
+                <div class="metric">
+                    <span class="metric-label">Adoption Rate</span>
+                    <span class="metric-value positive">+127%</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Cost Reduction</span>
+                    <span class="metric-value positive">-23%</span>
+                </div>
+            </div>
+            <p class="card-summary">Major shipping lines report 127% increase in blockchain-based cargo tracking implementations.</p>
+            </div>
+
+        <div id="green-fuel-tech" class="intel-card analytics-widget" data-category="technology">
+            <div class="widget-title">Green Fuel Adoption</div>
+            <div class="widget-value">34%</div>
+            <div class="widget-change positive">+12% this quarter</div>
+                    </div>
+
+        <div id="port-automation" class="intel-card" data-category="technology">
+            <div class="card-header">
+                <div class="card-tags">
+                    <span class="card-tag technology">Technology</span>
+                </div>
+                <span class="card-timestamp">8h ago</span>
+            </div>
+            <h3 class="card-title">Rotterdam Port Automation Phase 3 Complete</h3>
+            <p class="card-summary">Automated terminal operations now handle 78% of container throughput with 45% faster processing times.</p>
+        </div>
+
+        <div id="iot-sensors" class="intel-card live-update medium" data-category="technology">
+            <div class="card-header">
+                <span class="card-timestamp">12min ago</span>
+                <span class="impact-badge medium">Medium Impact</span>
+            </div>
+            <h3 class="card-title">IoT Sensor Network Expansion Announced</h3>
+            <div class="feed-status">
+                <span class="pulse-dot"></span>
+                <span>Live Update</span>
+                        </div>
+                    </div>
+
+                    <!-- Analysis Cards -->
+        <div id="container-rates" class="intel-card featured" data-category="analysis">
+            <div class="card-header">
+                <div class="card-tags">
+                    <span class="card-tag analysis">Analysis</span>
+                </div>
+                <span class="card-timestamp">6h ago</span>
+            </div>
+            <h3 class="card-title">Container Rate Volatility Q2 Analysis</h3>
+            <div class="card-metrics">
+                <div class="metric">
+                    <span class="metric-label">Rate Change</span>
+                    <span class="metric-value positive">+15.7%</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Confidence</span>
+                    <span class="metric-value">92%</span>
+                </div>
+            </div>
+            <p class="card-summary">Q2 container rates show increased volatility with 15.7% average increase across major routes.</p>
+            <div class="card-actions">
+                <button class="card-action-btn primary">View Full Analysis</button>
+                <button class="card-action-btn secondary">Download Data</button>
+                        </div>
+                    </div>
+
+        <div id="supply-chain-risk" class="intel-card" data-category="analysis">
+            <div class="card-header">
+                <div class="card-tags">
+                    <span class="card-tag analysis">Analysis</span>
+                </div>
+                <span class="card-timestamp">3h ago</span>
+            </div>
+            <h3 class="card-title">Global Supply Chain Risk Assessment</h3>
+            <div class="card-metrics">
+                <div class="metric">
+                    <span class="metric-label">Risk Level</span>
+                    <span class="metric-value negative">High</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Affected Routes</span>
+                    <span class="metric-value">23</span>
+                </div>
+            </div>
+            <p class="card-summary">Geopolitical tensions and weather patterns create elevated risk across 23 major shipping routes.</p>
+        </div>
+
+        <div id="fuel-price-forecast" class="intel-card market-pulse" data-category="analysis">
+            <div class="card-header">
+                <h3 class="card-title">Fuel Price Forecast</h3>
+            </div>
+            <div class="market-indicators">
+                <div class="market-indicator">
+                    <span class="indicator-label">Bunker</span>
+                    <span class="indicator-value up">+4.2%</span>
+                </div>
+                <div class="market-indicator">
+                    <span class="indicator-label">MGO</span>
+                    <span class="indicator-value down">-1.1%</span>
+                </div>
+                <div class="market-indicator">
+                    <span class="indicator-label">LNG</span>
+                    <span class="indicator-value up">+7.8%</span>
+                </div>
+                        </div>
+                    </div>
+
+        <div id="trade-flow-analysis" class="intel-card analytics-widget" data-category="analysis">
+            <div class="widget-title">Trade Flow Efficiency</div>
+            <div class="widget-value">87.3%</div>
+            <div class="widget-change negative">-2.1% vs target</div>
+                    </div>
+
+        <div id="demand-forecast" class="intel-card" data-category="analysis">
+            <div class="card-header">
+                <div class="card-tags">
+                    <span class="card-tag analysis">Analysis</span>
+                </div>
+                <span class="card-timestamp">5h ago</span>
+            </div>
+            <h3 class="card-title">Q3 Demand Forecast: Asia-Pacific Routes</h3>
+            <p class="card-summary">Projected 18% increase in container demand driven by manufacturing recovery and holiday season preparation.</p>
+        </div>
+
+                    <!-- Regulatory Cards -->
+        <div id="imo-standards" class="intel-card featured" data-category="regulatory">
+            <div class="card-header">
+                <div class="card-tags">
+                    <span class="card-tag regulatory">Regulatory</span>
+                </div>
+                <span class="card-timestamp">1h ago</span>
+            </div>
+            <h3 class="card-title">IMO Finalizes 2026 Sulfur Emission Standards</h3>
+            <div class="card-metrics">
+                <div class="metric">
+                    <span class="metric-label">Implementation</span>
+                    <span class="metric-value">2026</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Fleet Impact</span>
+                    <span class="metric-value">78%</span>
+                </div>
+            </div>
+            <p class="card-summary">New IMO regulations set stricter sulfur emission limits affecting 78% of global fleet.</p>
+            <div class="card-actions">
+                <button class="card-action-btn primary">Read Full Report</button>
+                <button class="card-action-btn secondary">Impact Calculator</button>
+                </div>
+            </div>
+
+        <div id="eu-carbon-tax" class="intel-card" data-category="regulatory">
+            <div class="card-header">
+                <div class="card-tags">
+                    <span class="card-tag regulatory">Regulatory</span>
+                    <span class="card-tag high-impact">High Impact</span>
+                </div>
+                <span class="card-timestamp">2h ago</span>
+            </div>
+            <h3 class="card-title">EU Carbon Tax Extension to Maritime Sector</h3>
+            <div class="card-metrics">
+                <div class="metric">
+                    <span class="metric-label">Effective Date</span>
+                    <span class="metric-value">Jan 2025</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Cost Impact</span>
+                    <span class="metric-value negative">+€45/TEU</span>
+                </div>
+            </div>
+            <p class="card-summary">EU extends carbon pricing mechanism to maritime transport, adding estimated €45 per TEU cost.</p>
+        </div>
+
+        <div id="ballast-water-compliance" class="intel-card analytics-widget" data-category="regulatory">
+            <div class="widget-title">BWM Compliance Rate</div>
+            <div class="widget-value">94.2%</div>
+            <div class="widget-change positive">+3.1% this month</div>
+        </div>
+
+        <div id="us-customs-update" class="intel-card live-update medium" data-category="regulatory">
+            <div class="card-header">
+                <span class="card-timestamp">25min ago</span>
+                <span class="impact-badge medium">Medium Impact</span>
+            </div>
+            <h3 class="card-title">US Customs Modernization Act Updates</h3>
+            <div class="feed-status">
+                <span class="pulse-dot"></span>
+                <span>Live Update</span>
+            </div>
+        </div>
+
+        <div id="flag-state-inspection" class="intel-card" data-category="regulatory">
+            <div class="card-header">
+                <div class="card-tags">
+                    <span class="card-tag regulatory">Regulatory</span>
+                </div>
+                <span class="card-timestamp">4h ago</span>
+            </div>
+            <h3 class="card-title">Flag State Inspection Requirements Updated</h3>
+            <p class="card-summary">New digital inspection protocols reduce port delays by average 6 hours while maintaining safety standards.</p>
+            </div>
+
+        <div id="cyber-security-mandate" class="intel-card" data-category="regulatory">
+            <div class="card-header">
+                <div class="card-tags">
+                    <span class="card-tag regulatory">Regulatory</span>
+                </div>
+                <span class="card-timestamp">7h ago</span>
+            </div>
+            <h3 class="card-title">Maritime Cyber Security Mandate 2025</h3>
+            <div class="card-metrics">
+                <div class="metric">
+                    <span class="metric-label">Compliance Deadline</span>
+                    <span class="metric-value">Q2 2025</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Affected Vessels</span>
+                    <span class="metric-value">12,400</span>
+                </div>
+            </div>
+            <p class="card-summary">New cyber security requirements mandate comprehensive protection systems for vessels over 500 GT.</p>
+    </div>
+        </div>
+
+
+        
         </div>
     </div>
 
-    <script>
-    // YAML Data Loader and Renderer
-    async function loadStoryData() {
-        try {
-            // Load the YAML data
-            const response = await fetch('data/stories/ammonia-plant.yaml');
-            const yamlText = await response.text();
-            const storyData = jsyaml.load(yamlText);
-            
-            // Initialize renderer
-            const renderer = new StoryRenderer(storyData);
-            
-            // Render the page
-            const renderedContent = renderer.render();
-            
-            // Replace loading state with rendered content
-            document.getElementById('app').innerHTML = renderedContent;
-            
-            // Initialize analytics tracking
-            initializeAnalytics(storyData);
-            
-            console.log('✅ Story loaded from YAML data successfully');
-            console.log('📊 Semantic tags enabled:', storyData.semantic_tags);
-            
-        } catch (error) {
-            console.error('❌ Error loading story data:', error);
-            document.getElementById('app').innerHTML = `
-                <div class="error-state">
-                    <h2>Error Loading Story</h2>
-                    <p>Could not load ammonia plant story data.</p>
-                    <button onclick="window.location.reload()">Retry</button>
-                </div>
-            `;
-        }
-    }
+    <!-- Global Footer -->
+    <div id="global-footer"></div>
 
-    // Analytics Initialization
-    function initializeAnalytics(storyData) {
-        // Track story view
-        console.log('📈 Analytics: Story viewed -', storyData.story_meta.story_id);
-        
-        // Track semantic concepts available for measurement
-        const concepts = storyData.semantic_tags.content_concepts;
-        console.log('🏷️ Content concepts available for tracking:', concepts);
-        
-        // Track user journey markers
-        const journeyMarkers = storyData.semantic_tags.user_journey_markers;
-        console.log('🎯 Journey markers for comprehension tracking:', journeyMarkers);
-        
-        // Initialize click tracking for all semantic elements
-        setTimeout(() => {
-            document.querySelectorAll('[data-concept]').forEach(element => {
-                const concept = element.getAttribute('data-concept');
-                element.addEventListener('click', () => {
-                    console.log('🎯 Content Analytics: Concept engaged -', concept);
-                    // Real implementation would send to analytics service:
-                    // analytics.track('concept_engagement', { concept, story_id: storyData.story_meta.story_id });
-                });
-            });
-            
-            // Track semantic class interactions
-            document.querySelectorAll('[class*="semantic-"]').forEach(element => {
-                const semanticClasses = Array.from(element.classList)
-                    .filter(cls => cls.startsWith('semantic-'))
-                    .map(cls => cls.replace('semantic-', ''));
-                
-                element.addEventListener('click', () => {
-                    console.log('🏷️ Semantic Analytics: Tags engaged -', semanticClasses);
-                });
-            });
-        }, 100);
-    }
 
-    // Load story when page loads
-    document.addEventListener('DOMContentLoaded', loadStoryData);
-    </script>
 
     <style>
     .loading-state, .error-state {
@@ -170,5 +500,113 @@
         transform: translateX(2px);
     }
     </style>
+
+    <script src="scripts/platform-hub.js"></script>
+    
+    <script>
+    // Global authentication functions
+    function closeAuthOverlay() {
+        const overlay = document.getElementById('auth-overlay');
+        if (overlay) {
+            overlay.classList.remove('visible');
+        }
+    }
+
+    function handleAuth(event) {
+        event.preventDefault();
+        
+        const form = event.target;
+        const email = form.querySelector('input[type="email"]').value;
+        const company = form.querySelector('input[type="text"]').value;
+        
+        // Simple validation
+        if (!email || !email.includes('@')) {
+            alert('Please enter a valid email address');
+            return;
+        }
+        
+        // Store authentication data
+        const authData = {
+            email: email,
+            company: company,
+            timestamp: new Date().toISOString()
+        };
+        
+        localStorage.setItem('shippingIntel_auth', JSON.stringify(authData));
+        
+        // Update platform hub
+        if (window.platformHub) {
+            window.platformHub.isAuthenticated = true;
+            window.platformHub.hideAuthCard();
+            window.platformHub.enableNavigation();
+        }
+        
+        // Show success notification
+        showNotification(`Welcome ${email}! You now have access to premium maritime intelligence.`);
+        
+        // Track analytics
+        console.log('🔐 User authenticated:', { email, company });
+    }
+
+    function showNotification(message) {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #00ff88, #00e67a);
+            color: #0a0a0a;
+            padding: 16px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+            z-index: 10000;
+            animation: slideInRight 0.3s ease-out;
+            max-width: 300px;
+        `;
+        
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        // Remove after 4 seconds
+        setTimeout(() => {
+            notification.style.animation = 'slideOutRight 0.3s ease-out';
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 300);
+        }, 4000);
+    }
+
+    // Add notification animations
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideOutRight {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+        }
+    `;
+    document.head.appendChild(style);
+    </script>
 </body>
 </html> 

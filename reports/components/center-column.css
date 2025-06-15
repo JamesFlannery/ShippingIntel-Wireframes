@@ -1,0 +1,457 @@
+/* Center Column: Deep Dive and Interaction */
+.center-column-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #0a0a0a;
+}
+
+/* Tab Navigation (integrated into center column) */
+.center-tab-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #121212;
+    border-bottom: 1px solid #333;
+    padding: 0 20px;
+    height: 48px;
+    flex-shrink: 0;
+}
+
+.tab-nav-container {
+    display: flex;
+    gap: 2px;
+}
+
+.tab-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 6px 6px 0 0;
+    transition: all 0.2s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-nav-item:hover {
+    background: #1a1a1a;
+    color: #ccc;
+}
+
+.tab-nav-item.active {
+    background: #0a0a0a;
+    color: #00d4ff;
+    border-bottom-color: #00d4ff;
+}
+
+.tab-icon {
+    font-size: 14px;
+}
+
+.tab-text {
+    font-size: 13px;
+}
+
+.tab-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.tab-control-btn {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #888;
+    padding: 6px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 14px;
+}
+
+.tab-control-btn:hover {
+    background: #333;
+    color: #00d4ff;
+    border-color: #00d4ff;
+}
+
+/* Content Container */
+.center-content-container {
+    flex: 1;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+    padding: 32px 40px;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Content Header */
+.content-header {
+    margin-bottom: 32px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 24px;
+}
+
+.content-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 16px 0;
+    line-height: 1.2;
+}
+
+.content-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 14px;
+    color: #888;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+}
+
+.meta-separator {
+    color: #555;
+}
+
+/* Content Body */
+.content-body {
+    max-width: 800px;
+}
+
+/* Key Insight Block */
+.key-insight-block {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 255, 136, 0.05));
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 32px;
+}
+
+.insight-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #00d4ff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
+.insight-text {
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.5;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Content Sections */
+.content-section {
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 20px 0;
+    border-left: 3px solid #00d4ff;
+    padding-left: 16px;
+}
+
+.section-content {
+    color: #ccc;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.section-content p {
+    margin: 0 0 16px 0;
+}
+
+.section-content ul {
+    margin: 0 0 16px 0;
+    padding-left: 20px;
+}
+
+.section-content li {
+    margin-bottom: 8px;
+    color: #ccc;
+}
+
+/* Metrics Grid */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.metric-card {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.metric-card:hover {
+    border-color: #555;
+    background: #222;
+}
+
+.metric-label {
+    font-size: 12px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.metric-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+}
+
+.metric-value.negative {
+    color: #ff4444;
+}
+
+.metric-value.positive {
+    color: #00ff88;
+}
+
+/* Data Placeholders */
+.data-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    background: #1a1a1a;
+    border: 2px dashed #333;
+    border-radius: 12px;
+    color: #666;
+    text-align: center;
+}
+
+.placeholder-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.placeholder-text {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Interactive Tools */
+.interaction-tools {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 10;
+}
+
+.interaction-btn {
+    background: rgba(26, 26, 26, 0.9);
+    border: 1px solid #333;
+    color: #888;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 16px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+}
+
+.interaction-btn:hover {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: #00d4ff;
+    color: #00d4ff;
+    transform: scale(1.05);
+}
+
+/* Typography Enhancements */
+.content-body h1,
+.content-body h2,
+.content-body h3,
+.content-body h4,
+.content-body h5,
+.content-body h6 {
+    color: #fff;
+    margin-top: 0;
+}
+
+.content-body h2 {
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+
+.content-body h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: #00d4ff;
+}
+
+.content-body h4 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+/* Links */
+.content-body a {
+    color: #00d4ff;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.content-body a:hover {
+    border-bottom-color: #00d4ff;
+}
+
+/* Code blocks */
+.content-body code {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: 'Monaco', 'Menlo', monospace;
+    font-size: 13px;
+    color: #00ff88;
+}
+
+.content-body pre {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    font-family: 'Monaco', 'Menlo', monospace;
+    font-size: 13px;
+    color: #ccc;
+}
+
+/* Tables */
+.content-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.content-body th,
+.content-body td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+.content-body th {
+    background: #333;
+    font-weight: 600;
+    color: #00d4ff;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.content-body td {
+    color: #ccc;
+}
+
+.content-body tr:hover {
+    background: #222;
+}
+
+/* Scrollbar */
+.center-content-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.center-content-container::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+.center-content-container::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+.center-content-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .tab-content {
+        padding: 24px 32px;
+    }
+    
+    .content-title {
+        font-size: 24px;
+    }
+    
+    .metrics-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .tab-nav-container {
+        flex-wrap: wrap;
+    }
+    
+    .tab-nav-item {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    .tab-text {
+        display: none;
+    }
+    
+    .tab-content {
+        padding: 20px 24px;
+    }
+    
+    .content-title {
+        font-size: 20px;
+    }
+    
+    .interaction-tools {
+        top: 12px;
+        right: 12px;
+    }
+} 

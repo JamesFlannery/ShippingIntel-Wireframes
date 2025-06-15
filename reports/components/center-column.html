@@ -1,0 +1,194 @@
+<!-- Center Column: Deep Dive and Interaction -->
+<div class="center-column-container">
+    <!-- Tab Navigation (part of center column) -->
+    <nav class="center-tab-nav">
+        <div class="tab-nav-container">
+            <button class="tab-nav-item active" data-tab="overview" id="tab-overview">
+                <span class="tab-icon">📊</span>
+                <span class="tab-text">Overview</span>
+            </button>
+            <button class="tab-nav-item" data-tab="data" id="tab-data">
+                <span class="tab-icon">📈</span>
+                <span class="tab-text">Data</span>
+            </button>
+            <button class="tab-nav-item" data-tab="connections" id="tab-connections">
+                <span class="tab-icon">🔗</span>
+                <span class="tab-text">Connections</span>
+            </button>
+            <button class="tab-nav-item" data-tab="impact" id="tab-impact">
+                <span class="tab-icon">💥</span>
+                <span class="tab-text">Impact</span>
+            </button>
+            <button class="tab-nav-item" data-tab="geography" id="tab-geography">
+                <span class="tab-icon">🌍</span>
+                <span class="tab-text">Geography</span>
+            </button>
+            <button class="tab-nav-item" data-tab="timeline" id="tab-timeline">
+                <span class="tab-icon">⏱️</span>
+                <span class="tab-text">Timeline</span>
+            </button>
+            <button class="tab-nav-item" data-tab="players" id="tab-players">
+                <span class="tab-icon">👥</span>
+                <span class="tab-text">Players</span>
+            </button>
+        </div>
+        
+        <div class="tab-controls">
+            <button class="tab-control-btn" id="expand-view" title="Expand View">⛶</button>
+            <button class="tab-control-btn" id="focus-mode" title="Focus Mode">🎯</button>
+        </div>
+    </nav>
+
+    <!-- Content Container -->
+    <div class="center-content-container">
+        <!-- Overview Tab Content -->
+        <section class="tab-content active" id="content-overview">
+            <div class="content-header">
+                <h1 class="content-title" id="report-title">[Report Title Placeholder]</h1>
+                <div class="content-meta">
+                    <span class="meta-item" id="report-date">[Date]</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-item" id="report-category">[Category]</span>
+                    <span class="meta-separator">•</span>
+                    <span class="meta-item" id="read-time">[Read Time]</span>
+                </div>
+            </div>
+
+            <div class="content-body">
+                <div class="key-insight-block">
+                    <div class="insight-label">Key Insight</div>
+                    <p class="insight-text" id="key-insight">[Key insight summary placeholder]</p>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Executive Summary</h2>
+                    <div class="section-content" id="executive-summary">
+                        <p>[Executive summary content placeholder]</p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Market Dynamics</h2>
+                    <div class="section-content" id="market-dynamics">
+                        <p>[Market dynamics content placeholder]</p>
+                        
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-label">Price Impact</div>
+                                <div class="metric-value negative" id="price-impact">[Price Change]</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Volume</div>
+                                <div class="metric-value" id="volume-metric">[Volume]</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-label">Market Share</div>
+                                <div class="metric-value" id="market-share">[Share %]</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Analysis</h2>
+                    <div class="section-content" id="analysis-content">
+                        <p>[Analysis content placeholder]</p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2 class="section-title">Outlook</h2>
+                    <div class="section-content" id="outlook-content">
+                        <p>[Outlook content placeholder]</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Tab Content -->
+        <section class="tab-content" id="content-data">
+            <div class="content-header">
+                <h1 class="content-title">Market Data Analysis</h1>
+            </div>
+            <div class="content-body">
+                <div class="data-placeholder">
+                    <div class="placeholder-icon">📈</div>
+                    <div class="placeholder-text">Data visualization and tables will be rendered here</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Connections Tab Content -->
+        <section class="tab-content" id="content-connections">
+            <div class="content-header">
+                <h1 class="content-title">Trade Connections</h1>
+            </div>
+            <div class="content-body">
+                <div class="data-placeholder">
+                    <div class="placeholder-icon">🔗</div>
+                    <div class="placeholder-text">Trade flow visualizations will be rendered here</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Tab Content -->
+        <section class="tab-content" id="content-impact">
+            <div class="content-header">
+                <h1 class="content-title">Market Impact</h1>
+            </div>
+            <div class="content-body">
+                <div class="data-placeholder">
+                    <div class="placeholder-icon">💥</div>
+                    <div class="placeholder-text">Impact analysis will be rendered here</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Geography Tab Content -->
+        <section class="tab-content" id="content-geography">
+            <div class="content-header">
+                <h1 class="content-title">Geographic Analysis</h1>
+            </div>
+            <div class="content-body">
+                <div class="data-placeholder">
+                    <div class="placeholder-icon">🌍</div>
+                    <div class="placeholder-text">Geographic visualizations will be rendered here</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Tab Content -->
+        <section class="tab-content" id="content-timeline">
+            <div class="content-header">
+                <h1 class="content-title">Timeline Analysis</h1>
+            </div>
+            <div class="content-body">
+                <div class="data-placeholder">
+                    <div class="placeholder-icon">⏱️</div>
+                    <div class="placeholder-text">Timeline visualization will be rendered here</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Players Tab Content -->
+        <section class="tab-content" id="content-players">
+            <div class="content-header">
+                <h1 class="content-title">Key Players</h1>
+            </div>
+            <div class="content-body">
+                <div class="data-placeholder">
+                    <div class="placeholder-icon">👥</div>
+                    <div class="placeholder-text">Player analysis will be rendered here</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Interactive Tools -->
+    <div class="interaction-tools">
+        <button class="interaction-btn" id="comment-tool" title="Add Comment">💬</button>
+        <button class="interaction-btn" id="highlight-tool" title="Highlight Text">🖍️</button>
+        <button class="interaction-btn" id="bookmark-tool" title="Bookmark Section">🔖</button>
+        <button class="interaction-btn" id="share-tool" title="Share Section">📤</button>
+    </div>
+</div> 

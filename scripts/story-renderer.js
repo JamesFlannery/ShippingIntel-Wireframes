@@ -125,7 +125,14 @@ class StoryRenderer {
                 ${this.renderNavigation()}
                 <div class="view-container story-view active">
                     ${this.renderStoryHeader(centerZone.story_header)}
-                    ${this.renderContentBlocks(centerZone.content_blocks)}
+                    ${this.renderExecutiveSummary(centerZone.executive_summary)}
+                    ${this.renderKeyTakeaways(centerZone.key_takeaways)}
+                    ${this.renderMarketImpact(centerZone.market_impact)}
+                    ${this.renderPricingAnalysis(centerZone.pricing_analysis)}
+                    ${this.renderIndustryImplications(centerZone.industry_implications)}
+                    ${this.renderStrategicImplications(centerZone.strategic_implications)}
+                    ${this.renderLookingAhead(centerZone.looking_ahead)}
+                    ${this.renderNextChapter(centerZone.next_chapter)}
                 </div>
             </main>
         `;
@@ -155,48 +162,122 @@ class StoryRenderer {
                     <span class="impact-level high">${storyHeader.meta_bar.impact_level}</span>
                     <span class="relevance">${storyHeader.meta_bar.relevance}</span>
                     <span class="last-updated">${storyHeader.meta_bar.last_updated}</span>
+                    <span class="read-time">${storyHeader.meta_bar.read_time}</span>
                 </div>
             </div>
         `;
     }
 
-    renderContentBlocks(contentBlocks) {
-        const blocksHtml = Object.entries(contentBlocks).map(([key, block]) => {
-            const semanticClasses = this.renderSemanticClasses(block.semantic_tags);
-            let blockContent = `<p>${block.content}</p>`;
-            
-            // Add inline prompts if present
-            if (block.inline_prompt) {
-                const promptSemanticClasses = this.renderSemanticClasses(block.inline_prompt.semantic_tags);
-                blockContent += `
+    renderExecutiveSummary(executiveSummary) {
+        const semanticClasses = this.renderSemanticClasses(executiveSummary.semantic_tags);
+        
+        return `
+            <div class="content-section executive-summary ${semanticClasses}">
+                <h2>${executiveSummary.title}</h2>
+                <p class="summary-content">${executiveSummary.content}</p>
+            </div>
+        `;
+    }
+
+    renderKeyTakeaways(keyTakeaways) {
+        const semanticClasses = this.renderSemanticClasses(keyTakeaways.semantic_tags);
+        const takeawayItems = keyTakeaways.items.map(item => `<li>${item}</li>`).join('');
+        
+        return `
+            <div class="content-section key-takeaways ${semanticClasses}" data-concept="key_takeaways">
+                <h3>${keyTakeaways.title}</h3>
+                <div class="takeaways-box">
+                    <ul>
+                        ${takeawayItems}
+                    </ul>
+                </div>
+            </div>
+        `;
+    }
+
+    renderMarketImpact(marketImpact) {
+        const semanticClasses = this.renderSemanticClasses(marketImpact.semantic_tags);
+        const promptSemanticClasses = this.renderSemanticClasses(marketImpact.inline_prompt.semantic_tags);
+        
+        return `
+            <div class="content-section market-impact ${semanticClasses}" data-concept="market_impact">
+                <h3>${marketImpact.title}</h3>
+                <p>${marketImpact.content}</p>
                     <div class="inline-prompt ${promptSemanticClasses}">
-                        <span class="prompt-icon">${block.inline_prompt.icon}</span>
-                        <span class="prompt-text">${block.inline_prompt.text}</span>
-                        <a href="${block.inline_prompt.link}" class="prompt-link">${block.inline_prompt.link_text} →</a>
+                    <span class="prompt-icon">${marketImpact.inline_prompt.icon}</span>
+                    <span class="prompt-text">${marketImpact.inline_prompt.text}</span>
+                    <a href="${marketImpact.inline_prompt.link}" class="prompt-link">${marketImpact.inline_prompt.link_text} →</a>
+                </div>
+            </div>
+        `;
+    }
+
+    renderPricingAnalysis(pricingAnalysis) {
+        const semanticClasses = this.renderSemanticClasses(pricingAnalysis.semantic_tags);
+        
+        return `
+            <div class="content-section pricing-analysis ${semanticClasses}" data-concept="pricing_analysis">
+                <p>${pricingAnalysis.content}</p>
                     </div>
                 `;
             }
             
-            // Add connection callouts if present
-            if (block.connection_callout) {
-                const calloutSemanticClasses = this.renderSemanticClasses(block.connection_callout.semantic_tags);
-                blockContent += `
+    renderIndustryImplications(industryImplications) {
+        const semanticClasses = this.renderSemanticClasses(industryImplications.semantic_tags);
+        const calloutSemanticClasses = this.renderSemanticClasses(industryImplications.connection_callout.semantic_tags);
+        
+        return `
+            <div class="content-section industry-implications ${semanticClasses}" data-concept="industry_implications">
+                <h3>${industryImplications.title}</h3>
+                <p>${industryImplications.content}</p>
                     <div class="connection-callout ${calloutSemanticClasses}">
-                        <div class="connection-type">${block.connection_callout.type}</div>
-                        <div class="connection-text">${block.connection_callout.description}</div>
-                        <button class="explore-connection">${block.connection_callout.button_text}</button>
+                    <div class="connection-type">${industryImplications.connection_callout.type}</div>
+                    <div class="connection-text">${industryImplications.connection_callout.description}</div>
+                    <button class="explore-connection">${industryImplications.connection_callout.button_text}</button>
+                </div>
                     </div>
                 `;
             }
+
+    renderStrategicImplications(strategicImplications) {
+        const semanticClasses = this.renderSemanticClasses(strategicImplications.semantic_tags);
+        const promptSemanticClasses = this.renderSemanticClasses(strategicImplications.inline_prompt.semantic_tags);
             
             return `
-                <div class="content-block ${semanticClasses}" data-concept="${key}">
-                    ${blockContent}
+            <div class="content-section strategic-implications ${semanticClasses}" data-concept="strategic_implications">
+                <p>${strategicImplications.content}</p>
+                <div class="inline-prompt ${promptSemanticClasses}">
+                    <span class="prompt-icon">${strategicImplications.inline_prompt.icon}</span>
+                    <span class="prompt-text">${strategicImplications.inline_prompt.text}</span>
+                    <a href="${strategicImplications.inline_prompt.link}" class="prompt-link">${strategicImplications.inline_prompt.link_text} →</a>
+                </div>
+            </div>
+        `;
+    }
+
+    renderLookingAhead(lookingAhead) {
+        const semanticClasses = this.renderSemanticClasses(lookingAhead.semantic_tags);
+        
+        return `
+            <div class="content-section looking-ahead ${semanticClasses}" data-concept="looking_ahead">
+                <h3>${lookingAhead.title}</h3>
+                <p>${lookingAhead.content}</p>
                 </div>
             `;
-        }).join('');
+    }
 
-        return `<div class="story-content">${blocksHtml}</div>`;
+    renderNextChapter(nextChapter) {
+        const semanticClasses = this.renderSemanticClasses(nextChapter.semantic_tags);
+
+        return `
+            <div class="content-section next-chapter ${semanticClasses}" data-concept="next_chapter">
+                <div class="chapter-preview">
+                    <h4>${nextChapter.title}</h4>
+                    <p class="chapter-description">${nextChapter.description}</p>
+                    <button class="chapter-button">${nextChapter.button_text}</button>
+                </div>
+            </div>
+        `;
     }
 
     // Render Right Zone Components
@@ -335,6 +416,44 @@ class StoryRenderer {
         `;
         
         return fullPage;
+    }
+
+    // Initialize analytics tracking for rendered content
+    initializeAnalytics() {
+        // Track story view
+        const storyId = this.data.story_meta ? this.data.story_meta.story_id : 'unknown';
+        console.log('📈 Analytics: Story viewed -', storyId);
+        
+        // Track semantic concepts available for measurement
+        const concepts = this.data.semantic_tags ? this.data.semantic_tags.content_concepts : [];
+        console.log('🏷️ Content concepts available for tracking:', concepts);
+        
+        // Track user journey markers
+        const journeyMarkers = this.data.semantic_tags ? this.data.semantic_tags.user_journey_markers : [];
+        console.log('🎯 Journey markers for comprehension tracking:', journeyMarkers);
+        
+        // Initialize click tracking for all semantic elements
+        setTimeout(() => {
+            document.querySelectorAll('[data-concept]').forEach(element => {
+                const concept = element.getAttribute('data-concept');
+                element.addEventListener('click', () => {
+                    console.log('🎯 Content Analytics: Concept engaged -', concept);
+                    // Real implementation would send to analytics service:
+                    // analytics.track('concept_engagement', { concept, story_id: storyId });
+                });
+            });
+            
+            // Track semantic class interactions
+            document.querySelectorAll('[class*="semantic-"]').forEach(element => {
+                const semanticClasses = Array.from(element.classList)
+                    .filter(cls => cls.startsWith('semantic-'))
+                    .map(cls => cls.replace('semantic-', ''));
+                
+                element.addEventListener('click', () => {
+                    console.log('🏷️ Semantic Analytics: Tags engaged -', semanticClasses);
+                });
+            });
+        }, 100);
     }
 }
 

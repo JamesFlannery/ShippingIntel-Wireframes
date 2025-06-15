@@ -1,0 +1,243 @@
+<!-- Right Column: Recommendation Engine & Next Topic Navigation -->
+<div class="right-column-container">
+    <!-- Smart Context Engine -->
+    <section class="smart-context">
+        <div class="section-header">
+            <h3 class="section-title">Smart Context</h3>
+            <div class="context-status">
+                <span class="status-indicator active" title="AI Context Active"></span>
+                <span class="status-text">Live</span>
+            </div>
+        </div>
+        
+        <div class="context-feed" id="context-feed">
+            <div class="context-item priority-high">
+                <div class="context-header">
+                    <div class="context-type">Related Company</div>
+                    <div class="context-relevance">97%</div>
+                </div>
+                <div class="context-content">
+                    <h4 class="context-title" id="related-company">[Company Name]</h4>
+                    <p class="context-description">[Company context description placeholder]</p>
+                    <div class="context-actions">
+                        <button class="context-btn primary">View Profile</button>
+                        <button class="context-btn secondary">Track</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="context-item priority-medium">
+                <div class="context-header">
+                    <div class="context-type">Vessel Details</div>
+                    <div class="context-relevance">89%</div>
+                </div>
+                <div class="context-content">
+                    <h4 class="context-title" id="vessel-name">[Vessel Name]</h4>
+                    <p class="context-description">[Vessel details placeholder]</p>
+                    <div class="context-actions">
+                        <button class="context-btn primary">Track Vessel</button>
+                        <button class="context-btn secondary">Route Map</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="context-item priority-medium">
+                <div class="context-header">
+                    <div class="context-type">Route Analysis</div>
+                    <div class="context-relevance">84%</div>
+                </div>
+                <div class="context-content">
+                    <h4 class="context-title" id="route-details">[Route Description]</h4>
+                    <p class="context-description">[Route analysis placeholder]</p>
+                    <div class="context-actions">
+                        <button class="context-btn primary">View Route</button>
+                        <button class="context-btn secondary">Compare</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommendation Engine -->
+    <section class="recommendations">
+        <div class="section-header">
+            <h3 class="section-title">Recommended Actions</h3>
+            <div class="recommendation-settings">
+                <button class="settings-btn" id="rec-settings" title="Recommendation Settings">⚙️</button>
+            </div>
+        </div>
+        
+        <div class="recommendation-list" id="recommendation-list">
+            <div class="recommendation-item urgent">
+                <div class="rec-header">
+                    <div class="rec-type">Price Monitoring</div>
+                    <div class="rec-priority">Urgent</div>
+                </div>
+                <div class="rec-content">
+                    <h4 class="rec-title">Monitor Price Trends</h4>
+                    <p class="rec-description">Track CFR NWE ammonia prices for continued weakness</p>
+                    <div class="rec-actions">
+                        <button class="rec-btn primary" id="set-price-alert">Set Alert</button>
+                        <button class="rec-btn secondary">Details</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recommendation-item important">
+                <div class="rec-header">
+                    <div class="rec-type">Export Tracking</div>
+                    <div class="rec-priority">Important</div>
+                </div>
+                <div class="rec-content">
+                    <h4 class="rec-title">Track Exports</h4>
+                    <p class="rec-description">Monitor additional Gulf Coast Ammonia shipments</p>
+                    <div class="rec-actions">
+                        <button class="rec-btn primary" id="create-export-alert">Create Alert</button>
+                        <button class="rec-btn secondary">View History</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recommendation-item suggested">
+                <div class="rec-header">
+                    <div class="rec-type">Competitor Analysis</div>
+                    <div class="rec-priority">Suggested</div>
+                </div>
+                <div class="rec-content">
+                    <h4 class="rec-title">Analyze Impact</h4>
+                    <p class="rec-description">Assess impact on Caribbean and Eastern European suppliers</p>
+                    <div class="rec-actions">
+                        <button class="rec-btn primary" id="view-analysis">View Analysis</button>
+                        <button class="rec-btn secondary">Compare</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Next Topics Navigation -->
+    <section class="next-topics">
+        <div class="section-header">
+            <h3 class="section-title">What's Next</h3>
+            <div class="topics-filter">
+                <select class="filter-select" id="topics-filter">
+                    <option value="all">All Topics</option>
+                    <option value="related">Related</option>
+                    <option value="trending">Trending</option>
+                    <option value="recommended">Recommended</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="topics-list" id="topics-list">
+            <div class="topic-item">
+                <div class="topic-header">
+                    <div class="topic-type">Market Report</div>
+                    <div class="topic-relevance">92%</div>
+                </div>
+                <div class="topic-content">
+                    <h4 class="topic-title">European Ammonia Import Shifts</h4>
+                    <p class="topic-preview">How new US exports reshape European import patterns...</p>
+                    <div class="topic-meta">
+                        <span class="topic-date">Expected: Apr 2, 2025</span>
+                        <span class="topic-readtime">6 min read</span>
+                    </div>
+                    <div class="topic-actions">
+                        <button class="topic-btn primary">Read Report</button>
+                        <button class="topic-btn secondary">Preview</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="topic-item">
+                <div class="topic-header">
+                    <div class="topic-type">Analysis</div>
+                    <div class="topic-relevance">87%</div>
+                </div>
+                <div class="topic-content">
+                    <h4 class="topic-title">Caribbean Supplier Response</h4>
+                    <p class="topic-preview">Traditional Caribbean suppliers adjust pricing strategies...</p>
+                    <div class="topic-meta">
+                        <span class="topic-date">Expected: Apr 5, 2025</span>
+                        <span class="topic-readtime">4 min read</span>
+                    </div>
+                    <div class="topic-actions">
+                        <button class="topic-btn primary">Read Analysis</button>
+                        <button class="topic-btn secondary">Track</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="topic-item">
+                <div class="topic-header">
+                    <div class="topic-type">Market Data</div>
+                    <div class="topic-relevance">81%</div>
+                </div>
+                <div class="topic-content">
+                    <h4 class="topic-title">Q2 2025 Trade Flow Forecast</h4>
+                    <p class="topic-preview">Projected ammonia trade patterns for Q2 2025...</p>
+                    <div class="topic-meta">
+                        <span class="topic-date">Expected: Apr 8, 2025</span>
+                        <span class="topic-readtime">8 min read</span>
+                    </div>
+                    <div class="topic-actions">
+                        <button class="topic-btn primary">View Forecast</button>
+                        <button class="topic-btn secondary">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="quick-actions">
+        <div class="section-header">
+            <h3 class="section-title">Quick Actions</h3>
+        </div>
+        
+        <div class="action-grid">
+            <button class="quick-action-btn" id="create-watchlist">
+                <span class="action-icon">👁️</span>
+                <span class="action-text">Create Watchlist</span>
+            </button>
+            <button class="quick-action-btn" id="export-insights">
+                <span class="action-icon">📊</span>
+                <span class="action-text">Export Insights</span>
+            </button>
+            <button class="quick-action-btn" id="schedule-update">
+                <span class="action-icon">🔔</span>
+                <span class="action-text">Schedule Updates</span>
+            </button>
+            <button class="quick-action-btn" id="share-report">
+                <span class="action-icon">📤</span>
+                <span class="action-text">Share Report</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- AI Assistant -->
+    <section class="ai-assistant">
+        <div class="section-header">
+            <h3 class="section-title">AI Assistant</h3>
+            <div class="ai-status">
+                <span class="ai-indicator active"></span>
+                <span class="ai-text">Online</span>
+            </div>
+        </div>
+        
+        <div class="ai-suggestions" id="ai-suggestions">
+            <div class="ai-suggestion">
+                <div class="suggestion-icon">🤖</div>
+                <div class="suggestion-text">"Would you like me to analyze the impact on your portfolio?"</div>
+                <button class="suggestion-btn">Yes, analyze</button>
+            </div>
+        </div>
+        
+        <div class="ai-chat-trigger">
+            <button class="chat-btn" id="open-ai-chat">
+                <span class="chat-icon">💬</span>
+                <span class="chat-text">Ask AI Assistant</span>
+            </button>
+        </div>
+    </section>
+</div> 

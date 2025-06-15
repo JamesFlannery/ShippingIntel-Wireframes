@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Report - Maritime Intelligence</title>
+    <link rel="stylesheet" href="../styles/platform-hub.css">
+    <link rel="stylesheet" href="styles/reports.css">
+    
+    <!-- Column-specific CSS -->
+    <link rel="stylesheet" href="components/left-column.css">
+    <link rel="stylesheet" href="components/center-column.css">
+    <link rel="stylesheet" href="components/right-column.css">
+    
+    <script src="../components/header.js"></script>
+    <script src="../components/footer.js"></script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚢</text></svg>">
+</head>
+<body>
+    <!-- Global Header -->
+    <div id="global-header"></div>
+
+    <!-- Three-Column Layout with Independent Components -->
+    <div class="report-layout">
+        <!-- Left Sidebar: Context, Awareness and Controls -->
+        <aside class="left-sidebar" id="left-column">
+            <!-- Left column content will be loaded here -->
+        </aside>
+
+        <!-- Center Column: Deep Dive and Interaction -->
+        <main class="main-content" id="center-column">
+            <!-- Center column content will be loaded here -->
+        </main>
+
+        <!-- Right Sidebar: Recommendation Engine & Next Topic Navigation -->
+        <aside class="right-sidebar" id="right-column">
+            <!-- Right column content will be loaded here -->
+        </aside>
+    </div>
+
+    <!-- Global Footer -->
+    <div id="global-footer"></div>
+
+    <!-- Column Component JavaScript -->
+    <script src="components/left-column.js"></script>
+    <script src="components/center-column.js"></script>
+    <script src="components/right-column.js"></script>
+    <script src="scripts/reports.js"></script>
+
+    <!-- Component Loader Script -->
+    <script>
+        // Load column components dynamically
+        async function loadColumnComponents() {
+            try {
+                // Load Left Column HTML
+                const leftResponse = await fetch('components/left-column.html');
+                const leftHTML = await leftResponse.text();
+                document.getElementById('left-column').innerHTML = leftHTML;
+
+                // Load Center Column HTML
+                const centerResponse = await fetch('components/center-column.html');
+                const centerHTML = await centerResponse.text();
+                document.getElementById('center-column').innerHTML = centerHTML;
+
+                // Load Right Column HTML
+                const rightResponse = await fetch('components/right-column.html');
+                const rightHTML = await rightResponse.text();
+                document.getElementById('right-column').innerHTML = rightHTML;
+
+                console.log('All column components loaded successfully');
+            } catch (error) {
+                console.error('Error loading column components:', error);
+                
+                // Fallback: show loading placeholders
+                document.getElementById('left-column').innerHTML = '<div class="component-loading">Loading Context & Controls...</div>';
+                document.getElementById('center-column').innerHTML = '<div class="component-loading">Loading Content...</div>';
+                document.getElementById('right-column').innerHTML = '<div class="component-loading">Loading Recommendations...</div>';
+            }
+        }
+
+        // Load components when DOM is ready
+        document.addEventListener('DOMContentLoaded', loadColumnComponents);
+    </script>
+
+    <style>
+        /* Loading state styles */
+        .component-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #888;
+            font-size: 14px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            margin: 20px;
+        }
+
+        /* Component integration styles */
+        .left-sidebar {
+            width: 280px;
+            flex-shrink: 0;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .right-sidebar {
+            width: 300px;
+            flex-shrink: 0;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .right-sidebar {
+                width: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .report-layout {
+                flex-direction: column;
+            }
+            
+            .left-sidebar,
+            .right-sidebar {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        /* Inter-column communication visual feedback */
+        .column-highlight {
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+            transition: box-shadow 0.3s ease;
+        }
+
+        /* Focus mode - hide sidebars */
+        body.focus-mode .left-sidebar,
+        body.focus-mode .right-sidebar {
+            display: none;
+        }
+
+        body.focus-mode .main-content {
+            width: 100%;
+        }
+
+        /* Speed reading mode adjustments */
+        body.speed-mode .center-column-container {
+            line-height: 1.8;
+            letter-spacing: 0.3px;
+        }
+
+        body.speed-mode .content-body p {
+            margin-bottom: 20px;
+        }
+
+        /* Expanded center view */
+        body.expanded-center .right-sidebar {
+            width: 200px;
+        }
+
+        body.expanded-center .main-content {
+            flex: 2;
+        }
+    </style>
+</body>
+</html> 

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Discovery Tracking - Test Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="product-discovery-tracker.js"></script>
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #0a0a0a;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0a0a0a;
+            overflow-x: hidden;
+        }
+        
+        .test-section {
+            background: #1a1a1a;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+        }
+        
+        .test-section h2 {
+            color: #ffffff;
+            margin: 0 0 15px 0;
+        }
+        
+        .test-button {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .test-button:hover {
+            background: #444;
+        }
+        
+        .fake-price {
+            color: #00cc66;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        
+        .fake-price:hover {
+            background: #333;
+        }
+        
+        .fake-data {
+            font-family: monospace;
+            background: #0a0a0a;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        
+        .export-button {
+            background: #0066cc;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .non-clickable {
+            color: #0066cc;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        
+        .status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #333;
+            font-size: 12px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="status" id="tracking-status">
+        📊 Tracking: <span id="event-count">0</span> events
+    </div>
+    
+    <div class="test-container">
+        <h1>🧪 Product Discovery Tracking Test</h1>
+        <p>This page tests various behavioral patterns that the Product Discovery system should detect.</p>
+        
+        <div class="test-section">
+            <h2>🔢 Calculation Intent Test</h2>
+            <p>Double-click or right-click on these numbers to trigger calculation intent detection:</p>
+            <div>
+                Tampa Contract Price: <span class="fake-price" data-price="$435" data-type="contract-price">$435/mt CFR</span>
+            </div>
+            <div>
+                Price Change: <span class="fake-price" data-price="-$25" data-type="price-change" data-trend="negative">-$25/mt</span>
+            </div>
+            <div>
+                Plant Capacity: <span data-value="1.3M t/y" data-type="capacity">1.3M t/y</span>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>📤 Export Intent Test</h2>
+            <p>Try to export, copy, or save data:</p>
+            <button class="export-button" data-action="export" data-content="test-data">Export Data</button>
+            <div class="fake-data" id="copyable-data">
+                Ammonia Market Data:
+                Jan 2025: $470/mt CFR
+                Feb 2025: $455/mt CFR
+                Mar 2025: $435/mt CFR
+            </div>
+            <p>Try: Ctrl+C to copy text, Ctrl+S to save, right-click for context menu</p>
+        </div>
+        
+        <div class="test-section">
+            <h2>🔄 Comparison Intent Test</h2>
+            <p>Navigate between views quickly to trigger comparison detection:</p>
+            <button class="test-button" onclick="simulateViewChange('data')">📊 Data View</button>
+            <button class="test-button" onclick="simulateViewChange('geography')">🗺️ Geography View</button>
+            <button class="test-button" onclick="simulateViewChange('timeline')">⏰ Timeline View</button>
+            <button class="test-button" onclick="simulateViewChange('data')">📊 Back to Data</button>
+        </div>
+        
+        <div class="test-section">
+            <h2>⚠️ Friction Detection Test</h2>
+            <p>Click on these elements that look interactive but aren't:</p>
+            <div class="non-clickable">This looks like a link but isn't →</div>
+            <div class="non-clickable">Another fake interactive element →</div>
+            <button class="test-button" onclick="triggerAnalysisParalysis()">Simulate Analysis Paralysis</button>
+        </div>
+        
+        <div class="test-section">
+            <h2>📝 Text Selection Test</h2>
+            <p>Select text to trigger data extraction detection:</p>
+            <div>
+                <strong>Key Facts:</strong>
+                - Gulf Coast Ammonia Plant capacity: 1.3M t/y
+                - Tampa pricing dropped $25/mt CFR to $435/mt
+                - Fourth consecutive monthly decline
+                - USG-Europe trade lane established
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>📊 Real-time Event Monitor</h2>
+            <div id="event-monitor" style="max-height: 200px; overflow-y: auto; background: #0a0a0a; padding: 10px; border-radius: 4px; font-size: 12px; font-family: monospace;">
+                <div style="color: #888;">Events will appear here in real-time...</div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>🔗 Navigation Links</h2>
+            <p>Test navigation tracking:</p>
+            <a href="index.html" class="test-button" style="text-decoration: none; display: inline-block;">← Back to Overview</a>
+            <a href="data-view.html" class="test-button" style="text-decoration: none; display: inline-block;">Data View →</a>
+            <a href="analytics-dashboard.html" class="test-button" style="text-decoration: none; display: inline-block;">📈 Analytics Dashboard</a>
+        </div>
+    </div>
+    
+    <script>
+        let eventCounter = 0;
+        
+        // Monitor for tracking events
+        const originalSendEvent = window.productDiscoveryTracker?.sendEvent;
+        if (window.productDiscoveryTracker) {
+            window.productDiscoveryTracker.sendEvent = function(eventData) {
+                // Call original method
+                if (originalSendEvent) {
+                    originalSendEvent.call(this, eventData);
+                }
+                
+                // Update our counter and display
+                eventCounter++;
+                document.getElementById('event-count').textContent = eventCounter;
+                
+                // Add to event monitor
+                const monitor = document.getElementById('event-monitor');
+                const eventDiv = document.createElement('div');
+                eventDiv.style.color = getEventColor(eventData.eventType);
+                eventDiv.innerHTML = `
+                    <span style="color: #888;">${new Date().toLocaleTimeString()}</span>
+                    <span style="color: ${getEventColor(eventData.eventType)};">${eventData.eventType}</span>
+                    ${eventData.eventType === 'intent_signal' ? 
+                        `<span style="color: #88ff88;">→ ${eventData.eventData.intentType}</span>` : ''}
+                    ${eventData.eventType === 'friction_detected' ? 
+                        `<span style="color: #ff8888;">→ ${eventData.eventData.frictionType}</span>` : ''}
+                `;
+                
+                monitor.appendChild(eventDiv);
+                monitor.scrollTop = monitor.scrollHeight;
+                
+                // Keep only last 20 events visible
+                while (monitor.children.length > 20) {
+                    monitor.removeChild(monitor.firstChild);
+                }
+            };
+        }
+        
+        function getEventColor(eventType) {
+            switch (eventType) {
+                case 'intent_signal': return '#88ff88';
+                case 'friction_detected': return '#ff8888';
+                case 'interaction': return '#88aaff';
+                case 'dwell_pattern': return '#ffaa88';
+                default: return '#ffffff';
+            }
+        }
+        
+        function simulateViewChange(viewName) {
+            // Simulate hash change for view switching
+            window.location.hash = viewName;
+            
+            // Trigger popstate event
+            const event = new PopStateEvent('popstate', { state: { view: viewName } });
+            window.dispatchEvent(event);
+        }
+        
+        function triggerAnalysisParalysis() {
+            // Simulate long dwell time without interaction
+            alert('Simulating analysis paralysis...\n\nIn real usage, this would be detected automatically when a user stays on a view for a long time without interacting.');
+        }
+        
+        // Add some automatic behavior simulation
+        document.addEventListener('DOMContentLoaded', () => {
+            // Simulate some mouse movement
+            setTimeout(() => {
+                console.log('🧪 Test page loaded - tracking should be active');
+            }, 1000);
+        });
+        
+        // Monitor localStorage changes
+        let lastEventCount = 0;
+        setInterval(() => {
+            try {
+                const events = JSON.parse(localStorage.getItem('pd_events') || '[]');
+                if (events.length !== lastEventCount) {
+                    lastEventCount = events.length;
+                    console.log(`📊 Total events in storage: ${events.length}`);
+                }
+            } catch (e) {
+                // Ignore parsing errors
+            }
+        }, 2000);
+    </script>
+</body>
+</html> 

@@ -6,6 +6,8 @@
     <title>Data View - ShippingIntel</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <!-- Product Discovery Analytics -->
+    <script src="product-discovery-tracker.js"></script>
 </head>
 <body>
     <!-- Top Navigation Bar -->
@@ -107,8 +109,8 @@
                 <div class="data-header">
                     <h2>Global Ammonia Market Analysis: GCA Plant Supply Impact</h2>
                     <div class="data-controls">
-                        <button class="export-btn">Export Data</button>
-                        <button class="refresh-btn">Refresh</button>
+                        <button class="export-btn" data-action="export" data-content="pricing-data">Export Data</button>
+                        <button class="refresh-btn" data-action="refresh" data-content="ammonia-data">Refresh</button>
                     </div>
                 </div>
 
@@ -141,11 +143,11 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>December 2024</td>
-                                            <td>$485</td>
-                                            <td class="negative">-$15</td>
-                                            <td>Market weakness begins</td>
-                                            <td>First decline</td>
+                                            <td data-type="date">December 2024</td>
+                                            <td data-price="$485" data-type="contract-price">$485</td>
+                                            <td class="negative" data-price="-$15" data-type="price-change" data-trend="negative">-$15</td>
+                                            <td data-type="event">Market weakness begins</td>
+                                            <td data-type="status">First decline</td>
                                         </tr>
                                         <tr>
                                             <td>January 2025</td>
@@ -196,12 +198,12 @@
                                             <td>Cargo loading commences</td>
                                             <td>Final decline begins</td>
                                         </tr>
-                                        <tr class="highlight">
-                                            <td>March 28, 2025</td>
-                                            <td>$435</td>
-                                            <td class="negative">-$2</td>
-                                            <td>Dancing Brave departs for Norway</td>
-                                            <td>Fourth decline complete</td>
+                                        <tr class="highlight" data-significance="high">
+                                            <td data-type="date">March 28, 2025</td>
+                                            <td data-price="$435" data-type="contract-price" data-significance="current">$435</td>
+                                            <td class="negative" data-price="-$2" data-type="price-change" data-trend="negative">-$2</td>
+                                            <td data-type="event" data-significance="milestone">Dancing Brave departs for Norway</td>
+                                            <td data-type="status" data-significance="conclusion">Fourth decline complete</td>
                                         </tr>
                                     </tbody>
                                 </table>
